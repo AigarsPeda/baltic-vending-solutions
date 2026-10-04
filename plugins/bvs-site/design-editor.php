@@ -33,12 +33,12 @@ function bvs_render_design_editor($attributes) {
     FIRST VIEWPORT: Compact tools at left, large machine and flat panel at right, export below.
     FORM: Operate workbench, extension of the existing BVS world, seed bvs-wrap-editor.
     FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
-    <section class="bvs-design-editor" data-labels="<?php echo esc_attr(wp_json_encode($a)); ?>" aria-label="<?php echo esc_attr($a['previewLabel']); ?>">
+    <section id="<?php echo esc_attr($id); ?>" class="bvs-design-editor" data-labels="<?php echo esc_attr(wp_json_encode($a)); ?>" aria-label="<?php echo esc_attr($a['previewLabel']); ?>">
       <noscript><p><?php echo $label('noScriptMessage'); ?></p></noscript>
       <div class="bvs-design-workbench" hidden>
         <div class="bvs-design-tools">
           <fieldset><legend><?php echo $label('panelLabel'); ?></legend><div class="bvs-design-panels">
-            <?php foreach (['front','left','right'] as $panel): ?><button type="button" data-panel="<?php echo $panel; ?>" aria-pressed="<?php echo $panel==='front'?'true':'false'; ?>"><?php echo $label($panel.'Label'); ?></button><?php endforeach; ?>
+            <?php foreach (['front','left','right'] as $panel): ?><button type="button" data-panel="<?php echo $panel; ?>" aria-pressed="<?php echo $panel==='front'?'true':'false'; ?>" aria-label="<?php echo esc_attr($a[$panel.'Label']); ?>" title="<?php echo esc_attr($a[$panel.'Label']); ?>"><?php echo $label($panel.'ShortLabel'); ?></button><?php endforeach; ?>
           </div></fieldset>
           <fieldset><legend><?php echo $label('colourLabel'); ?></legend><div class="bvs-design-colour">
             <input type="color" data-control="colour" value="#00675f" aria-label="<?php echo esc_attr($a['colourLabel']); ?>">
@@ -53,7 +53,7 @@ function bvs_render_design_editor($attributes) {
           </fieldset><?php endforeach; ?>
           <details class="bvs-design-drawing"><summary><?php echo $label('drawingLabel'); ?></summary>
             <label class="bvs-design-field"><?php echo $label('drawingToolLabel'); ?><select data-control="drawingTool">
-              <?php foreach (['raw','smooth','line','rectangle','ellipse','text'] as $kind): ?><option value="<?php echo $kind; ?>"><?php echo $label($kind==='text'?'textToolLabel':$kind.'Label'); ?></option><?php endforeach; ?>
+              <?php foreach (['raw','smooth','line','rectangle','ellipse','text','erase'] as $kind): ?><option value="<?php echo $kind; ?>"><?php echo $label($kind==='text'?'textToolLabel':$kind.'Label'); ?></option><?php endforeach; ?>
             </select></label>
             <div class="bvs-design-modes"><button type="button" data-tool="draw" aria-pressed="false"><?php echo $label('drawLabel'); ?></button></div>
             <div class="bvs-design-text-controls" hidden><label class="bvs-design-field"><?php echo $label('textLabel'); ?><input type="text" data-control="text" maxlength="100" autocomplete="off"></label><?php $range('textSize',12,120,48); ?><p class="bvs-design-hint"><?php echo $label('textHint'); ?></p></div>
@@ -61,16 +61,23 @@ function bvs_render_design_editor($attributes) {
             <label class="bvs-design-brush"><?php echo $label('brushColourLabel'); ?><input type="color" data-control="brushColour" value="#ffffff"></label>
             <?php $range('brushSize',2,60,12); ?>
             <p class="bvs-design-hint" data-drawing-hint><?php echo $label('drawingHint'); ?></p>
-            <div class="bvs-design-history"><button type="button" data-action="undo" disabled><?php echo $label('undoLabel'); ?></button><button type="button" data-action="redo" disabled><?php echo $label('redoLabel'); ?></button></div>
+            <p class="bvs-design-hint" data-eraser-hint hidden><?php echo $label('eraseHint'); ?></p>
             <button type="button" data-action="clear" class="bvs-design-text"><?php echo $label('clearLabel'); ?></button>
           </details>
         </div>
         <div class="bvs-design-stage">
-          <div class="bvs-design-stage-heading"><h2><?php echo $label('previewLabel'); ?></h2><button type="button" data-action="view" class="bvs-design-text"><?php echo $label('resetViewLabel'); ?></button></div>
+          <div class="bvs-design-stage-heading"><h2><?php echo $label('previewLabel'); ?></h2><button type="button" data-action="preview-switch" hidden><?php echo $label('showFlatViewLabel'); ?></button></div>
           <div class="bvs-design-previews">
             <div class="bvs-design-machine">
-              <div class="bvs-design-view-modes"><button type="button" data-preview-mode="rotate" aria-pressed="true"><?php echo $label('rotateModelLabel'); ?></button><button type="button" data-preview-mode="draw" aria-pressed="false" disabled><?php echo $label('drawModelLabel'); ?></button></div>
-              <model-viewer src="<?php echo esc_url($model_url); ?>" alt="<?php echo esc_attr($a['previewLabel']); ?>" poster="<?php echo esc_url(plugins_url('design-editor/assets/smart-fridge-neutral.png', __FILE__)); ?>" camera-controls interaction-prompt="none" camera-orbit="25deg 90deg 4.74m" min-camera-orbit="auto auto 1.58m" max-camera-orbit="auto auto 6.32m" camera-target="0m .965m 0m" field-of-view="30deg" shadow-intensity="0.7" environment-image="neutral" exposure="1" loading="eager" touch-action="pan-y"><span slot="progress-bar" hidden></span></model-viewer><img class="bvs-design-poster" src="<?php echo esc_url(plugins_url('design-editor/assets/smart-fridge-neutral.png', __FILE__)); ?>" alt="<?php echo esc_attr($a['previewLabel']); ?>">
+              <div class="bvs-design-preview-tools">
+                <button type="button" data-action="view" class="bvs-design-reset" aria-label="<?php echo esc_attr($a['resetViewLabel']); ?>" title="<?php echo esc_attr($a['resetViewLabel']); ?>"><span class="bvs-design-reset-label"><?php echo $label('resetViewLabel'); ?></span><svg class="bvs-design-reset-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 11a9 9 0 1 1 2.64 6.36M3 4v7h7"/></svg></button>
+                <div class="bvs-design-view-modes"><button type="button" data-preview-mode="rotate" aria-pressed="true"><?php echo $label('rotateModelLabel'); ?></button><button type="button" data-preview-mode="draw" aria-pressed="false" disabled><?php echo $label('drawModelLabel'); ?></button></div>
+                <div class="bvs-design-history">
+                  <button type="button" data-action="eraser" aria-pressed="false" aria-label="<?php echo esc_attr($a['eraseLabel']); ?>" title="<?php echo esc_attr($a['eraseLabel']); ?>"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m16 3 5 5a2 2 0 0 1 0 3L11 21H6l-3-3a2 2 0 0 1 0-3L13 3a2 2 0 0 1 3 0ZM8 10l7 7M11 21h10"/></svg></button>
+                  <?php foreach (['undo','redo'] as $action): ?><button type="button" data-action="<?php echo $action; ?>" aria-label="<?php echo esc_attr($a[$action.'Label']); ?>" title="<?php echo esc_attr($a[$action.'Label']); ?>" disabled><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><?php if ($action==='undo'): ?><path d="M9 5 4 10l5 5M4 10h10a6 6 0 0 1 0 12" transform="translate(0 -2)"/><?php else: ?><path d="m15 5 5 5-5 5M20 10H10a6 6 0 0 0 0 12" transform="translate(0 -2)"/><?php endif; ?></svg></button><?php endforeach; ?>
+                </div>
+              </div>
+              <div class="bvs-design-model"><model-viewer src="<?php echo esc_url($model_url); ?>" alt="<?php echo esc_attr($a['previewLabel']); ?>" poster="<?php echo esc_url(plugins_url('design-editor/assets/smart-fridge-neutral.png', __FILE__)); ?>" camera-controls interaction-prompt="none" camera-orbit="25deg 90deg 4.74m" min-camera-orbit="auto auto 1.58m" max-camera-orbit="auto auto 6.32m" camera-target="0m .965m 0m" field-of-view="30deg" shadow-intensity="0.7" environment-image="neutral" exposure="1" loading="eager" touch-action="pan-y"><span slot="progress-bar" hidden></span></model-viewer><img class="bvs-design-poster" src="<?php echo esc_url(plugins_url('design-editor/assets/smart-fridge-neutral.png', __FILE__)); ?>" alt="<?php echo esc_attr($a['previewLabel']); ?>"></div>
               <div class="bvs-design-zoom" aria-label="<?php echo esc_attr($a['modelZoomLabel']); ?>"><button type="button" data-zoom="model-out" aria-label="<?php echo esc_attr($a['zoomOutLabel']); ?>">−</button><output data-model-zoom>100%</output><button type="button" data-zoom="model-in" aria-label="<?php echo esc_attr($a['zoomInLabel']); ?>">+</button></div><p class="bvs-design-hint"><?php echo $label('previewHint'); ?></p></div>
             <div class="bvs-design-flat"><h3><?php echo $label('canvasLabel'); ?></h3><div class="bvs-design-canvas-wrap">
               <canvas width="592" height="1024" tabindex="0" aria-label="<?php echo esc_attr($a['canvasLabel']); ?>"></canvas>
@@ -78,7 +85,7 @@ function bvs_render_design_editor($attributes) {
             </div><div class="bvs-design-zoom" aria-label="<?php echo esc_attr($a['flatZoomLabel']); ?>"><button type="button" data-zoom="flat-out" aria-label="<?php echo esc_attr($a['zoomOutLabel']); ?>">−</button><output data-flat-zoom>100%</output><button type="button" data-action="pan-panel" aria-pressed="false" hidden><?php echo $label('panPanelLabel'); ?></button><button type="button" data-zoom="flat-in" aria-label="<?php echo esc_attr($a['zoomInLabel']); ?>">+</button></div><p class="bvs-design-hint"><?php echo $label('canvasHint'); ?></p></div>
           </div>
           <p class="bvs-design-status" role="status" aria-live="polite"><?php echo $label('loadingMessage'); ?></p>
-          <div class="bvs-design-actions"><button type="button" data-action="attach" class="bvs-design-primary"><?php echo $label('attachLabel'); ?></button><button type="button" data-action="download"><?php echo $label('downloadLabel'); ?></button><button type="button" data-action="reset" class="bvs-design-text"><?php echo $label('resetLabel'); ?></button></div>
+          <div class="bvs-design-actions"><button type="button" data-action="attach" class="bvs-design-primary"><?php echo $label('attachLabel'); ?></button><button type="button" data-action="download"><?php echo $label('downloadLabel'); ?></button><button type="button" data-action="reset" class="bvs-design-danger"><?php echo $label('resetLabel'); ?></button></div>
           <p class="bvs-design-hint bvs-design-production"><?php echo $label('productionNote'); ?></p>
         </div>
       </div>

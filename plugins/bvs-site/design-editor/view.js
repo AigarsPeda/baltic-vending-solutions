@@ -45,17 +45,22 @@
       setFlatPanning(false);
       root.dataset.tool=tool;
       const button=find('button[data-tool="draw"]');button.setAttribute('aria-pressed',String(tool==='draw'));
-      button.textContent=labels[tool==='draw'?'stopDrawLabel':'drawLabel'];
       const kind=controls.drawingTool.value;
+      button.textContent=labels[kind==='erase'?(tool==='draw'?'stopEraseLabel':'eraseActionLabel'):(tool==='draw'?'stopDrawLabel':'drawLabel')];
+      find('[data-preview-mode="draw"]').textContent=labels[kind==='erase'?'eraseModelLabel':'drawModelLabel'];
       find('.bvs-design-text-controls').hidden=kind!=='text';
       find('.bvs-design-fill').hidden=!['rectangle','ellipse'].includes(kind);
-      find('[data-drawing-hint]').hidden=kind==='text';
+      find('[data-drawing-hint]').hidden=kind==='text'||kind==='erase';
+      find('[data-eraser-hint]').hidden=kind!=='erase';
+      find('.bvs-design-brush').hidden=kind==='erase';controls.brushSize.closest('label').hidden=kind==='erase';
       if(tool!=='draw')setModelDrawing(false);
+      updateEraserButton();
     }
     function setModelDrawing(active) {
       modelDrawing=active&&ready;root.dataset.modelDrawing=String(modelDrawing);
       viewer.cameraControls=!modelDrawing;viewer.setAttribute('touch-action',modelDrawing?'none':'pan-y');
       all('[data-preview-mode]').forEach(button=>button.setAttribute('aria-pressed',String((button.dataset.previewMode==='draw')===modelDrawing)));
+      updateEraserButton();
     }
     async function restoreDraft(draft) {
       if(draft.version!==1)throw new Error('Unknown draft version');
@@ -83,13 +88,13 @@
       panels=restored;selected=['front','left','right'].includes(draft.selected)?draft.selected:'front';tool=draft.tool==='draw'?'draw':'move';
       if(colour(draft.brushColour))controls.brushColour.value=draft.brushColour;
       if(bounded(draft.brushSize,2,60)){controls.brushSize.value=draft.brushSize;controls.brushSize.nextElementSibling.value=draft.brushSize;}
-      if(drawingTools.includes(draft.drawingTool))controls.drawingTool.value=draft.drawingTool;
+      if(drawingTools.includes(draft.drawingTool)||draft.drawingTool==='erase')controls.drawingTool.value=draft.drawingTool;
       if(typeof draft.text==='string')controls.text.value=draft.text.slice(0,100);
       if(bounded(draft.textSize,12,120)){controls.textSize.value=draft.textSize;controls.textSize.nextElementSibling.value=draft.textSize;}
       controls.shapeFill.checked=draft.shapeFill===true;
       if(bounded(draft.flatZoom,100,400)){flatZoom=draft.flatZoom;updateFlatZoom();}
       hasDraft=true;quoteForm?.dispatchEvent(new Event('bvs:design-changed'));
-      viewer.cameraOrbit=`${{front:0,left:-75,right:75}[selected]}deg 90deg 4.74m`;
+      viewer.cameraOrbit=`${mobile.matches?0:{front:0,left:-75,right:75}[selected]}deg 90deg 4.74m`;
       draftMessage('draftRestoredMessage','saved');
     }
     async function loadDraft() {
@@ -109,18 +114,42 @@
     addEventListener('pagehide',saveDraft);
     document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveDraft();});
     const mobile = matchMedia('(max-width: 680px)');
+    const resetCameraView=()=>{viewer.cameraOrbit=`${mobile.matches?0:25}deg 90deg 4.74m`;viewer.cameraTarget='0m .965m 0m';};
+    if(mobile.matches)resetCameraView();
     const flat = find('.bvs-design-flat'), tools = find('.bvs-design-tools'), previews = find('.bvs-design-previews');
     const stageHeading = find('.bvs-design-stage-heading'), machine = find('.bvs-design-machine');
-    const disclosure = document.createElement('details');disclosure.className='bvs-design-mobile-preview';
-    const summary = document.createElement('summary');summary.textContent=labels.previewLabel;disclosure.append(summary);
+    const previewTools=find('.bvs-design-preview-tools'),historyControls=find('.bvs-design-history');
+    let mobileView='model';
+    const mobilePreview=document.createElement('div');mobilePreview.className='bvs-design-mobile-preview';mobilePreview.id=root.id+'mobile-preview';
+    const mobileHeader=document.createElement('div');mobileHeader.className='bvs-design-mobile-heading';
+    const mobileTitle=document.createElement('h3');mobileHeader.append(mobileTitle);
+    const switchPreview=find('[data-action="preview-switch"]'),resetView=find('[data-action="view"]');
+    switchPreview.setAttribute('aria-controls',mobilePreview.id);
+    function eraserActive() {
+      return tool==='draw'&&controls.drawingTool.value==='erase'&&(modelDrawing||mobile.matches&&mobileView==='flat'||!ready);
+    }
+    function updateEraserButton() {find('[data-action=eraser]').setAttribute('aria-pressed',String(eraserActive()));}
+    function updateMobileView() {
+      root.dataset.mobileView=mobileView;
+      if(mobile.matches){
+        machine.hidden=mobileView==='flat';flat.hidden=mobileView==='model';
+        mobileTitle.textContent=labels[mobileView==='model'?'modelViewLabel':'flatViewLabel'];
+        switchPreview.textContent=labels[mobileView==='model'?'showFlatViewLabel':'showModelViewLabel'];
+        resetView.hidden=mobileView==='flat';
+      }else{machine.hidden=false;flat.hidden=false;resetView.hidden=false;}
+      switchPreview.disabled=mobile.matches&&mobileView==='flat'&&root.dataset.model==='error';
+      switchPreview.title=switchPreview.disabled?labels.fallbackMessage:'';
+      updateEraserButton();
+    }
     const adapt = () => {
       if(mobile.matches) {
-        tools.insertBefore(flat,tools.children[1]);previews.append(disclosure);disclosure.append(stageHeading,machine);
-        stageHeading.querySelector('h2').hidden=true;
+        tools.prepend(mobilePreview);mobilePreview.append(mobileHeader,machine,flat);
+        mobileHeader.append(historyControls,switchPreview);machine.querySelector('.bvs-design-model').append(resetView);switchPreview.hidden=false;
       } else {
         previews.prepend(machine);previews.append(flat);find('.bvs-design-stage').prepend(stageHeading);
-        stageHeading.querySelector('h2').hidden=false;disclosure.remove();
+        previewTools.prepend(resetView);previewTools.append(historyControls);stageHeading.append(switchPreview);switchPreview.hidden=true;mobilePreview.remove();
       }
+      updateMobileView();
     };
     mobile.addEventListener('change',adapt);adapt();
     const sizes = {front:[592,1024],left:[400,1024],right:[400,1024]};
@@ -178,13 +207,30 @@
         c.drawImage(p.artwork,(w-iw)/2,(h-ih)/2,iw,ih);
       }
       for (const stroke of p.strokes)paintDrawing(c,stroke,w,h);
-      if (p.logo) {
-        const lw=w*p.size/100,lh=lw*p.logo.height/p.logo.width;
-        c.save();c.translate(w*p.x/100,h*p.y/100);c.rotate(p.rotation*Math.PI/180);c.drawImage(p.logo,-lw/2,-lh/2,lw,lh);c.restore();
-      }
+      paintLogo(c,p,w,h);
       // Flat templates have transparent hardware cut-outs. The 3D model already has separate hardware geometry.
       if(panel==='front'&&!flip){c.globalCompositeOperation='destination-out';c.scale(w/592,h/1024);c.fill(cutouts);}
       c.restore();
+    }
+    function paintLogo(c,p,w,h) {
+      if(!p.logo)return;
+      const lw=w*p.size/100,lh=lw*p.logo.height/p.logo.width;
+      c.save();c.translate(w*p.x/100,h*p.y/100);c.rotate(p.rotation*Math.PI/180);c.drawImage(p.logo,-lw/2,-lh/2,lw,lh);c.restore();
+    }
+    const eraseCanvas=document.createElement('canvas');eraseCanvas.width=eraseCanvas.height=11;
+    const eraseContext=eraseCanvas.getContext('2d',{willReadFrequently:true});
+    function eraseAt(panel,pos) {
+      const p=panels[panel],[w,h]=sizes[panel];
+      // Test actual painted pixels in a small patch, including rotated logos and smoothed paths.
+      const hits=draw=>{
+        eraseContext.clearRect(0,0,11,11);eraseContext.save();eraseContext.translate(5-pos.x*w,5-pos.y*h);draw();eraseContext.restore();
+        const pixels=eraseContext.getImageData(0,0,11,11).data;
+        return pixels.some((value,index)=>index%4===3&&value>0);
+      };
+      if(p.logo&&hits(()=>paintLogo(eraseContext,p,w,h))){remember();p.logo=null;refresh();saveDraft();return;}
+      for(let i=p.strokes.length-1;i>=0;i--)if(hits(()=>paintDrawing(eraseContext,p.strokes[i],w,h))){
+        remember();p.strokes.splice(i,1);refresh();saveDraft();return;
+      }
     }
     function render() {
       paint(canvas,selected);
@@ -227,6 +273,12 @@
         schedule();
       });
       input.addEventListener('change',saveDraft);
+      if(['size','x','y','rotation'].includes(key))input.addEventListener('dblclick',event=>{
+        event.preventDefault();const value=blank(selected)[key];
+        if(panels[selected][key]===value)return;
+        remember();panels[selected][key]=value;input.value=value;input.nextElementSibling.value=value;
+        schedule();saveDraft();
+      });
     }
     all('[data-upload]').forEach(input=>input.addEventListener('change',async()=>{
       const file=input.files[0], panel=selected, kind=input.dataset.upload;if(!file)return;
@@ -311,6 +363,11 @@
       }
       const hit=(surface===viewer?modelPoint:flatPoint)(event);if(!hit)return;
       const {panel,pos}=hit,p=panels[panel],kind=controls.drawingTool.value;
+      if(tool==='draw'&&kind==='erase'){
+        event.preventDefault();if(surface===viewer)event.stopPropagation();
+        if(selected!==panel){selected=panel;refresh();queueSave();}
+        eraseAt(panel,pos);return;
+      }
       if(tool==='move'&&!p.logo)return;
       if(tool==='draw'&&kind==='text'&&!controls.text.value.trim()){controls.text.focus();return;}
       if(tool==='draw'&&(p.strokes.length>=1000||p.strokes.reduce((n,s)=>n+s.points.length,0)>=20000)){say('drawingLimitMessage',true);return;}
@@ -397,7 +454,12 @@
       const out=document.createElement('canvas');out.width=1880;out.height=1100;const c=out.getContext('2d');
       c.fillStyle='#f3f6f6';c.fillRect(0,0,out.width,out.height);c.fillStyle='#16282d';c.font='600 30px sans-serif';c.fillText(labels.downloadTitle,40,52);
       let start=40;
-      if(ready){const opened=mobile.matches&&!disclosure.open;if(opened){disclosure.open=true;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));}try{const blob=await viewer.toBlob({mimeType:'image/png',idealAspect:true});const image=await createImageBitmap(blob);const scale=Math.min(460/image.width,800/image.height);c.drawImage(image,20,90,image.width*scale,image.height*scale);image.close();start=520;}catch(_){start=40;}finally{if(opened)disclosure.open=false;}}
+      if(ready){
+        const hiddenMachine=machine.hidden;
+        if(hiddenMachine){machine.hidden=false;flat.hidden=true;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));}
+        try{const blob=await viewer.toBlob({mimeType:'image/png',idealAspect:true});const image=await createImageBitmap(blob);const scale=Math.min(460/image.width,800/image.height);c.drawImage(image,20,90,image.width*scale,image.height*scale);image.close();start=520;}catch(_){start=40;}
+        finally{if(hiddenMachine)updateMobileView();}
+      }
       for(const panel of ['front','left','right']) {
         const flat=document.createElement('canvas');[flat.width,flat.height]=sizes[panel];paint(flat,panel);
         const w=panel==='front'?462.5:312.5;
@@ -413,9 +475,16 @@
     if(quoteForm)quoteForm.bvsEditorDesign={hasDraft:()=>hasDraft,file:designFile};
     all('[data-action]').forEach(button=>button.addEventListener('click',async()=>{
       const action=button.dataset.action,p=panels[selected];
+      if(action==='preview-switch'){if(exporting||dragging||panning)return;mobileView=mobileView==='model'?'flat':'model';setModelDrawing(false);updateMobileView();return;}
       if(action==='pan-panel'){if(!dragging&&!panning)setFlatPanning(!flatPanning);return;}
-      if(action==='view'){viewer.cameraOrbit='25deg 90deg 4.74m';viewer.cameraTarget='0m .965m 0m';return;}
+      if(action==='view'){resetCameraView();return;}
       if(dragging)return;
+      if(action==='eraser'){
+        if(panning)return;
+        const active=eraserActive();tool=active?'move':'draw';
+        if(!active)controls.drawingTool.value='erase';
+        updateTool();setModelDrawing(!active&&(!mobile.matches||mobileView==='model'));queueSave();saveDraft();return;
+      }
       if(action==='undo'){if(history.length){future.push(snapshot());panels=history.pop();refresh();queueSave();saveDraft();}return;}
       if(action==='redo'){if(future.length){history.push(snapshot());panels=future.pop();refresh();queueSave();saveDraft();}return;}
       if(action==='reset'){
@@ -453,11 +522,11 @@
           const texture=viewer.createCanvasTexture();[texture.source.element.width,texture.source.element.height]=sizes[panel];
           material.pbrMetallicRoughness.setBaseColorFactor('#ffffff');material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);textures[panel]=texture;
         }
-        ready=true;root.dataset.model='ready';find('[data-preview-mode="draw"]').disabled=false;render();say('readyMessage');
-      }catch(_){root.dataset.model='error';say('fallbackMessage',true);}
+        ready=true;root.dataset.model='ready';updateMobileView();find('[data-preview-mode="draw"]').disabled=false;render();say('readyMessage');
+      }catch(_){root.dataset.model='error';mobileView='flat';updateMobileView();say('fallbackMessage',true);}
     });
-    viewer.addEventListener('error',()=>{ready=false;setModelDrawing(false);find('[data-preview-mode="draw"]').disabled=true;root.dataset.model='error';say('fallbackMessage',true);});
-    setTimeout(()=>{if(!ready){root.dataset.model='error';say('fallbackMessage',true);}},20000);
+    viewer.addEventListener('error',()=>{ready=false;setModelDrawing(false);find('[data-preview-mode="draw"]').disabled=true;root.dataset.model='error';mobileView='flat';updateMobileView();say('fallbackMessage',true);});
+    setTimeout(()=>{if(!ready){root.dataset.model='error';mobileView='flat';updateMobileView();say('fallbackMessage',true);}},20000);
     loadDraft();
   });
 })();

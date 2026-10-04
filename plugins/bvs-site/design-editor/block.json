@@ -18,13 +18,25 @@
       "type": "string",
       "default": "Front"
     },
+    "frontShortLabel": {
+      "type": "string",
+      "default": "Front"
+    },
     "leftLabel": {
       "type": "string",
       "default": "Left side"
     },
+    "leftShortLabel": {
+      "type": "string",
+      "default": "Left"
+    },
     "rightLabel": {
       "type": "string",
       "default": "Right side"
+    },
+    "rightShortLabel": {
+      "type": "string",
+      "default": "Right"
     },
     "colourLabel": {
       "type": "string",
@@ -313,6 +325,42 @@
     "stopPanPanelLabel": {
       "type": "string",
       "default": "Continue editing"
+    },
+    "modelViewLabel": {
+      "type": "string",
+      "default": "3D machine"
+    },
+    "flatViewLabel": {
+      "type": "string",
+      "default": "2D panel"
+    },
+    "showFlatViewLabel": {
+      "type": "string",
+      "default": "2D view"
+    },
+    "showModelViewLabel": {
+      "type": "string",
+      "default": "3D view"
+    },
+    "eraseLabel": {
+      "type": "string",
+      "default": "Eraser"
+    },
+    "eraseActionLabel": {
+      "type": "string",
+      "default": "Erase items"
+    },
+    "stopEraseLabel": {
+      "type": "string",
+      "default": "Stop erasing"
+    },
+    "eraseModelLabel": {
+      "type": "string",
+      "default": "Erase on machine"
+    },
+    "eraseHint": {
+      "type": "string",
+      "default": "In 3D, choose Erase on machine. Click a drawing, shape, text item or logo to remove the topmost item. Undo restores it."
     }
   },
   "supports": {
