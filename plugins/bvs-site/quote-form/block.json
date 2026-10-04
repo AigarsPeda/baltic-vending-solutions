@@ -1,0 +1,149 @@
+{
+  "apiVersion": 3,
+  "name": "bvs/quote-form",
+  "title": "BVS quote form",
+  "category": "widgets",
+  "icon": "email",
+  "description": "Editable quote form. Enquiries are stored privately in WordPress.",
+  "attributes": {
+    "formId": {
+      "type": "string",
+      "default": "quote"
+    },
+    "intro": {
+      "type": "string",
+      "default": "Required fields are marked (required)."
+    },
+    "nameLabel": {
+      "type": "string",
+      "default": "Contact name (required)"
+    },
+    "companyLabel": {
+      "type": "string",
+      "default": "Business name"
+    },
+    "emailLabel": {
+      "type": "string",
+      "default": "Email (required)"
+    },
+    "phoneLabel": {
+      "type": "string",
+      "default": "Phone"
+    },
+    "modelLabel": {
+      "type": "string",
+      "default": "Equipment"
+    },
+    "modelAny": {
+      "type": "string",
+      "default": "Help me choose"
+    },
+    "compactLabel": {
+      "type": "string",
+      "default": "Compact Cooler"
+    },
+    "fridgeLabel": {
+      "type": "string",
+      "default": "Smart Fridge"
+    },
+    "modeLabel": {
+      "type": "string",
+      "default": "Interest"
+    },
+    "modeAdvice": {
+      "type": "string",
+      "default": "Advice"
+    },
+    "modeBuy": {
+      "type": "string",
+      "default": "Purchase"
+    },
+    "modeRent": {
+      "type": "string",
+      "default": "Rental"
+    },
+    "productsLabel": {
+      "type": "string",
+      "default": "What do you plan to sell? (required)"
+    },
+    "locationLabel": {
+      "type": "string",
+      "default": "Intended location"
+    },
+    "messageLabel": {
+      "type": "string",
+      "default": "Anything else we should know?"
+    },
+    "namePlaceholder": {
+      "type": "string",
+      "default": "Your name"
+    },
+    "companyPlaceholder": {
+      "type": "string",
+      "default": "Business or project name"
+    },
+    "emailPlaceholder": {
+      "type": "string",
+      "default": "you@company.com"
+    },
+    "phonePlaceholder": {
+      "type": "string",
+      "default": "Optional"
+    },
+    "productsPlaceholder": {
+      "type": "string",
+      "default": "For example, packaged meals and drinks"
+    },
+    "locationPlaceholder": {
+      "type": "string",
+      "default": "City and type of premises, or still deciding"
+    },
+    "messagePlaceholder": {
+      "type": "string",
+      "default": "Your plans, questions or branding requirements"
+    },
+    "submitLabel": {
+      "type": "string",
+      "default": "Request a quote"
+    },
+    "sendingLabel": {
+      "type": "string",
+      "default": "Saving…"
+    },
+    "successMessage": {
+      "type": "string",
+      "default": "Your enquiry has been saved."
+    },
+    "errorMessage": {
+      "type": "string",
+      "default": "Please check the required fields and try again."
+    },
+    "unavailableMessage": {
+      "type": "string",
+      "default": "We could not save your enquiry. Please try again shortly."
+    },
+    "privacyText": {
+      "type": "string",
+      "default": "We use the details you provide to respond to your enquiry."
+    },
+    "privacyLabel": {
+      "type": "string",
+      "default": "Privacy notice"
+    },
+    "privacyUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "language": {
+      "type": "string",
+      "default": "en"
+    }
+  },
+  "supports": {
+    "html": false,
+    "multiple": true
+  },
+  "editorScript": "bvs-quote-editor",
+  "viewScript": "bvs-quote-view",
+  "style": "bvs-quote-style"
+}

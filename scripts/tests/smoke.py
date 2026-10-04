@@ -10,7 +10,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
-SCRIPTS = sorted((ROOT / 'scripts').glob('*.sh'))
+SCRIPTS = sorted(p for p in (ROOT / 'scripts').glob('*.sh') if p.name != 'wp-local.sh')
 
 
 def run(script, args, env, ok=True):
@@ -105,6 +105,7 @@ elif name == 'php':
     fixture_scripts = base / 'project' / 'scripts'
     shutil.copytree(ROOT / 'scripts', fixture_scripts)
     shutil.copyfile(config, fixture_scripts / 'baltic-vending-solutions.env')
+    shutil.copytree(ROOT / 'plugins', fixture_scripts.parent / 'plugins')
     default_env = dict(env)
     default_env.pop('CONFIG_FILE')
     for script in SCRIPTS:
@@ -165,4 +166,4 @@ elif name == 'php':
     assert not (destination / 'obsolete.php').exists()
     assert (other_theme / 'keep.txt').read_text() == 'keep'
     sock.close()
-print('Passed: shell syntax, help, blank-config guards, dry-run, path guards and backup ordering for all six scripts; real Local rsync and SSH key quoting.')
+print('Passed: shell syntax, help, blank-config guards, dry-run, path guards and backup ordering for transfer scripts; real Local rsync and SSH key quoting.')

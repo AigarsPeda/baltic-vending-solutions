@@ -1,6 +1,6 @@
 # WordPress plugins, editing and content storage plan
 
-Project requirements and implementation plan, 2026-10-04. This document defines how Baltic Vending Solutions will use language, Google, SEO and email plugins while keeping website content editable through WordPress's visual interfaces. It is a plan; the new WordPress site and plugins have not been installed.
+Project requirements and implementation plan, 2026-10-04. This document defines how Baltic Vending Solutions will use language, Google, SEO and email plugins while keeping website content editable through WordPress's visual interfaces. The first Local implementation now follows this plan. See [local development](docs/local-development.md) for installed versions, editing locations and completed checks. Google and production email configuration remain pending.
 
 ## Required editing behaviour
 
@@ -20,6 +20,7 @@ The supplied screenshot shows the intended plugin baseline, not an installation 
 | Rank Math SEO | Search titles/descriptions, canonical URLs, XML sitemaps and suitable structured data | Edit SEO information per language; verify sitemaps, canonical URLs and translated routes. Keep its Analytics/tag insertion disabled when Site Kit owns that integration. |
 | Site Kit by Google | Connect the production site to the owner's Google services | Start with Search Console. Enable Analytics only after the property and consent integration are configured. PageSpeed Insights may be connected; ads and Tag Manager are outside the initial plan. |
 | WP Mail SMTP | Deliver WordPress email through the selected SMTP or API provider | Configure the business sender and mailer on production. Route quote notifications and WordPress transactional emails through `wp_mail()`. |
+| WP Consent API | Share consent choices with compatible plugins | Active locally. The first-party BVS Cookie banner provides editable LV/EN controls; the API alone does not display a banner. |
 
 Use Rank Math's current native Polylang compatibility rather than copying obsolete compatibility snippets from another project. Its documentation states native support was added in 1.0.276. Confirm the actual installed combination with translated-page checks. [Rank Math compatibility guidance](https://rankmath.com/kb/polylang-compatibility/).
 
@@ -49,7 +50,7 @@ Site Kit's setup requires a publicly accessible production environment. Prepare 
 
 Keep one owner for Analytics tag insertion. In this plan, Site Kit owns it; Rank Math and the theme must not add another GA4 tag. If Tag Manager is introduced later, revise the ownership plan first. Google service access and Gmail sending authorisation are separate connections.
 
-Plan a WordPress-configurable consent solution compatible with Site Kit and the chosen Analytics setup. Its copy, choices and policy links must be editable and translated. Until that solution is selected, configured and tested, leave Analytics disconnected and tags disabled. The intended launch behaviour is to avoid Analytics requests before the visitor grants the applicable choice. Verify network requests after acceptance, refusal and revocation; do not assume Consent Mode alone provides a visible banner or eliminates all requests. [Site Kit consent documentation](https://sitekit.withgoogle.com/documentation/using-site-kit/consent-mode/).
+The Local implementation uses a first-party BVS Cookie banner block plus WP Consent API. Copy, choices and policy links are translated and visually editable in native Widgets. The first visit offers equal reject/allow controls; saved choices can be reopened from the footer. Site Kit remains the only Analytics tag owner, with server-side opt-in gating. Leave Analytics disconnected until the final production property, consent integration and caching are configured and tested. Verify network requests before a choice and after acceptance, refusal and revocation; Consent Mode alone does not provide a visible banner or eliminate all requests. See [implementation details](docs/cookie-consent.md) and [Site Kit consent documentation](https://sitekit.withgoogle.com/documentation/using-site-kit/consent-mode/).
 
 Search Console and site verification can be prepared independently of enabling visitor Analytics tracking. Do not introduce advertising integrations as part of the initial Google setup.
 

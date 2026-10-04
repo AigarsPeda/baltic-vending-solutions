@@ -1,0 +1,53 @@
+{
+  "apiVersion": 3,
+  "name": "bvs/cookie-banner",
+  "title": "BVS Cookie banner",
+  "category": "widgets",
+  "icon": "privacy",
+  "description": "Editable cookie-choice banner and footer settings control.",
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Your cookie choice"
+    },
+    "description": {
+      "type": "string",
+      "default": "Necessary cookies remember your language and cookie choice. Analytics is optional and is enabled only with your permission. You can change your choice at any time."
+    },
+    "rejectLabel": {
+      "type": "string",
+      "default": "Reject analytics"
+    },
+    "acceptLabel": {
+      "type": "string",
+      "default": "Allow analytics"
+    },
+    "closeLabel": {
+      "type": "string",
+      "default": "Close without changing"
+    },
+    "settingsLabel": {
+      "type": "string",
+      "default": "Cookie settings"
+    },
+    "privacyLabel": {
+      "type": "string",
+      "default": "Privacy & cookies"
+    },
+    "privacyUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "storageError": {
+      "type": "string",
+      "default": "Your choice could not be saved. Check whether cookies are allowed in your browser and try again."
+    }
+  },
+  "supports": {
+    "html": false,
+    "multiple": false
+  },
+  "editorScript": "bvs-cookie-editor",
+  "viewScript": "bvs-cookie-view",
+  "style": "bvs-cookie-style"
+}

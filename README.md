@@ -1,49 +1,67 @@
 # Baltic Vending Solutions
 
-Starter repository for a WordPress website offering vending equipment for sale or rent and custom branding to match the customer's business. Development will use Local App, with deployment to a DigitalOcean droplet later.
+The first local WordPress version is implemented for vending equipment purchase, rental and custom branding. It runs in Local App with Latvian and English pages.
 
-The repository currently contains documentation and synchronisation scripts. WordPress, the custom theme, the Local site and the droplet have not been created.
+- [Local website](http://baltic-vending-solutions.local/)
+- [English website](http://baltic-vending-solutions.local/en/)
+- [WordPress admin](http://baltic-vending-solutions.local/wp-admin/)
+- [Local development and editing guide](docs/local-development.md)
+- [Privacy drafts and pending business details](docs/privacy-page.md)
+- [Project handoff](HANDOFF.md)
+- [Client profile](CLIENT_PROFILE.md), [style guide](STYLE_GUIDE.md) and [WordPress plan](WORDPRESS_PLAN.md)
+- [Equipment research](docs/equipment-research.md) and [deployment workflow](docs/development-and-deployment.md)
+- [Payments and product-management research](docs/payments-and-management.md)
+- [Logo, favicon and native replacement controls](docs/brand-assets.md)
 
-- [Project handoff](HANDOFF.md) records the current state and next steps.
-- [Client profile](CLIENT_PROFILE.md) defines the audience, offer and content direction.
-- [Style guide](STYLE_GUIDE.md) sets the working B2B visual and editorial rules.
-- [WordPress plan](WORDPRESS_PLAN.md) defines plugins, native visual editing, media management and storage.
-- [Equipment research](docs/equipment-research.md) summarises our proposal specifications and supporting manufacturer information.
-- [Development and deployment](docs/development-and-deployment.md) explains configuration and complete website transfer.
+The equipment research and original deployment document remain in Latvian. New documentation is in English. GitHub repository: [AigarsPeda/baltic-vending-solutions](https://github.com/AigarsPeda/baltic-vending-solutions).
 
-The two supporting documents under `docs/` currently retain their original Latvian text. The client profile, handoff, README and style guide are in English. Documentation language does not determine the public website's languages.
+## Implementation
 
-GitHub repository: [AigarsPeda/baltic-vending-solutions](https://github.com/AigarsPeda/baltic-vending-solutions).
+`theme/baltic-vending-solutions/` contains the hybrid theme, editor styles, locally hosted IBM Plex Sans fonts and navigation behaviour. `plugins/bvs-site/` contains the editable Quote Form and Cookie banner blocks, private enquiry records and notification handling.
 
-## WordPress requirements
+Page content uses core Gutenberg blocks. Navigation uses native WordPress menus, and header/footer content uses per-language block widgets. Photos are imported into Media Library and stored in WordPress uploads. The repository does not contain the WordPress database, credentials or content photos.
 
-Plan Polylang, Rank Math SEO, Site Kit by Google and WP Mail SMTP. Keep all website content editable through Gutenberg and native WordPress admin interfaces. Manage photographs and logos through Media Library; store authored content in the WordPress database and media in the configured uploads directory. The [WordPress plan](WORDPRESS_PLAN.md) records the hybrid-theme baseline, optional Polylang Pro/Site Editor route, Google setup and email responsibilities.
+Polylang, Rank Math SEO, Site Kit by Google, WP Mail SMTP and WP Consent API are installed. The translated [cookie banner](docs/cookie-consent.md) is active locally. Google services and production mail are unconfigured. Local intercepts mail through the BVS plugin, so quote notifications cannot leave the development site. Enquiries remain visible under **Quote enquiries** in admin.
 
-## Configuration
+## Local workflow
+
+The ignored `scripts/baltic-vending-solutions.env` contains this machine's Local runtime paths. The example retains blank values for a different installation. Start the site in Local before running commands.
 
 ```bash
-cp scripts/baltic-vending-solutions.env.example scripts/baltic-vending-solutions.env
+./scripts/sync-code-to-local.sh --dry-run
+./scripts/sync-code-to-local.sh
+./scripts/sync-site-plugin-to-local.sh
+./scripts/wp-local.sh core version
 ```
 
-All configuration fields are blank. Git ignores the real `.env` file. Scripts check the required fields and stop before connecting or making changes if they are missing. `--help` works without configuration. Check the Local and server paths for this project before filling them in.
+Theme and plugin syncs update code without modifying saved pages, widgets, menus or media. The one-time content seed is described in the local guide. It exits once imported and never restores deleted sections.
 
 ## Scripts
 
 | Script | Purpose |
 | --- | --- |
-| `scripts/sync-code-to-local.sh` | Copy the repository theme into Local |
-| `scripts/sync-code-to-droplet.sh` | Copy the theme to the droplet and archive the previous theme |
-| `scripts/sync-plugins-to-droplet.sh` | Copy plugins and mu-plugins after backing up the server copies |
-| `scripts/sync-uploads-to-droplet.sh` | Copy upload files without creating Media Library records |
-| `scripts/push-db-to-droplet.sh` | Replace the server database after a server backup |
-| `scripts/pull-db-from-droplet.sh` | Replace the Local database after a Local backup and download uploads |
+| `sync-code-to-local.sh` | Copy the repository theme into Local |
+| `sync-site-plugin-to-local.sh` | Copy the first-party site plugin into Local |
+| `wp-local.sh` | Run WP-CLI with this site's PHP runtime and database socket |
+| `sync-code-to-droplet.sh` | Copy theme code and archive the previous theme |
+| `sync-plugins-to-droplet.sh` | Copy Local plugins and mu-plugins after a server backup |
+| `sync-uploads-to-droplet.sh` | Copy uploaded files without creating attachment records |
+| `push-db-to-droplet.sh` | Replace the server database after a server backup |
+| `pull-db-from-droplet.sh` | Replace the Local database after a Local backup and download uploads |
 
-Every script supports `--dry-run`. File scripts show rsync changes; database scripts check connectivity and database availability without exporting or importing. Push and pull require an exact confirmation phrase after preflight. Use `--yes` only for an already authorised database replacement.
+Transfer scripts support `--help` and `--dry-run`. Database replacement requires explicit confirmation. Remote configuration remains blank; DigitalOcean deployment is pending. A complete website transfer requires the database, uploads, theme and plugin files.
 
 ## Checks
 
 ```bash
 python3 scripts/tests/smoke.py
+./scripts/wp-local.sh eval-file scripts/tests/wordpress.php
+./scripts/wp-local.sh eval-file scripts/tests/consent.php
+NODE_PATH=/path/to/playwright/node_modules node scripts/tests/browser.cjs
+NODE_PATH=/path/to/playwright/node_modules node scripts/tests/cookies.cjs
+NODE_PATH=/path/to/playwright/node_modules node scripts/tests/privacy.cjs
 ```
 
-Checks use temporary files and mocked SSH/WP-CLI processes. They also exercise installed rsync against a temporary Local directory. They do not connect to a droplet or modify a real WordPress site. Actual Local and test-server verification is still required after configuration.
+The smoke checks isolate transfer behaviour with temporary files and mocked remote tools. The WordPress checks use synthetic enquiries and remove their test records. The browser checks use Chrome, inspect eight routes at several widths, exercise navigation and submit a synthetic enquiry named `BVS browser verification`. Remove that test record from Quote enquiries after a manual run. Screenshots go into ignored `output/`.
+
+Before launch, complete the legal identity, contact details, privacy notice, commercial terms, Google/consent and production email setup. The current site is a local development draft with search indexing disabled.

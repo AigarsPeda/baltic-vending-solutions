@@ -1,6 +1,6 @@
 # Baltic Vending Solutions style guide
 
-Working design baseline, 2026-10-04. This guide turns the [client profile](CLIENT_PROFILE.md) into practical rules for the WordPress website. It covers visual design, product presentation and writing. No existing company logo or approved brand palette has been supplied, so the choices below establish a consistent starting point for implementation.
+Working design baseline, 2026-10-04. This guide turns the [client profile](CLIENT_PROFILE.md) into practical rules for the WordPress website. It covers visual design, product presentation and writing. The owner selected a generated text-only wordmark and plain B favicon during local development. The palette below provides the implementation baseline.
 
 ## Design purpose
 
@@ -47,11 +47,17 @@ Base colour checks use solid, opaque colours. Recheck any overlays or image back
 | error on canvas | 6.72:1 |
 | success on canvas | 6.26:1 |
 
+## Logo and favicon
+
+Use the text-only Baltic Vending Solutions wordmark in dark ink on a light background. Preserve its two-line layout, proportions and transparent background. The favicon is a plain white typographic B on teal; do not use the earlier machine-shaped symbols. Both languages share the same identity. Manage the logo and Site Icon through native WordPress settings and Media Library, as described in [brand assets](docs/brand-assets.md).
+
 ## Typography
 
 Use IBM Plex Sans for headings, body text and controls. Its technical character suits equipment specifications, and one family keeps the reading experience consistent. IBM publishes it as an open-source family under the Open Font License and documents extended Latin support. [Official IBM Plex source](https://github.com/IBM/plex).
 
 Self-host the selected WOFF2 files with their licence. Start with weights 400 and 600, use `font-display: swap`, and retain a system sans-serif fallback. Check the actual font files for English and Latvian characters before shipping. Do not make a remote font service a requirement for rendering the page.
+
+The cookie banner follows the owner’s JanogaGo reference layout, with the site’s dark ink `#16282d` background and white text, a 28px Playfair Display heading and Manrope body/control text. Its fonts are self-hosted and scoped to this component. Use a teal top border and subtle upward shadow to separate the banner from the page. Use square outlined reject/allow buttons with equal emphasis. Show only these choices on first visit; offer close without changing when reopening an existing choice. On mobile, place the actions below the copy, retaining readable labels and a scrollable banner on short screens.
 
 | Role | Small screens | Desktop | Weight and line height |
 | --- | --- | --- | --- |
@@ -63,7 +69,7 @@ Self-host the selected WOFF2 files with their licence. Start with weights 400 an
 | Labels, specifications, buttons | 16px | 16px | 400 or 600, 1.4 |
 | Captions and secondary metadata | 14px | 14px | 400, 1.5 |
 
-Use fluid heading sizes between these endpoints. Keep prose to about 60 to 68 characters per line. Use sentence case and left alignment for headings and explanatory text. Product names keep their official capitalisation. Small uppercase labels are optional and limited to short section identifiers.
+Use fluid heading sizes between these endpoints. Keep prose to about 60 to 68 characters per line. Use sentence case and left alignment for headings and explanatory text. Main headings should express one statement without a period; rewrite two-sentence headings as a single statement. Product names keep their official capitalisation. Do not add small marketing labels above the main headings or repeat manufacturer labels above model names. The owner removed these from the first draft. Useful numbered process steps may remain.
 
 Use tabular numerals in specification comparisons. Keep units attached to values, such as `13.3 in` and `+1 to +8 °C`. Mark dimensions consistently as height, width and depth when confirmed. Do not publish estimated measurements to fill an empty row.
 
@@ -75,9 +81,11 @@ Base spacing on 4px increments. Use 8px between a label and its field, 16px with
 
 Keep the header about 72px high on desktop and 64px on mobile. The desktop navigation fits one line. Collapse it before labels become cramped. Use concise navigation labels such as Equipment, Purchase & rental, Custom branding and Contact, with "Request a quote" as the primary action.
 
-Use a split hero on desktop: left-aligned copy and actions alongside a full machine image. Give the machine enough vertical room to show its proportions. Use natural content height, with the offer and primary action visible early. Do not force a viewport-height section. On mobile, show the offer and action before the machine image.
+Use a split hero on desktop: left-aligned copy and actions alongside a full machine image. Give the machine enough vertical room to show its proportions. The owner requested a taller homepage hero: at desktop widths of 1000px and above, use a 720px minimum section height, 80px vertical padding and a 560px image area, with the two columns vertically centred. Keep the offer and primary action visible early. Do not force a viewport-height section; mobile and product-detail heroes retain their natural height. On mobile, show the offer and action before the machine image.
 
 Use straight-edged image panels and comparison sections. Buttons and inputs use a consistent 4px radius. Cards are for distinct products or choices, not every paragraph. Group explanatory content with spacing and thin rules. Use shadows only for floating UI such as an open navigation panel.
+
+Keep the footer compact. Group the company name and description with a 12px gap; align quote, privacy and cookie-settings controls together on the right on desktop. The owner removed the local-development notice from both translated footer widgets. Stack the identity and utility controls with left alignment on mobile, allowing links to wrap naturally. Override default WordPress block margins within the footer so they do not add unintended gaps.
 
 ## Homepage sequence
 
@@ -95,7 +103,7 @@ Add genuine project examples or customer references when available. An empty log
 
 Show both machines at a consistent image scale and angle, with their complete bodies visible. Do not stretch an image or crop the payment screen, doors or base. Show products stocked inside only where the image accurately represents a suitable configuration.
 
-Each product introduction needs a model name, a short suitability explanation, an equipment image, key proposal facts and a route to the detailed page. Use the same fact order for both machines. With two proposed models, a two-column comparison is sufficient; do not add a third placeholder product.
+The homepage comparison introduces shared suitability once, then shows each machine's photo, model name, short distinguishing features, key proposal facts and a model-specific link to the detailed page. Use the same order for both machines. Save longer product explanations for the detail pages. With two proposed models, a two-column comparison is sufficient; do not add a third placeholder product.
 
 Our local Pages documents define the proposed offer. For Compact Cooler, retain the proposal's 13.3-inch screen and Vision AI configuration. For Smart Fridge, retain its stated features without borrowing the Classic model's 24-inch display or approximate dimensions from other projects. Supporting manufacturer information can explain the platform, but must not silently replace our proposed configuration.
 
@@ -109,13 +117,19 @@ Prioritise authorised equipment photos, original customer projects and accurate 
 
 Show custom wrapping through a neutral and branded view of the same model at the same angle. Explain the customer's artwork input, design preparation, approval and application as the actual service scope becomes available. Keep vents, seals, screens and payment hardware visible in examples. A render must not imply a wrapping method that prevents normal operation.
 
-Use "Branding visualisation" as the visible caption for concepts. Use customer logos only with permission. Do not represent JanogaGo artwork as a Baltic Vending Solutions customer case without evidence and approval for that use.
+Use "Branding visualisation" as the visible caption for concepts. Use customer logos only with permission. The owner identified JāņogaGO as the first client on 2026-10-04 and supplied its machine photo for the wrapping section. The owner subsequently removed the public caption; retain the descriptive alt text. Keep concept renders separate from real client examples, and do not add outcomes or testimonials without evidence.
 
 Write useful alt text describing the model, view or wrapping. Decorative duplicates can have empty alt text. Keep captions and labels as editable text rather than baked into images.
 
+The homepage wrapping offer is a service overview. Its headline focuses on making the customer’s brand stand out, with the final brand phrase on its own line in light teal #a5d1cb using native inline colour formatting. Name the wrapping service directly in the introductory text. Group the heading, introduction and two unnumbered artwork/approval details on the left. Show the supplied JāņogaGO client photo without a visible caption on the right, preserving the full machine and transparency. Stack text and image on mobile. The following project-start section uses three photo cards at the owner’s request. Each card has an image, step number, action heading and short explanation on a canvas background. Use the real equipment photograph for model selection and local Unsplash photos for planning and discussion. Keep image areas, heading starts and description starts aligned across desktop cards. Use shared CSS grid rows through the card and copy groups so the tallest heading determines the description baseline, rather than reserving a fixed number of lines. Stack the cards in sequence on mobile. Keep the wrapping section as a distinct split layout. Use the shared purchase/rental quote button immediately above this section; do not repeat the same button inside the wrapping section.
+
+Explain payments and management through the buyer's daily tasks. Pair a pale teal payment panel with stock, sales and remote-pricing rows, using the actual proposed model capabilities. Keep these as native editable blocks. Avoid simulated dashboards with invented numbers. Manufacturer feature headings can inform the hierarchy; copy and colours should belong to Baltic Vending Solutions.
+
+Purchase and rental headings use matching 28px teal outline icons: a shopping bag for purchase and a calendar with a clock for rental. Keep a 12px gap between each icon and its heading. These are decorative theme SVGs tied to semantic heading classes, so the readable labels remain native editable text and the icons follow the correct option if columns move.
+
 ## Buttons, navigation and forms
 
-Use one primary action label, "Request a quote", across the header, product details and final enquiry section. These can lead to the same form with model and purchase/rental context prefilled. "View equipment" has a different browsing purpose and is the secondary action. In prose, use underlined links rather than styling every link as a button.
+Use one primary action label, "Request a quote", across the header, product details and final enquiry section. These can lead to the same form with model and purchase/rental context prefilled. "View equipment" has a different browsing purpose and is the secondary action. In prose, use underlined links rather than styling every link as a button. Avoid repeating the same quote action in neighbouring sections. Payments ends with its capability note; purchase and rental share one quote button below both options, with the interest selected in the form.
 
 Buttons are at least 48px high, with 20 to 24px horizontal padding and a 600-weight label. Make icon-only controls at least 44 by 44px and give them an accessible name. Primary and secondary actions need visible hover, focus, pressed and loading states. Do not rely on a hover effect to reveal necessary information.
 
@@ -148,9 +162,15 @@ Design toward WCAG 2.2 AA. Normal text needs at least 4.5:1 contrast; large text
 
 Use semantic headings, visible keyboard focus, descriptive link names and a skip link. Validate reflow, zoom, screen-reader labels and form errors during implementation. Palette checks do not establish that the entire website meets WCAG.
 
-Motion is limited to brief state transitions, normally 120 to 180ms. Honour reduced-motion preferences. Keep essential content visible without JavaScript. Avoid autoplay carousels, scroll hijacking, bouncing quote buttons and decorative parallax. An optional 3D viewer needs a static image fallback and accessible controls; it must not block the offer or comparison.
+Motion is limited to brief state transitions, normally 120 to 180ms. FAQ answers follow the JanogaGo reference with a 340ms opening slide and a faster 220ms closing slide, accompanied by a teal plus/minus indicator. Equipment comparison buttons may reveal a brief teal tile-and-light treatment over their matching photo, as selected by the owner from the CodePen reference. Keep this treatment confined to the selected product, run it once per hover or focus, and retain static feedback with reduced motion. Each comparison photo links to the matching translated product page through the native image-block link control. Keep an inset focus outline visible on image links. The detail button also carries its own filled teal tile pattern and light sweep, so its hover feedback is visible independently of the photo. Honour reduced-motion preferences with immediate state changes. Keep essential content accessible without JavaScript. Avoid autoplay carousels, scroll hijacking, bouncing quote buttons and decorative parallax. An optional 3D viewer needs a static image fallback and accessible controls; it must not block the offer or comparison.
+
+The manufacturer performance section uses one scroll-triggered counter, counting to its editable value over one second. Animate it only once per page load. Screen readers receive the final value throughout; reduced motion and disabled JavaScript show the final value immediately. Keep the manufacturer attribution in the explanatory note and record its source in project documentation, and distinguish reported averages from forecasts for a specific installation.
+
+Same-page section links scroll smoothly to their destination through native browser behavior. Preserve URL fragments, keyboard activation and browser history. Use immediate scrolling for reduced-motion preferences.
 
 ## WordPress implementation and review
+
+Privacy notices use a single reading column capped at 840px, with 16px body text at 1.75 line height. Use clear section headings, short paragraphs and lists for cookie names and lifetimes. Keep the site's IBM Plex Sans typography. Show unresolved business details in a visible draft notice and in the relevant paragraph. Place the native cookie-settings button beside the explanation of changing a choice. On mobile, reduce outer spacing without shrinking the text.
 
 Follow [WORDPRESS_PLAN.md](WORDPRESS_PLAN.md) for the plugin baseline and storage rules. All visitor-facing content must be visually editable, including header/footer copy, form labels and feedback, CTA destinations and branding-demo captions. The baseline uses Gutenberg pages, native menus and per-language block-widget areas; a full Site Editor route requires the documented language-plugin edition decision. Do not hide content in PHP, CSS, JSON data files or shortcode-only sections.
 

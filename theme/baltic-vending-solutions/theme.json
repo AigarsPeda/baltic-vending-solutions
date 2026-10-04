@@ -1,0 +1,114 @@
+{
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "1200px",
+      "wideSize": "1200px"
+    },
+    "color": {
+      "defaultPalette": false,
+      "palette": [
+        {
+          "slug": "canvas",
+          "name": "Canvas",
+          "color": "#F3F6F6"
+        },
+        {
+          "slug": "surface",
+          "name": "Surface",
+          "color": "#FFFFFF"
+        },
+        {
+          "slug": "ink",
+          "name": "Ink",
+          "color": "#16282D"
+        },
+        {
+          "slug": "muted",
+          "name": "Muted",
+          "color": "#506166"
+        },
+        {
+          "slug": "accent",
+          "name": "Accent",
+          "color": "#00675F"
+        },
+        {
+          "slug": "accent-soft",
+          "name": "Accent soft",
+          "color": "#E4F1EF"
+        }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "slug": "plex",
+          "name": "IBM Plex Sans",
+          "fontFamily": "Plex, 'Segoe UI', sans-serif"
+        }
+      ],
+      "fontSizes": [
+        {
+          "slug": "small",
+          "name": "Small",
+          "size": "14px"
+        },
+        {
+          "slug": "medium",
+          "name": "Medium",
+          "size": "18px"
+        },
+        {
+          "slug": "large",
+          "name": "Large",
+          "size": "20px"
+        },
+        {
+          "slug": "x-large",
+          "name": "X-large",
+          "size": "40px"
+        }
+      ]
+    },
+    "spacing": {
+      "units": [
+        "px",
+        "rem",
+        "%",
+        "vw"
+      ],
+      "blockGap": "24px"
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#FFFFFF",
+      "text": "#16282D"
+    },
+    "typography": {
+      "fontFamily": "var:preset|font-family|plex",
+      "lineHeight": "1.6"
+    },
+    "elements": {
+      "link": {
+        "color": {
+          "text": "#00675F"
+        }
+      },
+      "button": {
+        "border": {
+          "radius": "4px"
+        },
+        "color": {
+          "background": "#00675F",
+          "text": "#FFFFFF"
+        },
+        "typography": {
+          "fontWeight": "600"
+        }
+      }
+    }
+  }
+}
