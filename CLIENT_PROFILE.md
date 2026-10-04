@@ -1,62 +1,64 @@
-# Baltic Vending Solutions klienta un mērķauditorijas profils
+# Baltic Vending Solutions client and audience profile
 
-Darba profils vietnes satura un dizaina izstrādei. Sagatavots 2026-10-04 pēc projekta pasūtītāja apraksta, divām mūsu piedāvājuma iekārtu specifikācijām un Boost inc vietnes izpētes. Tas apraksta gan vietnes pasūtītāju, gan tā potenciālos pircējus. Mērķauditorijas vajadzības ir darba hipotēzes, nevis klientu interviju rezultāti.
+Working profile for website content and design, prepared on 2026-10-04 from the project owner's brief, our two equipment proposal documents and research into the Boost inc website. It covers both the business commissioning the website and its prospective customers. Audience needs are working hypotheses, not findings from customer interviews.
 
-## Vietnes pasūtītājs un piedāvājums
+## Business and offer
 
-Baltic Vending Solutions ir projekta darba nosaukums. Pasūtītājs vēlas piedāvāt tirdzniecības automātu pārdošanu, nomu un aplīmēšanu klienta zīmola stilā. Mūsu piedāvājuma sākotnējie produkti ir Boost inc Compact Cooler un Smart Fridge. Abas pasūtītāja lokālās Pages specifikācijas ir piedāvājuma pamats un nosaka produktu satura sākotnējo komplektāciju. Ražotāja vietne ir papildavots, kas šo piedāvājumu automātiski nepārraksta. Juridiskais uzņēmuma nosaukums, oficiāls izplatītāja statuss un precīza apkalpošanas teritorija vēl nav apstiprināti. Nosaukums pats par sevi nepierāda darbību visās Baltijas valstīs.
+Baltic Vending Solutions is the project's working name. The business will offer vending equipment for sale or rent, with custom branding and wrapping to match the customer's identity. The initial products in our proposal are the Boost inc Compact Cooler and Smart Fridge. The two local Pages specifications are the primary source for the proposed product configuration. The manufacturer's website provides supporting information and does not automatically override our offer.
 
-Darba pozicionējums: palīdzēt uzņēmumiem izveidot pašapkalpošanās tirdzniecības punktu saviem produktiem, izvēloties iekārtu, pirkumu vai nomu un atbilstošu ārējo noformējumu. Vietnes galvenais uzdevums ir iegūt kvalificētus piedāvājuma pieprasījumus. Tiešsaistes norēķini par iekārtu iegādi pašlaik nav pieprasīti.
+The legal company name, official distributor status and exact service territory remain unconfirmed. The working name alone does not establish coverage throughout the Baltic states.
 
-Boost savu risinājumu klāstu adresē operatoriem, zīmoliem un mazumtirgotājiem, kā arī apraksta darbavietu pašapkalpošanās ēdināšanu un zīmolu tirdzniecības punktus viesnīcās vai publiskās vietās. Tas pamato šeit izvēlētos segmentus, bet nepierāda pieprasījumu Latvijā. [Boost risinājumi](https://boostinc.com/solutions/).
+The proposed positioning is to help businesses create a self-service retail point for their own products, choosing suitable equipment, purchase or rental, and branded presentation. The website's main purpose is to generate qualified quote enquiries. Online checkout for equipment purchases is outside the current brief.
 
-## Potenciālie klienti
+Boost addresses operators, brands and retailers, and describes workplace self-service catering and branded retail points in hospitality and public locations. This supports the proposed audience segments but does not establish demand in Latvia. [Boost solutions](https://boostinc.com/solutions/).
 
-| Segments, darba hipotēze | Ko vēlas panākt | Kas jāizskaidro vietnē |
+## Prospective customers
+
+| Segment, working hypothesis | Intended outcome | What the website should explain |
 | --- | --- | --- |
-| Esoši pārtikas, dzērienu vai fasētu produktu ražotāji un tirgotāji | Izmēģināt vēl vienu pārdošanas vietu savam sortimentam | Produktu piemērotība, papildināšana, pārdošanas dati, izvietošana un zīmola noformējums |
-| Jauni uzņēmēji | Pārbaudīt biznesa ideju ar vienu iekārtu | Nomas un pirkuma atšķirības, sākuma darbības, izmaksu sastāvs un ikdienas pienākumi |
-| Esoši vending operatori | Pievienot vai nomainīt tirdzniecības punktus | Konfigurācija, pārvaldība, maksājumu pieslēgšana un servisa nosacījumi |
-| Biroju, sporta centru, viesnīcu un citu telpu pārvaldnieki | Nodrošināt piekļuvi produktiem savā ēkā | Kas būs operators, kas piegādās preces, kam piederēs iekārta un kā tiks segtas izmaksas |
+| Existing food, drink or packaged-product producers and retailers | Test another sales location for their range | Product suitability, restocking, sales data, placement and branding |
+| New entrepreneurs | Test a business idea with one machine | Purchase versus rental, starting steps, cost components and daily responsibilities |
+| Existing vending operators | Add or replace retail points | Configuration, management, payment setup and service terms |
+| Office, gym, hotel and other property managers | Make products available within their premises | Who operates and stocks the machine, who owns it and how costs are allocated |
 
-Prioritāte pirmajai vietnes versijai ir uzņēmumiem ar savu produktu un jauniem uzņēmējiem. Telpu pārvaldnieks var būt tikai izvietošanas partneris, tāpēc viņa vajadzību nedrīkst automātiski pielīdzināt iekārtas pirkumam.
+The first version should prioritise businesses with their own products and new entrepreneurs. A property manager may be a placement partner rather than an equipment buyer, so their enquiry needs a separate route.
 
-Lēmuma pieņēmējs, iespējams, būs īpašnieks, uzņēmuma vadītājs vai tirdzniecības vadītājs. Viņam vajadzīga saprotama informācija par piemērotību un saistībām. Tehniskais speciālists vēlāk pārbaudīs pieslēgumus, izmērus un konfigurāciju. Šī lēmuma secība ir izstrādes pieņēmums.
+The likely decision-maker is an owner, business manager or sales manager. They need clear information about suitability and commitments. A technical specialist may later check connections, dimensions and configuration. This buying sequence is a design assumption.
 
-## Jautājumi pirms pieprasījuma
+## Questions before an enquiry
 
-- Vai manas preces ir piemērotas šai iekārtai un konkrētajam temperatūras režīmam?
-- Vai izdevīgāk pirkt vai nomāt, un kas ir iekļauts piedāvājumā?
-- Kādas papildu izmaksas ir par piegādi, uzstādīšanu, programmatūru, maksājumiem un aplīmēšanu?
-- Kā notiek pirkums pie iekārtas, un kuri maksājumu veidi ir pieejami manā konfigurācijā?
-- Kas papildina krājumus, tīra iekārtu un risina bojājumus?
-- Kādas telpas, elektrība un internets ir vajadzīgs?
-- Kā tiek sagatavots un saskaņots aplīmējuma dizains?
+- Are my products suitable for this machine and its temperature range?
+- Should I buy or rent, and what does each offer include?
+- What additional costs apply to delivery, installation, software, payments and wrapping?
+- How does a customer make a purchase, and which payment methods work with my configuration?
+- Who restocks, cleans and repairs the machine?
+- What space, electricity and connectivity does the location require?
+- How is the wrapping design prepared and approved?
 
-Boost apraksta Vendlive attālinātu pārvaldību, krājumu uzskaiti, produktu informāciju un cenu pārvaldību. Vietnē šīs iespējas skaidrot caur klienta ikdienas darbībām. Konkrētās licences, integrācijas un pakalpojuma komplektāciju vēl jāsaskaņo. [Boost programmatūra](https://boostinc.com/software/).
+Boost describes Vendlive remote management, stock tracking, product information and pricing controls. Explain these through the customer's daily tasks. Specific licences, integrations and service inclusions still need agreement. [Boost software](https://boostinc.com/software/).
 
-Boost apraksta kartes, mobilos makus un slēgtās sistēmas maksājumus. Vietējo pieejamību, termināli, pakalpojuma sniedzēju un darījumu maksu nedrīkst izsecināt no kopējā funkciju saraksta. [Boost maksājumi](https://boostinc.com/payments/).
+Boost describes card payments, mobile wallets and closed-loop payments. Local availability, the terminal, payment provider and transaction fees cannot be inferred from the general platform list. [Boost payments](https://boostinc.com/payments/).
 
-## Satura virziens
+## Content direction
 
-Darba galvenais vēstījums: "Jūsu produkti pašapkalpošanās tirdzniecības punktā." Nākamais teikums var paskaidrot piedāvājumu: "Tirdzniecības iekārtas iegādei vai nomai ar noformējumu jūsu zīmola stilā." Tie ir sākuma varianti, nevis apstiprināts sauklis.
+Working headline: "Your products. A self-service retail point." Supporting copy: "Vending equipment to buy or rent, with branding that matches your business." These are starting copy options rather than an approved slogan.
 
-Pamata aicinājums ir "Saņemt piedāvājumu". Pie produktu kartītēm izmantot "Apskatīt iekārtu", bet nomas sadaļā "Pārrunāt nomu". Sākotnējā pieprasījumā pietiek ar kontaktinformāciju, produktu veidu, plānoto vietu un interesi par pirkumu vai nomu. Iekārtas modelim pievienot izvēli "Vēlos ieteikumu".
+Use "Request a quote" consistently for the main enquiry action. Use "View equipment" for product browsing. A rental enquiry can use the same quote action with rental preselected. The initial form should ask for contact details, product type, intended location and interest in purchase or rental. Include "I need advice" as an equipment choice.
 
-Ieteicamā struktūra ir sākumlapa, iekārtu salīdzinājums un katra modeļa lapa, pirkšana un noma, aplīmēšana, sadarbības process un kontakti. Biežākie jautājumi var būt attiecīgajās lapās. Juridiskās un privātuma lapas sagatavot pēc uzņēmuma datu apstiprināšanas. LV ir darba pamatvaloda; EN ir ieteikums turpmākai Baltijas komunikācijai, vēl jāapstiprina.
+The proposed structure includes a homepage, equipment comparison and individual model pages, purchase and rental information, custom branding, the cooperation process and contact details. FAQs can sit within the relevant pages. Prepare legal and privacy pages after the business details are confirmed. Latvian is the proposed primary website language, with English recommended for wider Baltic communication. The website languages remain to be agreed. Project documentation and communication with the owner are in English.
 
-## Dizaina virziens
+## Design direction
 
-Ieteikums ir veidot pārskatāmu B2B produktu vietni, kur dominē pašas iekārtas un īsti aplīmējuma piemēri. Gaišs pamats, tumšs teksts un viens akcenta tonis palīdzēs salīdzināt produktus. Galīgo paleti nosaka Baltic Vending Solutions identitāte, kad tā būs pieejama. Boost un JāņogaGO identitātes nekopēt.
+Create a clear B2B equipment website where machines and real wrapping examples carry the visual message. A light background, dark text and one accent colour will support product comparison. [STYLE_GUIDE.md](STYLE_GUIDE.md) defines the working palette, typography, layout and component rules. Refine the baseline when the Baltic Vending Solutions logo and established identity become available. Do not copy the Boost or JāņogaGO identity.
 
-Produktu skatā parādīt pilnu iekārtu, salasāmus galvenos parametrus un skaidru ceļu līdz piedāvājumam. Aplīmēšanas sadaļā izmantot vienas iekārtas neitrālu un zīmolotu versiju. Ja piemērs ir vizualizācija, to tā arī apzīmēt. Tas nav klienta projekts vai atsauksme.
+Show the complete machine, readable specifications and a clear route to a quote. For custom branding, show neutral and branded versions of the same machine. Label a rendered example as a visualisation; it is not a completed customer project or testimonial.
 
-Tonis ir praktisks un pārliecinošs, bez sarežģītiem tehnoloģiju saukļiem. Jaunam uzņēmējam jāsaprot, ar ko sākt; pieredzējušam pircējam jāatrod konkrētā informācija. Mobilajā skatā jāvar salīdzināt modeļus un aizpildīt pieprasījumu bez horizontālas ritināšanas. Animāciju vai 3D modeli pievienot tikai tad, ja tas palīdz izprast iekārtu; statiskām fotogrāfijām ir prioritāte.
+Use practical, confident language. A new entrepreneur should understand where to start, while an experienced buyer should find the details quickly. On mobile, users should be able to compare models and complete the enquiry without horizontal page scrolling. Photography takes priority over animation. Add a 3D model only when it helps explain the equipment.
 
-## Solījumu robežas un neatbildētie jautājumi
+## Claims and open questions
 
-Nepublicēt garantētu peļņu, atmaksāšanās termiņu, bezmaksas nomu, darbību jebkurā vietā vai apgalvojumu, ka bizness neprasa ikdienas darbu. Nepieņemt, ka pārdošana vai noma ietver krājumu papildināšanu, pārtikas piegādi vai pilnu servisu.
+Do not publish guaranteed profits, payback periods, free rental, suitability for every location or claims that operation requires no daily work. Do not assume purchase or rental includes restocking, food supply or a fully managed service.
 
-Mūsu Compact Cooler piedāvājuma specifikācijā ir 13,3 collu ekrāns un Vision AI. Boost vispārīgajā klāstā Vision AI ir izvēles aprīkojums. Tas neizslēdz tā iekļaušanu mūsu piedāvājumā; vietnes satura darba versija balstās uz mūsu specifikāciju. Pirms gala publicēšanas jāapstiprina piegādājamā komplektācija un cenas sastāvs. Smart Fridge sērijas nosaukums vēl jāsasaista ar precīzu ražotāja modeli. [Boost iekārtas](https://boostinc.com/pos/), [tehniskās piezīmes](docs/equipment-research.md).
+Our Compact Cooler proposal specifies a 13.3-inch screen and Vision AI. Boost lists Vision AI as an option across its range. That does not exclude it from our proposed configuration; draft website content should follow our specification. Confirm the delivered configuration and price inclusions before final publication. Smart Fridge Series still needs an exact manufacturer model reference. [Boost equipment](https://boostinc.com/pos/), [equipment notes](docs/equipment-research.md).
 
-Jāapstiprina uzņēmuma rekvizīti un kontaktinformācija, logo, teritorija, valodas, cenas un PVN norādes, nomas termiņi un depozīts, servisa atbildība, piegādes termiņi, aplīmējuma apjoms un materiāli. Vajadzīgs arī precīzs iekārtu modeļu saraksts un atļauja izmantot ražotāja foto. Šie dati noteiks gala saturu; tie neaizkavē projekta tehniskās struktūras sagatavošanu.
+Confirm business details, contacts, logo, territory, website languages, pricing and VAT presentation, rental periods and deposits, service responsibilities, delivery times, and wrapping scope and materials. Obtain the precise model list and permission to use manufacturer photography. These details will shape the final content without preventing technical preparation.
