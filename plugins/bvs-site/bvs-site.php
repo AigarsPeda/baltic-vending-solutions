@@ -57,7 +57,9 @@ function bvs_render_quote($attributes) {
                 <label class="bvs-editor-design-choice"><input type="checkbox" class="bvs-use-editor-design" checked aria-describedby="<?php echo esc_attr($id.'editor-design-hint'); ?>"><?php echo esc_html($a['designEditorLabel']); ?></label>
                 <p id="<?php echo esc_attr($id.'editor-design-hint'); ?>" class="bvs-form-note"><?php echo esc_html($a['designEditorHint']); ?></p>
             </div>
+            <?php if ($a['createDesignUrl']): ?><div class="bvs-design-upload-row"><?php endif; ?>
             <input id="<?php echo esc_attr($id.'design'); ?>" type="file" name="design" accept="image/png,image/jpeg,image/webp" aria-describedby="<?php echo esc_attr($id.'design-hint'); ?>" data-error="<?php echo esc_attr($a['designError']); ?>">
+            <?php if ($a['createDesignUrl']): ?><a class="bvs-create-design" href="<?php echo esc_url($a['createDesignUrl']); ?>"><?php echo esc_html($a['createDesignLabel']); ?></a></div><?php endif; ?>
             <p id="<?php echo esc_attr($id.'design-hint'); ?>" class="bvs-form-note"><?php echo esc_html($a['designHint']); ?></p>
             <button type="button" class="bvs-remove-design" hidden><?php echo esc_html($a['designRemove']); ?></button>
         </div>

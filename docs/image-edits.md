@@ -25,3 +25,6 @@ Use case: precise-object-edit. Asset type: WordPress equipment catalogue photo. 
 
 The cleaned images were inspected on the equipment comparison section. Browser checks confirmed every product image loads from an unbranded Media Library filename on all six equipment-related pages. Machine logos are removed from the Smart Fridge fascia/glass and Compact Cooler glass. The source Pages proposal documents and product specifications are unchanged.
 
+The homepage hero now uses the same front-view Smart Fridge photo, native attachment55, in both languages. `scripts/local/setup-home-hero.php` replaces only the homepage hero Image block and preserves the surrounding content. New seeds use Smart Fridge too. The existing image keeps its transparency and responsive presentation.
+
+The homepage machine is displayed25% larger inside its existing frame. A two-axis CSS mask fades the cropped shadow into the page background, removing the visible rectangular image edges while preserving the cabinet. On stacked tablet layouts, the image width is capped at480px so enlargement keeps the whole machine in view. Desktop and mobile captures are in ignored output/home-smart-fridge-*.

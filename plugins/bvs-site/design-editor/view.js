@@ -17,7 +17,7 @@
     const drawingTools=['raw','smooth','line','rectangle','ellipse','text'];
     const history = [], future = [], textures = {};
     const imageBlobs = new WeakMap();
-    let database = null, saveTimer = 0, revision = 0;
+    let database = null, saveTimer = 0, revision = 0, cameraView = null, draftLoaded = false;
     const draftMessage = (key,state) => {draftStatus.textContent=labels[key];draftStatus.dataset.state=state;};
     function draftTransaction(mode,action) {
       return new Promise((resolve,reject)=>{
@@ -28,11 +28,15 @@
         if(mode==='readwrite')transaction.commit?.();
       });
     }
+    function cameraSnapshot() {
+      const {theta,phi,radius}=viewer.getCameraOrbit();
+      return {theta:Math.atan2(Math.sin(theta),Math.cos(theta)),phi,radius};
+    }
     function saveDraft() {
       clearTimeout(saveTimer);if(!hasDraft)return;
       const savedRevision=revision;
       const savedPanels=Object.fromEntries(Object.entries(panels).map(([name,p])=>[name,{...p,artwork:p.artwork?imageBlobs.get(p.artwork):null,logo:p.logo?imageBlobs.get(p.logo):null}]));
-      const draft={version:1,updatedAt:Date.now(),panels:savedPanels,selected,tool,brushColour:controls.brushColour.value,brushSize:Number(controls.brushSize.value),drawingTool:controls.drawingTool.value,text:controls.text.value,textSize:Number(controls.textSize.value),shapeFill:controls.shapeFill.checked,flatZoom};
+      const draft={version:1,updatedAt:Date.now(),panels:savedPanels,selected,tool,brushColour:controls.brushColour.value,brushSize:Number(controls.brushSize.value),drawingTool:controls.drawingTool.value,text:controls.text.value,textSize:Number(controls.textSize.value),shapeFill:controls.shapeFill.checked,flatZoom,camera:ready?cameraSnapshot():cameraView};
       draftTransaction('readwrite',store=>store.put(draft,'smart-fridge')).then(()=>{
         if(revision===savedRevision)draftMessage('draftSavedMessage','saved');
       }).catch(()=>{if(revision===savedRevision)draftMessage('draftErrorMessage','error');});
@@ -94,7 +98,11 @@
       controls.shapeFill.checked=draft.shapeFill===true;
       if(bounded(draft.flatZoom,100,400)){flatZoom=draft.flatZoom;updateFlatZoom();}
       hasDraft=true;quoteForm?.dispatchEvent(new Event('bvs:design-changed'));
-      viewer.cameraOrbit=`${mobile.matches?0:{front:0,left:-75,right:75}[selected]}deg 90deg 4.74m`;
+      const camera=draft.camera;
+      if(camera&&bounded(camera.theta,-Math.PI,Math.PI)&&bounded(camera.phi,0,Math.PI)&&bounded(camera.radius,1.58,6.32)) {
+        cameraView={theta:camera.theta,phi:camera.phi,radius:camera.radius};
+        viewer.cameraOrbit=`${camera.theta}rad ${camera.phi}rad ${camera.radius}m`;
+      }else resetCameraView();
       draftMessage('draftRestoredMessage','saved');
     }
     async function loadDraft() {
@@ -108,6 +116,8 @@
         const draft=await draftTransaction('readonly',store=>store.get('smart-fridge'));
         if(draft)await restoreDraft(draft);else draftMessage('draftEmptyMessage','empty');
       }catch(_){draftMessage('draftErrorMessage','error');}
+      // Apply the restored goal before showing the workbench, without a camera tween.
+      viewer.jumpCameraToGoal?.();await viewer.updateComplete;draftLoaded=true;
       updateTool();
       find('.bvs-design-drawing').open=tool==='draw';refresh();find('.bvs-design-workbench').hidden=false;
     }
@@ -331,6 +341,7 @@
     viewer.addEventListener('camera-change',()=>{
       const zoom=Math.round(474/viewer.getCameraOrbit().radius);find('[data-model-zoom]').value=`${zoom}%`;
       find('[data-zoom="model-out"]').disabled=zoom<=75;find('[data-zoom="model-in"]').disabled=zoom>=300;
+      if(ready&&draftLoaded){cameraView=cameraSnapshot();queueSave();}
     });
     controls.brushSize.addEventListener('input',()=>{controls.brushSize.nextElementSibling.value=controls.brushSize.value;queueSave();});
     controls.brushColour.addEventListener('input',queueSave);
@@ -514,7 +525,7 @@
         }
       }catch(_){say('exportError',true);}finally{exporting=false;exportButtons.forEach(el=>el.disabled=false);}
     }));
-    viewer.addEventListener('load',()=>{
+    viewer.addEventListener('load',async()=>{
       try {
         for(const panel of ['front','left','right']) {
           const material=viewer.model.materials.find(m=>m.name===`BVS wrap ${panel}`);
@@ -522,6 +533,7 @@
           const texture=viewer.createCanvasTexture();[texture.source.element.width,texture.source.element.height]=sizes[panel];
           material.pbrMetallicRoughness.setBaseColorFactor('#ffffff');material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);textures[panel]=texture;
         }
+        viewer.jumpCameraToGoal();await viewer.updateComplete;
         ready=true;root.dataset.model='ready';updateMobileView();find('[data-preview-mode="draw"]').disabled=false;render();say('readyMessage');
       }catch(_){root.dataset.model='error';mobileView='flat';updateMobileView();say('fallbackMessage',true);}
     });

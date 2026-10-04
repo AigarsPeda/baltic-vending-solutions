@@ -41,7 +41,15 @@
   mobile.addEventListener('change', updateLayout);
   button.addEventListener('click', open);
   drawer.querySelector('.drawer-close').addEventListener('click', () => close());
-  nav.addEventListener('click', event => { if (event.target.closest('a')) close(); });
+  nav.addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if (!link) return;
+    const destination = new URL(link.href, location.href);
+    const samePageAnchor = destination.hash && destination.origin === location.origin &&
+      destination.pathname === location.pathname && destination.search === location.search;
+    // Release the dialog's scroll lock before the browser follows an in-page link.
+    close(Boolean(samePageAnchor));
+  });
   drawer.addEventListener('cancel', event => {
     event.preventDefault();
     close();

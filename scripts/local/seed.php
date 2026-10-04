@@ -142,7 +142,7 @@ foreach($copy as $lang=>$c) {
         $details.=$contact;
         if(!get_post_meta($pages[$lang][$model],'_bvs_seed_complete',true)) { wp_update_post(wp_slash(['ID'=>$pages[$lang][$model],'post_content'=>$details])); update_post_meta($pages[$lang][$model],'_bvs_seed_complete',1); }
     }
-    $hero=seed_columns([seed_h(str_replace('\n',' ',$c['hero']),1).seed_p($c['lead'],'bvs-lead').seed_buttons(seed_button($c['quote'],'#quote').seed_button($c['equipment'],'#equipment',true)),seed_image($media['compact'],'bvs-hero-image','Boost inc Compact Cooler')],true);
+    $hero=seed_columns([seed_h(str_replace('\n',' ',$c['hero']),1).seed_p($c['lead'],'bvs-lead').seed_buttons(seed_button($c['quote'],'#quote').seed_button($c['equipment'],'#equipment',true)),seed_image($media['fridge'],'bvs-hero-image','Smart Fridge')],true);
     $content=seed_group($hero,'bvs-section bvs-hero');
     $content.=seed_group(seed_h($c['equipTitle']).seed_p($c['equipLead'],'bvs-lead').seed_columns($cards),'bvs-section','equipment');
     $content.=seed_group(seed_columns([seed_p('+75%','bvs-counter').seed_p($c['performanceLabel'],'bvs-performance-label'),seed_h($c['performanceTitle']).seed_p($c['performanceText'],'bvs-lead').seed_p($c['performanceNote'],'bvs-note')]),'bvs-section bvs-performance','shopping-experience');
@@ -184,4 +184,7 @@ require __DIR__.'/setup-cookies.php';
 require __DIR__.'/setup-privacy.php';
 require __DIR__.'/setup-design-editor.php';
 require __DIR__.'/setup-mobile-home.php';
+require __DIR__.'/setup-contact-menu.php';
+require __DIR__.'/setup-contact-details.php';
+require __DIR__.'/setup-create-design-link.php';
 WP_CLI::success('Created editable LV/EN pages, native menus/widgets, quote blocks and Media Library attachments.');

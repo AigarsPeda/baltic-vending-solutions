@@ -33,3 +33,25 @@ function bvs_ui($key) {
     $options = get_option('bvs_interface', []);
     return $options[bvs_language()][$key] ?? ($key === 'skip' ? __('Skip to content', 'bvs') : __('Menu', 'bvs'));
 }
+// Keep the native Contact menu item pointed at the form on the current page.
+function bvs_contact_anchor($blocks) {
+    foreach ($blocks as $block) {
+        $anchor = $block['attrs']['anchor'] ?? '';
+        if (in_array($anchor, ['quote', 'design-quote'], true)) return $anchor;
+        $anchor = bvs_contact_anchor($block['innerBlocks']);
+        if ($anchor) return $anchor;
+    }
+    return '';
+}
+add_filter('wp_nav_menu_objects', function ($items, $args) {
+    if (($args->theme_location ?? '') !== 'primary') return $items;
+    $page = get_queried_object();
+    $anchor = $page instanceof WP_Post ? bvs_contact_anchor(parse_blocks($page->post_content)) : '';
+    $home = function_exists('pll_home_url') ? pll_home_url(bvs_language()) : home_url('/');
+    foreach ($items as $item) {
+        if (in_array('bvs-contact-menu', $item->classes, true)) {
+            $item->url = $anchor ? '#' . $anchor : $home . '#quote';
+        }
+    }
+    return $items;
+}, 10, 2);

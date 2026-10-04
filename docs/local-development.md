@@ -29,12 +29,14 @@ WordPress lives at `/Users/aigarspeda/Local Sites/baltic-vending-solutions/app/p
 | Privacy notice, pending details and cookie-settings link | Pages > Privātums un sīkdatnes / Privacy & cookies, visual block editor |
 | Equivalent language content | Edit the linked translation under Languages in the page editor |
 | Navigation and language switcher | Appearance > Menus, Primary LV / Primary EN |
+| Contact menu link | Native Kontakti / Contact item, class `bvs-contact-menu`; the theme targets the current page's `quote` or `design-quote` section, with a translated homepage fallback |
+| Public phone/email placeholders | Pages > Homepage, contact introduction, native Group/Paragraph blocks with class `bvs-contact-details`; currently `+371 XX XXX XXX` and `info@example.com` |
 | Header quote button | Appearance > Widgets, Header actions — LV / EN |
 | Footer text and links | Appearance > Widgets, Footer content — LV / EN |
 | Cookie banner text, labels and privacy link | Appearance > Widgets, Cookie banner — LV / EN; edit the BVS Cookie banner block |
 | Logo and site identity | Appearance > Customize > Site identity |
 | Photos and their metadata | Media > Library; native Image block controls in pages |
-| Quote form labels and feedback | Select BVS quote form in the page editor; edit fields in the canvas or Block settings |
+| Quote form labels and feedback | Select BVS quote form in the page editor; edit fields in the canvas or Block settings. The homepage Create design label and URL are in Design attachment settings |
 | Notification recipient, menu and skip-link labels | Settings > BVS enquiries |
 | Saved enquiries and notification outcome | Quote enquiries, administrators only |
 
@@ -79,6 +81,10 @@ The seed creates native records and imports the cleaned machine photos through W
 `bvs_seed_version` prevents a second import. Do not delete that option to refresh content. Use the editor or migrate an existing database and uploads instead. Deleting a section or image is an editorial action that a code update must preserve.
 
 For an existing seeded installation, sync the theme and plugin, activate WP Consent API, then run `./scripts/wp-local.sh eval-file scripts/local/setup-cookies.php` to add missing cookie widgets and the native privacy-page explanation. This setup preserves existing banner edits. See [cookie consent](cookie-consent.md) for behaviour and the production checklist.
+
+Run `./scripts/wp-local.sh eval-file scripts/local/setup-contact-menu.php` to add the translated Contact link before the language switch without replacing menus or page content. Repeated runs reuse the existing item. On mobile, same-page links release the drawer's scroll lock immediately before native anchor navigation. `scripts/tests/contact-navigation.cjs` checks scrolling to each page's form, translated fallbacks and header widths without submitting enquiries.
+
+Run `./scripts/wp-local.sh eval-file scripts/local/setup-contact-details.php` to add the owner-requested phone/email placeholders below both homepage contact introductions. Repeated runs preserve existing contact-detail blocks and later edits. Replace the placeholders through the native page editor when real contact details are supplied. The placeholder text does not create working telephone or email links.
 
 Run `./scripts/wp-local.sh eval-file scripts/local/setup-privacy.php` once to expand existing privacy drafts into the detailed LV/EN notices. New seeds already include these pages. The setup keeps page IDs, routes and translation links, and skips pages marked `_bvs_privacy_version` to preserve later editorial changes. Edit future changes in WordPress. [Privacy-page notes](privacy-page.md) list the business details still pending at the owner's request.
 
