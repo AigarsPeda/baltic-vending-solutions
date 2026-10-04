@@ -14,6 +14,7 @@
       const groups = {
         'Form and feedback': ['intro','submitLabel','sendingLabel','successMessage','errorMessage','unavailableMessage','formId','language'],
         'Privacy': ['privacyText','privacyLabel','privacyUrl'],
+        'Design attachment': ['designLabel','designHint','designError','designRemove','designEditorLabel','designEditorHint'],
         'Equipment and purchase options': ['modelLabel','modelAny','compactLabel','fridgeLabel','modeLabel','modeAdvice','modeBuy','modeRent'],
         'Field labels and examples': ['nameLabel','namePlaceholder','companyLabel','companyPlaceholder','emailLabel','emailPlaceholder','phoneLabel','phonePlaceholder','productsLabel','productsPlaceholder','locationLabel','locationPlaceholder','messageLabel','messagePlaceholder']
       };

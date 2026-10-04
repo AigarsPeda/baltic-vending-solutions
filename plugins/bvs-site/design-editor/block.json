@@ -1,0 +1,325 @@
+{
+  "apiVersion": 3,
+  "name": "bvs/design-editor",
+  "title": "BVS wrapping design editor",
+  "category": "widgets",
+  "icon": "art",
+  "description": "Local image and logo editing with a live 3D Smart Fridge preview.",
+  "attributes": {
+    "language": {
+      "type": "string",
+      "default": "en"
+    },
+    "panelLabel": {
+      "type": "string",
+      "default": "Choose a panel"
+    },
+    "frontLabel": {
+      "type": "string",
+      "default": "Front"
+    },
+    "leftLabel": {
+      "type": "string",
+      "default": "Left side"
+    },
+    "rightLabel": {
+      "type": "string",
+      "default": "Right side"
+    },
+    "colourLabel": {
+      "type": "string",
+      "default": "Panel colour"
+    },
+    "colourAllLabel": {
+      "type": "string",
+      "default": "Apply colour to all panels"
+    },
+    "artworkLabel": {
+      "type": "string",
+      "default": "Background artwork"
+    },
+    "artworkHint": {
+      "type": "string",
+      "default": "PNG, JPG or WebP, up to 5 MB. Applied to the selected panel."
+    },
+    "logoLabel": {
+      "type": "string",
+      "default": "Your logo"
+    },
+    "logoHint": {
+      "type": "string",
+      "default": "Use a transparent PNG for a logo without a background."
+    },
+    "removeArtworkLabel": {
+      "type": "string",
+      "default": "Remove artwork"
+    },
+    "removeLogoLabel": {
+      "type": "string",
+      "default": "Remove logo"
+    },
+    "fitLabel": {
+      "type": "string",
+      "default": "Image fit"
+    },
+    "coverLabel": {
+      "type": "string",
+      "default": "Fill panel"
+    },
+    "containLabel": {
+      "type": "string",
+      "default": "Fit whole image"
+    },
+    "sizeLabel": {
+      "type": "string",
+      "default": "Logo width (%)"
+    },
+    "xLabel": {
+      "type": "string",
+      "default": "Horizontal position (%)"
+    },
+    "yLabel": {
+      "type": "string",
+      "default": "Vertical position (%)"
+    },
+    "rotationLabel": {
+      "type": "string",
+      "default": "Logo rotation (°)"
+    },
+    "drawingLabel": {
+      "type": "string",
+      "default": "Drawing tools"
+    },
+    "drawLabel": {
+      "type": "string",
+      "default": "Draw"
+    },
+    "brushColourLabel": {
+      "type": "string",
+      "default": "Brush colour"
+    },
+    "brushSizeLabel": {
+      "type": "string",
+      "default": "Brush size"
+    },
+    "undoLabel": {
+      "type": "string",
+      "default": "Undo"
+    },
+    "redoLabel": {
+      "type": "string",
+      "default": "Redo"
+    },
+    "clearLabel": {
+      "type": "string",
+      "default": "Clear drawing"
+    },
+    "canvasLabel": {
+      "type": "string",
+      "default": "Edit selected panel"
+    },
+    "canvasHint": {
+      "type": "string",
+      "default": "Use the drawing tools here, or drag your logo when drawing is off. Transparent areas cannot be wrapped."
+    },
+    "previewLabel": {
+      "type": "string",
+      "default": "Smart Fridge preview"
+    },
+    "previewHint": {
+      "type": "string",
+      "default": "Rotate to find a panel, then choose Draw on machine. Only the wrapping panels can be edited."
+    },
+    "resetViewLabel": {
+      "type": "string",
+      "default": "Reset view"
+    },
+    "downloadLabel": {
+      "type": "string",
+      "default": "Download design"
+    },
+    "attachLabel": {
+      "type": "string",
+      "default": "Request a quote with this design"
+    },
+    "resetLabel": {
+      "type": "string",
+      "default": "Start again"
+    },
+    "resetConfirm": {
+      "type": "string",
+      "default": "Clear all three panels and delete the draft saved in this browser?"
+    },
+    "loadingMessage": {
+      "type": "string",
+      "default": "Loading the 3D machine…"
+    },
+    "readyMessage": {
+      "type": "string",
+      "default": "3D preview ready."
+    },
+    "fallbackMessage": {
+      "type": "string",
+      "default": "3D is unavailable in this browser. You can still edit, download and send the flat design below."
+    },
+    "fileError": {
+      "type": "string",
+      "default": "Choose a PNG, JPG or WebP image under 5 MB and 4096 pixels per side."
+    },
+    "exportError": {
+      "type": "string",
+      "default": "Could not prepare the file. Please try again."
+    },
+    "attachedMessage": {
+      "type": "string",
+      "default": "Your design is attached to the form below. Complete your details to send it."
+    },
+    "downloadMessage": {
+      "type": "string",
+      "default": "Your design file is ready."
+    },
+    "draftNote": {
+      "type": "string",
+      "default": "Your design is saved automatically in this browser. Return here to continue. Start again deletes the saved draft. Clearing browser data also removes it."
+    },
+    "productionNote": {
+      "type": "string",
+      "default": "Design mockup only. We confirm dimensions, print files and wrapping scope with you before production."
+    },
+    "downloadTitle": {
+      "type": "string",
+      "default": "Smart Fridge wrap design"
+    },
+    "exportNote": {
+      "type": "string",
+      "default": "Design mockup • not a print template"
+    },
+    "noScriptMessage": {
+      "type": "string",
+      "default": "Enable JavaScript to use the design editor. You can still attach your artwork to the form below."
+    },
+    "draftLoadingMessage": {
+      "type": "string",
+      "default": "Checking for a saved design…"
+    },
+    "draftEmptyMessage": {
+      "type": "string",
+      "default": "Your edits will be saved in this browser."
+    },
+    "draftSavingMessage": {
+      "type": "string",
+      "default": "Saving design…"
+    },
+    "draftSavedMessage": {
+      "type": "string",
+      "default": "Design saved in this browser."
+    },
+    "draftRestoredMessage": {
+      "type": "string",
+      "default": "Saved design restored. Continue where you left off."
+    },
+    "draftErrorMessage": {
+      "type": "string",
+      "default": "Browser saving is unavailable. Keep this page open or download your design before leaving."
+    },
+    "draftClearedMessage": {
+      "type": "string",
+      "default": "Saved design deleted."
+    },
+    "stopDrawLabel": {
+      "type": "string",
+      "default": "Stop drawing"
+    },
+    "drawingToolLabel": {
+      "type": "string",
+      "default": "Tool"
+    },
+    "rawLabel": {
+      "type": "string",
+      "default": "Freehand: exact"
+    },
+    "smoothLabel": {
+      "type": "string",
+      "default": "Freehand: smooth"
+    },
+    "lineLabel": {
+      "type": "string",
+      "default": "Straight line"
+    },
+    "rectangleLabel": {
+      "type": "string",
+      "default": "Rectangle"
+    },
+    "ellipseLabel": {
+      "type": "string",
+      "default": "Ellipse"
+    },
+    "textToolLabel": {
+      "type": "string",
+      "default": "Text"
+    },
+    "shapeFillLabel": {
+      "type": "string",
+      "default": "Fill shapes"
+    },
+    "textLabel": {
+      "type": "string",
+      "default": "Your text"
+    },
+    "textSizeLabel": {
+      "type": "string",
+      "default": "Text size"
+    },
+    "textHint": {
+      "type": "string",
+      "default": "Enter text, then click a panel or the machine to place it."
+    },
+    "drawingHint": {
+      "type": "string",
+      "default": "Drag to draw. Smooth mode straightens near-straight strokes and softens curves. Hold Shift for a square or circle."
+    },
+    "rotateModelLabel": {
+      "type": "string",
+      "default": "Rotate machine"
+    },
+    "drawModelLabel": {
+      "type": "string",
+      "default": "Draw on machine"
+    },
+    "zoomInLabel": {
+      "type": "string",
+      "default": "Zoom in"
+    },
+    "zoomOutLabel": {
+      "type": "string",
+      "default": "Zoom out"
+    },
+    "flatZoomLabel": {
+      "type": "string",
+      "default": "Panel zoom"
+    },
+    "modelZoomLabel": {
+      "type": "string",
+      "default": "Machine zoom"
+    },
+    "drawingLimitMessage": {
+      "type": "string",
+      "default": "This panel is full. Undo or clear some drawing to continue."
+    },
+    "panPanelLabel": {
+      "type": "string",
+      "default": "Move zoomed panel"
+    },
+    "stopPanPanelLabel": {
+      "type": "string",
+      "default": "Continue editing"
+    }
+  },
+  "supports": {
+    "html": false,
+    "multiple": false
+  },
+  "editorScript": "bvs-design-admin",
+  "viewScript": "bvs-design-view",
+  "style": "bvs-design-style"
+}

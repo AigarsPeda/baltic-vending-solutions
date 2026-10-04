@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T15:30:19.414985+00:00",
+  "title": "Design System: Baltic Vending Solutions",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Petrol",
+        "tonalRamp": [
+          "oklch(15.0% 0.08122 185.58)",
+          "oklch(26.4% 0.08122 185.58)",
+          "oklch(37.9% 0.08122 185.58)",
+          "oklch(49.3% 0.08122 185.58)",
+          "oklch(60.7% 0.08122 185.58)",
+          "oklch(72.1% 0.08122 185.58)",
+          "oklch(83.6% 0.08122 185.58)",
+          "oklch(95.0% 0.08122 185.58)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Petrol hover",
+        "tonalRamp": [
+          "oklch(15.0% 0.06968 186.43)",
+          "oklch(26.4% 0.06968 186.43)",
+          "oklch(37.9% 0.06968 186.43)",
+          "oklch(49.3% 0.06968 186.43)",
+          "oklch(60.7% 0.06968 186.43)",
+          "oklch(72.1% 0.06968 186.43)",
+          "oklch(83.6% 0.06968 186.43)",
+          "oklch(95.0% 0.06968 186.43)"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Soft petrol",
+        "tonalRamp": [
+          "oklch(15.0% 0.01402 185.95)",
+          "oklch(26.4% 0.01402 185.95)",
+          "oklch(37.9% 0.01402 185.95)",
+          "oklch(49.3% 0.01402 185.95)",
+          "oklch(60.7% 0.01402 185.95)",
+          "oklch(72.1% 0.01402 185.95)",
+          "oklch(83.6% 0.01402 185.95)",
+          "oklch(95.0% 0.01402 185.95)"
+        ]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Cool canvas",
+        "tonalRamp": [
+          "oklch(15.0% 0.00319 197.10)",
+          "oklch(26.4% 0.00319 197.10)",
+          "oklch(37.9% 0.00319 197.10)",
+          "oklch(49.3% 0.00319 197.10)",
+          "oklch(60.7% 0.00319 197.10)",
+          "oklch(72.1% 0.00319 197.10)",
+          "oklch(83.6% 0.00319 197.10)",
+          "oklch(95.0% 0.00319 197.10)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White surface",
+        "tonalRamp": [
+          "oklch(15.0% 0.00000 0.00)",
+          "oklch(26.4% 0.00000 0.00)",
+          "oklch(37.9% 0.00000 0.00)",
+          "oklch(49.3% 0.00000 0.00)",
+          "oklch(60.7% 0.00000 0.00)",
+          "oklch(72.1% 0.00000 0.00)",
+          "oklch(83.6% 0.00000 0.00)",
+          "oklch(95.0% 0.00000 0.00)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15.0% 0.02546 217.30)",
+          "oklch(26.4% 0.02546 217.30)",
+          "oklch(37.9% 0.02546 217.30)",
+          "oklch(49.3% 0.02546 217.30)",
+          "oklch(60.7% 0.02546 217.30)",
+          "oklch(72.1% 0.02546 217.30)",
+          "oklch(83.6% 0.02546 217.30)",
+          "oklch(95.0% 0.02546 217.30)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted text",
+        "tonalRamp": [
+          "oklch(15.0% 0.02226 217.48)",
+          "oklch(26.4% 0.02226 217.48)",
+          "oklch(37.9% 0.02226 217.48)",
+          "oklch(49.3% 0.02226 217.48)",
+          "oklch(60.7% 0.02226 217.48)",
+          "oklch(72.1% 0.02226 217.48)",
+          "oklch(83.6% 0.02226 217.48)",
+          "oklch(95.0% 0.02226 217.48)"
+        ]
+      },
+      "divider": {
+        "role": "neutral",
+        "displayName": "Divider",
+        "tonalRamp": [
+          "oklch(15.0% 0.01097 204.11)",
+          "oklch(26.4% 0.01097 204.11)",
+          "oklch(37.9% 0.01097 204.11)",
+          "oklch(49.3% 0.01097 204.11)",
+          "oklch(60.7% 0.01097 204.11)",
+          "oklch(72.1% 0.01097 204.11)",
+          "oklch(83.6% 0.01097 204.11)",
+          "oklch(95.0% 0.01097 204.11)"
+        ]
+      },
+      "control-border": {
+        "role": "neutral",
+        "displayName": "Control border",
+        "tonalRamp": [
+          "oklch(15.0% 0.02155 212.59)",
+          "oklch(26.4% 0.02155 212.59)",
+          "oklch(37.9% 0.02155 212.59)",
+          "oklch(49.3% 0.02155 212.59)",
+          "oklch(60.7% 0.02155 212.59)",
+          "oklch(72.1% 0.02155 212.59)",
+          "oklch(83.6% 0.02155 212.59)",
+          "oklch(95.0% 0.02155 212.59)"
+        ]
+      },
+      "error": {
+        "role": "semantic",
+        "displayName": "Error",
+        "tonalRamp": [
+          "oklch(15.0% 0.16058 25.84)",
+          "oklch(26.4% 0.16058 25.84)",
+          "oklch(37.9% 0.16058 25.84)",
+          "oklch(49.3% 0.16058 25.84)",
+          "oklch(60.7% 0.16058 25.84)",
+          "oklch(72.1% 0.16058 25.84)",
+          "oklch(83.6% 0.16058 25.84)",
+          "oklch(95.0% 0.16058 25.84)"
+        ]
+      },
+      "success": {
+        "role": "semantic",
+        "displayName": "Success",
+        "tonalRamp": [
+          "oklch(15.0% 0.09040 157.77)",
+          "oklch(26.4% 0.09040 157.77)",
+          "oklch(37.9% 0.09040 157.77)",
+          "oklch(49.3% 0.09040 157.77)",
+          "oklch(60.7% 0.09040 157.77)",
+          "oklch(72.1% 0.09040 157.77)",
+          "oklch(83.6% 0.09040 157.77)",
+          "oklch(95.0% 0.09040 157.77)"
+        ]
+      }
+    },
+    "tonalRampNote": "Synthesized OKLCH lightness samples for panel visualisation only. These are not additional brand tokens; DESIGN.md frontmatter and the implemented styles supply canonical values.",
+    "typographyMeta": {
+      "display": {
+        "displayName": "Main heading",
+        "purpose": "Shared main page headings."
+      },
+      "editor-body": {
+        "displayName": "Editor body",
+        "purpose": "Operate tools and status text."
+      },
+      "editor-button": {
+        "displayName": "Editor action",
+        "purpose": "Compact editor actions; panel selectors use 14px."
+      }
+    },
+    "shadows": [],
+    "focus": [
+      {
+        "name": "light-background",
+        "value": "3px solid var(--bvs-accent); outline-offset: 3px",
+        "purpose": "Links, buttons, inputs and native disclosure summaries."
+      },
+      {
+        "name": "dark-background",
+        "value": "outline-color: #fff",
+        "purpose": "Focus within dark branding/footer sections."
+      }
+    ],
+    "motion": [
+      {
+        "name": "shared-button",
+        "value": "background .15s",
+        "purpose": "Shared button state change; reduced motion removes transitions."
+      },
+      {
+        "name": "equipment-state",
+        "value": "180ms ease-out",
+        "purpose": "Existing equipment photo/button feedback."
+      },
+      {
+        "name": "equipment-tile",
+        "value": "800ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Existing comparison image reveal on hover or focus."
+      },
+      {
+        "name": "equipment-shine",
+        "value": "650ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Existing comparison-button sweep; disabled for reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "header-collapse-and-editor-compact",
+        "value": "1180px"
+      },
+      {
+        "name": "homepage-tall-hero-start",
+        "value": "1000px"
+      },
+      {
+        "name": "shared-section-compact",
+        "value": "960px"
+      },
+      {
+        "name": "editor-preview-stack",
+        "value": "900px"
+      },
+      {
+        "name": "shared-single-column",
+        "value": "781px"
+      },
+      {
+        "name": "editor-mobile",
+        "value": "680px"
+      },
+      {
+        "name": "narrow-gutters",
+        "value": "380px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shared quote action on a light background.",
+      "html": "<button class=\"ds-primary\">Request a quote</button>",
+      "css": ".ds-primary{font-family:Plex,'Segoe UI',sans-serif;font-size:16px;font-weight:600;line-height:1.4;min-height:48px;padding:14px 24px;border:1px solid transparent;border-radius:4px;background:var(--bvs-accent,#00675f);color:#fff;cursor:pointer;transition:background .15s}.ds-primary:hover{background:#00534d}.ds-primary:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}.ds-primary:disabled{opacity:.65;cursor:wait}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Outline action",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action with a visible control boundary.",
+      "html": "<button class=\"ds-outline\">View equipment</button>",
+      "css": ".ds-outline{font-family:Plex,'Segoe UI',sans-serif;font-size:16px;font-weight:600;line-height:1.4;min-height:48px;padding:14px 24px;border:1px solid #7e9094;border-radius:4px;background:transparent;color:var(--bvs-ink,#16282d);cursor:pointer;transition:background .15s}.ds-outline:hover{background:#e4f1ef}.ds-outline:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-outline{transition:none}}"
+    },
+    {
+      "name": "Editor panel selection",
+      "kind": "button",
+      "refersTo": "editor-button-selected",
+      "description": "Pressed state selects the editable panel.",
+      "html": "<button class=\"ds-panel\" aria-pressed=\"true\">Front</button>",
+      "css": ".ds-panel{font-family:Plex,'Segoe UI',sans-serif;font-size:14px;font-weight:600;line-height:1.4;min-height:44px;padding:10px 6px;border:1px solid #7e9094;border-radius:4px;background:#fff;color:#16282d;cursor:pointer}.ds-panel:hover{background:#e4f1ef}.ds-panel[aria-pressed=true]{background:#00675f;color:#fff;border-color:#00675f}.ds-panel:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}.ds-panel:disabled{opacity:.5;cursor:default}"
+    },
+    {
+      "name": "Editor text control",
+      "kind": "input",
+      "refersTo": "editor-input",
+      "description": "The HEX field pairs readable text with the colour chooser.",
+      "html": "<label class=\"ds-field\" for=\"ds-hex\">Panel colour HEX<input class=\"ds-input\" id=\"ds-hex\" value=\"#00675f\" maxlength=\"7\" pattern=\"#[a-fA-F0-9]{6}\" spellcheck=\"false\"></label>",
+      "css": ".ds-field{font-family:Plex,'Segoe UI',sans-serif;display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:1.5;color:#16282d}.ds-input{font-family:Plex,'Segoe UI',sans-serif;min-width:0;height:44px;padding:8px 12px;border:1px solid #7e9094;border-radius:4px;background:#fff;color:#16282d;font-size:16px}.ds-input:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}"
+    },
+    {
+      "name": "Quote container",
+      "kind": "card",
+      "refersTo": "quote-container",
+      "description": "Straight reading and form area separated by a thin rule.",
+      "html": "<section class=\"ds-quote\"><h2>Request a quote</h2><p>Tell us what you plan to sell.</p></section>",
+      "css": ".ds-quote{font-family:Plex,'Segoe UI',sans-serif;border:1px solid var(--bvs-line,#cbd5d6);background:#fff;padding:32px;color:var(--bvs-ink,#16282d)}.ds-quote h2{font-size:28px;line-height:1.2;font-weight:600;letter-spacing:-.025em;margin:0 0 24px}.ds-quote p{font-size:18px;line-height:1.6;margin:0 0 20px}@media(max-width:781px){.ds-quote{padding:24px}.ds-quote p{font-size:16px}}"
+    },
+    {
+      "name": "Navigation link",
+      "kind": "nav",
+      "description": "Semibold native navigation with underlined hover.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#equipment\">Equipment</a><a href=\"#design\">Design editor</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:18px}.ds-nav a{font-family:Plex,'Segoe UI',sans-serif;font-size:15px;font-weight:600;line-height:1.6;color:var(--bvs-accent,#00675f);text-decoration:none;white-space:nowrap;text-underline-offset:4px}.ds-nav a:hover{color:#00534d;text-decoration:underline}.ds-nav a:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}"
+    },
+    {
+      "name": "Drawing disclosure",
+      "kind": "custom",
+      "description": "Native expandable drawing group with a 44px summary target.",
+      "html": "<details class=\"ds-drawing\"><summary>Drawing tools</summary><p>Choose a tool, then draw on the panel or select Draw on machine.</p></details>",
+      "css": ".ds-drawing{font-family:Plex,'Segoe UI',sans-serif;border-top:1px solid #cbd5d6;padding:16px 0 0;color:#16282d}.ds-drawing summary{font-size:17px;font-weight:600;line-height:1.5;min-height:44px;margin:0 0 12px;cursor:pointer}.ds-drawing summary:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}.ds-drawing p{font-size:14px;line-height:1.5;color:#506166;margin:8px 0 0}"
+    },
+    {
+      "name": "Drawing tool selector",
+      "kind": "input",
+      "refersTo": "editor-input",
+      "description": "One native selector for exact or smoothed freehand, lines, shapes and text. Fill and text controls appear for the relevant tool.",
+      "html": "<label class=\"ds-tool-field\" for=\"ds-drawing-tool\">Tool<select id=\"ds-drawing-tool\" class=\"ds-tool-select\"><option>Freehand: exact</option><option>Freehand: smooth</option><option>Straight line</option><option>Rectangle</option><option>Ellipse</option><option>Text</option></select></label>",
+      "css": ".ds-tool-field{font-family:Plex,'Segoe UI',sans-serif;display:flex;flex-direction:column;gap:6px;margin:12px 0;font-size:14px;line-height:1.5;color:#16282d}.ds-tool-select{font-family:Plex,'Segoe UI',sans-serif;min-width:0;width:100%;height:44px;padding:8px 12px;border:1px solid #7e9094;border-radius:4px;background:#fff;color:#16282d;font-size:16px}.ds-tool-select:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}"
+    },
+    {
+      "name": "Machine preview controls",
+      "kind": "custom",
+      "description": "Separate pressed-state rotation and drawing modes, with machine zoom from 75% to 300%. Drawing is available after the model loads.",
+      "html": "<div class=\"ds-machine-modes\"><button type=\"button\" aria-pressed=\"true\">Rotate machine</button><button type=\"button\" aria-pressed=\"false\">Draw on machine</button></div><div class=\"ds-machine-zoom\" aria-label=\"Machine zoom\"><button type=\"button\" aria-label=\"Zoom out\">−</button><output>100%</output><button type=\"button\" aria-label=\"Zoom in\">+</button></div>",
+      "css": ".ds-machine-modes{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}.ds-machine-modes button,.ds-machine-zoom button{font-family:Plex,'Segoe UI',sans-serif;border:1px solid #7e9094;border-radius:4px;background:#fff;color:#16282d;min-height:44px;font-weight:600;line-height:1.4;cursor:pointer}.ds-machine-modes button{flex:1;padding:10px 14px;font-size:14px}.ds-machine-modes button:hover,.ds-machine-zoom button:hover{background:#e4f1ef}.ds-machine-modes button[aria-pressed=true]{background:#00675f;color:#fff;border-color:#00675f}.ds-machine-modes button:focus-visible,.ds-machine-zoom button:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}.ds-machine-modes button:disabled,.ds-machine-zoom button:disabled{opacity:.5;cursor:default}.ds-machine-zoom{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}.ds-machine-zoom button{width:44px;padding:8px;font-size:18px}.ds-machine-zoom output{font-family:Plex,'Segoe UI',sans-serif;min-width:52px;text-align:center;color:#506166;font-size:14px;line-height:1.5}"
+    },
+    {
+      "name": "Flat panel zoom and pan",
+      "kind": "custom",
+      "description": "Flat zoom spans 100% to 400%. Above 100%, Move zoomed panel enables mouse, touch and arrow-key scrolling without editing; its active label is Continue editing. The scroll viewport has no shadow.",
+      "html": "<div class=\"ds-flat-zoom\" aria-label=\"Panel zoom\"><button type=\"button\" aria-label=\"Zoom out\">−</button><output>125%</output><button type=\"button\" aria-label=\"Zoom in\">+</button><button class=\"ds-flat-pan\" type=\"button\" aria-pressed=\"false\">Move zoomed panel</button></div>",
+      "css": ".ds-flat-zoom{font-family:Plex,'Segoe UI',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}.ds-flat-zoom button{font-family:Plex,'Segoe UI',sans-serif;min-height:44px;width:44px;padding:8px;font-size:18px;font-weight:600;line-height:1.4;border:1px solid #7e9094;border-radius:4px;background:#fff;color:#16282d;cursor:pointer}.ds-flat-zoom button:hover{background:#e4f1ef}.ds-flat-zoom button[aria-pressed=true]{background:#00675f;color:#fff;border-color:#00675f}.ds-flat-zoom button:focus-visible{outline:3px solid var(--bvs-accent,#00675f);outline-offset:3px}.ds-flat-zoom button:disabled{opacity:.5;cursor:default}.ds-flat-zoom output{min-width:52px;text-align:center;color:#506166;font-size:14px;line-height:1.5}.ds-flat-zoom .ds-flat-pan{width:100%;flex-basis:100%;order:4;font-size:14px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Practical industrial equipment",
+    "overview": "The established BVS interface uses clear proportions, precise alignment, visible equipment and readable information. Full machine images carry the visual interest. IBM Plex Sans, deep petrol controls and cool neutral backgrounds connect the marketing pages and wrapping tools.\n\nThis scan records the implemented system on 2026-10-04. [STYLE_GUIDE.md](STYLE_GUIDE.md) remains the detailed brand authority; this file does not replace its logo, writing or content rules. The wrapping editor extends that identity. Its page composition and editing workflow are recorded separately in [docs/design-editor.surface.md](docs/design-editor.surface.md).",
+    "keyCharacteristics": [
+      "Equipment remains complete and legible in its image area.",
+      "White and cool neutral areas separate reading, controls and equipment.",
+      "Petrol marks actions, links and selected controls.",
+      "Straight panels, thin rules and small control corners organise the interface."
+    ],
+    "rules": [
+      {
+        "name": "The Control Boundary Rule",
+        "body": "Use control border for inputs and outlined controls. Divider alone is a decorative separator, not an interactive boundary.",
+        "section": "colors"
+      },
+      {
+        "name": "The Customer Colour Rule",
+        "body": "Customer artwork may change the machine's colours. Keep the surrounding BVS interface in the established palette.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "**Do** reuse the established Plex, petrol and cool neutral palette.",
+      "**Do** preserve the complete machine and identify visual mockups as visualisations.",
+      "**Do** pair selected and feedback colours with semantic state or explanatory text.",
+      "**Do** retain visible focus, native labels and reduced-motion behavior.",
+      "**Do** keep customer artwork colours within the machine or flat editing panel."
+    ],
+    "donts": [
+      "**Don't** copy the Boost or JanogaGo identity into BVS controls.",
+      "**Don't** replace control boundaries with decorative divider strokes.",
+      "**Don't** turn every paragraph into a raised card.",
+      "**Don't** add marketing labels above headings or use decorative parallax and autoplay carousels.",
+      "**Don't** present the wrap mockup as a dimensioned print template or a completed customer project."
+    ]
+  }
+}

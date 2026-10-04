@@ -137,6 +137,34 @@
     "language": {
       "type": "string",
       "default": "en"
+    },
+    "designLabel": {
+      "type": "string",
+      "default": "Attach a design (optional)"
+    },
+    "designHint": {
+      "type": "string",
+      "default": "PNG, JPG or WebP, up to 5 MB."
+    },
+    "designError": {
+      "type": "string",
+      "default": "Please attach a valid PNG, JPG or WebP image under 5 MB and 4096 pixels per side."
+    },
+    "designAttached": {
+      "type": "string",
+      "default": "Design attached"
+    },
+    "designEditorLabel": {
+      "type": "string",
+      "default": "Include my current editor design"
+    },
+    "designEditorHint": {
+      "type": "string",
+      "default": "Your latest design will be attached automatically when you submit this form. No download or upload is needed."
+    },
+    "designRemove": {
+      "type": "string",
+      "default": "Remove design"
     }
   },
   "supports": {

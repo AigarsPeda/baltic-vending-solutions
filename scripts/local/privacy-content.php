@@ -20,6 +20,8 @@ function bvs_privacy_copy($lang) {
         'enquiries'=>'Jūsu pieprasījumi',
         'enquiriesText'=>'Nosūtot piedāvājuma pieprasījumu, jūs sniedzat kontaktpersonas vārdu, e-pastu un informāciju par produktiem, kurus vēlaties pārdot. Varat norādīt arī uzņēmuma nosaukumu, tālruni, vēlamo iekārtu, interesi par iegādi vai nomu, plānoto atrašanās vietu un papildu ziņu.',
         'purpose'=>'Šo informāciju izmantojam, lai izskatītu pieprasījumu, ieteiktu piemērotu iekārtu un sagatavotu atbildi vai piedāvājumu. Formas nosūtīšanai nav nepieciešama piekrišana analītikai. Pieprasījuma saturs netiek nosūtīts Google Analytics.',
+        'designs'=>'Jūsu dizaina faili',
+        'designsText'=>'Dizaina redaktors automātiski saglabā vienu dizainu šī pārlūka vietējā krātuvē, lai vēlāk varētu turpināt darbu. Saglabājam paneļu krāsas, attēlus, logotipu izvietojumu un zīmējumu; saziņas formas dati tajā netiek saglabāti. Dizains paliek pārlūkā, līdz redaktorā izvēlaties “Sākt no jauna” vai notīrāt vietnes datus. Tas netiek automātiski nosūtīts mums un nav saistīts ar analītikas izvēli. Lejupielāde saglabā failu jūsu ierīcē. Ja pievienojat dizainu formai un to nosūtāt, normalizētu attēlu glabājam kopā ar privāto pieprasījumu. Administratori to var lejupielādēt, lai sagatavotu aplīmēšanas piedāvājumu. Uz failu attiecas pieprasījumu glabāšanas un dzēšanas kārtība.',
         'basis'=>'<strong>Jāapstiprina pirms publicēšanas:</strong> tiesiskais pamats pieprasījumu izskatīšanai un saziņai ar uzņēmumu pārstāvjiem.',
         'security'=>'Vietnes darbība un drošība',
         'securityText'=>'Vietnes servera žurnālos var būt IP adrese, pieprasījuma laiks, apmeklētā adrese un pārlūka informācija. Forma izmanto īslaicīgu pieprasījumu ierobežotāju, kura atslēga veidota no IP adreses aizsargātas jaucējvērtības. Ierobežojuma laika logs ir piecas minūtes; IP adrese netiek saglabāta pieprasījuma ierakstā.',
@@ -55,6 +57,8 @@ function bvs_privacy_copy($lang) {
         'enquiries'=>'Your enquiries',
         'enquiriesText'=>'When requesting a quote, you provide your contact name, email and information about the products you want to sell. You can also provide a business name, phone number, preferred machine, interest in purchase or rental, planned location and an additional message.',
         'purpose'=>'We use this information to review your request, recommend suitable equipment and prepare a reply or proposal. Submitting the form does not require Analytics consent. Enquiry contents are not sent to Google Analytics.',
+        'designs'=>'Your design files',
+        'designsText'=>'The design editor automatically saves one draft in this browser’s local storage so you can resume later. It saves panel colours, images, logo positions and drawing; contact-form details are excluded. The draft remains until you choose Start again in the editor or clear site data. It is not automatically sent to us and is independent of your Analytics choice. Downloading saves the file on your device. If you attach a design and submit the form, we store a normalised image with your private enquiry. Administrators can download it to prepare your wrapping quote. The enquiry retention and deletion policy applies to the file.',
         'basis'=>'<strong>To confirm before publication:</strong> the legal grounds for handling enquiries and communicating with business representatives.',
         'security'=>'Website operation and security',
         'securityText'=>'Server logs may contain your IP address, request time, visited URL and browser information. The form uses a short-lived request limit keyed by a protected hash of the IP address. The rate-limit window is five minutes; the IP address is not saved in the enquiry record.',
@@ -85,7 +89,7 @@ function bvs_privacy_copy($lang) {
 function bvs_privacy_content($lang) {
     $c = bvs_privacy_copy($lang);
     $html = bvs_privacy_heading($c['title'], 1).bvs_privacy_paragraph($c['intro'], 'bvs-policy-lead').bvs_privacy_paragraph($c['updated'], 'bvs-policy-updated');
-    foreach ([['controller',['controllerText','contact']], ['enquiries',['enquiriesText','purpose','basis']], ['security',['securityText','securityPending']], ['cookies',['cookiesText']], ['analytics',['analyticsText','analyticsFuture']], ['access',['accessText','providers']], ['retention',['retentionText']], ['rights',['rightsText','rightsContact']]] as [$heading,$paragraphs]) {
+    foreach ([['controller',['controllerText','contact']], ['enquiries',['enquiriesText','purpose','basis']], ['designs',['designsText']], ['security',['securityText','securityPending']], ['cookies',['cookiesText']], ['analytics',['analyticsText','analyticsFuture']], ['access',['accessText','providers']], ['retention',['retentionText']], ['rights',['rightsText','rightsContact']]] as [$heading,$paragraphs]) {
         $html .= bvs_privacy_heading($c[$heading], 2, $heading === 'cookies' ? 'cookie-choices' : '');
         foreach ($paragraphs as $key) $html .= bvs_privacy_paragraph($c[$key]);
         if ($heading === 'cookies') {

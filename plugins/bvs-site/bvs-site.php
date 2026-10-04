@@ -9,6 +9,8 @@
  */
 defined('ABSPATH') || exit;
 require_once __DIR__.'/cookie-banner.php';
+require_once __DIR__.'/design-editor.php';
+require_once __DIR__.'/design-attachments.php';
 function bvs_is_local() {
     return wp_get_environment_type() === 'local' && str_ends_with((string) wp_parse_url(home_url(), PHP_URL_HOST), '.local');
 }
@@ -34,7 +36,7 @@ function bvs_render_quote($attributes) {
     $a = bvs_quote_attributes($attributes);
     $id = wp_unique_id('bvs-form-');
     ob_start(); ?>
-    <form class="bvs-quote-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" data-endpoint="<?php echo esc_url(admin_url('admin-ajax.php')); ?>">
+    <form class="bvs-quote-form" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" data-endpoint="<?php echo esc_url(admin_url('admin-ajax.php')); ?>">
         <p class="bvs-form-note"><?php echo esc_html($a['intro']); ?></p>
         <input type="hidden" name="action" value="bvs_quote"><input type="hidden" name="page_id" value="<?php echo get_the_ID(); ?>"><input type="hidden" name="form_id" value="<?php echo esc_attr($a['formId']); ?>">
         <?php wp_nonce_field('bvs_quote', 'bvs_nonce', false); ?>
@@ -49,6 +51,16 @@ function bvs_render_quote($attributes) {
         <?php foreach (['products','location','message'] as $key): ?>
             <label class="bvs-field bvs-field-wide" for="<?php echo esc_attr($id.$key); ?>"><?php echo esc_html($a[$key.'Label']); ?><textarea id="<?php echo esc_attr($id.$key); ?>" name="<?php echo esc_attr($key); ?>" rows="<?php echo $key === 'message' ? 3 : 2; ?>" maxlength="2000" placeholder="<?php echo esc_attr($a[$key.'Placeholder']); ?>" <?php echo $key === 'products' ? 'required' : ''; ?>></textarea></label>
         <?php endforeach; ?>
+        <div class="bvs-field bvs-field-wide bvs-design-attachment">
+            <label for="<?php echo esc_attr($id.'design'); ?>"><?php echo esc_html($a['designLabel']); ?></label>
+            <div class="bvs-editor-design-option" hidden>
+                <label class="bvs-editor-design-choice"><input type="checkbox" class="bvs-use-editor-design" checked aria-describedby="<?php echo esc_attr($id.'editor-design-hint'); ?>"><?php echo esc_html($a['designEditorLabel']); ?></label>
+                <p id="<?php echo esc_attr($id.'editor-design-hint'); ?>" class="bvs-form-note"><?php echo esc_html($a['designEditorHint']); ?></p>
+            </div>
+            <input id="<?php echo esc_attr($id.'design'); ?>" type="file" name="design" accept="image/png,image/jpeg,image/webp" aria-describedby="<?php echo esc_attr($id.'design-hint'); ?>" data-error="<?php echo esc_attr($a['designError']); ?>">
+            <p id="<?php echo esc_attr($id.'design-hint'); ?>" class="bvs-form-note"><?php echo esc_html($a['designHint']); ?></p>
+            <button type="button" class="bvs-remove-design" hidden><?php echo esc_html($a['designRemove']); ?></button>
+        </div>
         </div>
         <p class="bvs-privacy"><?php echo esc_html($a['privacyText']); ?> <?php if ($a['privacyUrl']): ?><a href="<?php echo esc_url($a['privacyUrl']); ?>"><?php echo esc_html($a['privacyLabel']); ?></a><?php endif; ?></p>
         <button class="bvs-submit" type="submit" data-sending="<?php echo esc_attr($a['sendingLabel']); ?>"><?php echo esc_html($a['submitLabel']); ?></button>
@@ -64,7 +76,7 @@ function bvs_find_form($blocks, $id) {
     }
     return null;
 }
-function bvs_save_quote($data) {
+function bvs_save_quote($data, $upload = null) {
     foreach ($data as $value) if (!is_string($value)) return new WP_Error('invalid_request', 'Invalid request.');
     $page = get_post(absint($data['page_id'] ?? 0));
     $a = $page && $page->post_status === 'publish' ? bvs_find_form(parse_blocks($page->post_content), sanitize_key($data['form_id'] ?? '')) : null;
@@ -80,15 +92,24 @@ function bvs_save_quote($data) {
     $limit_key = 'bvs_rate_'.hash_hmac('sha256', $_SERVER['REMOTE_ADDR'] ?? 'unknown', wp_salt());
     $count = (int) get_transient($limit_key);
     if ($count >= 5) return new WP_Error('rate_limit', $a['unavailableMessage']);
+    $design = bvs_validate_design_attachment($upload, $a['designError']);
+    if (is_wp_error($design)) return $design;
     $id = wp_insert_post(['post_type'=>'bvs_enquiry','post_status'=>'private','post_title'=>$fields['name'].' — '.$fields['model'],'meta_input'=>['_bvs_fields'=>$fields,'_bvs_source_page'=>$page->ID,'_bvs_language'=>$a['language'],'_bvs_notification'=>'pending']], true);
     if (is_wp_error($id) || !$id) return new WP_Error('save_failed', $a['unavailableMessage']);
+    if ($design) {
+        $design = bvs_store_design($design, $a['unavailableMessage']);
+        if (is_wp_error($design)) { wp_delete_post($id, true);return $design; }
+        update_post_meta($id, '_bvs_design', $design);
+    }
     set_transient($limit_key, $count + 1, 5 * MINUTE_IN_SECONDS);
     $recipient = sanitize_email(get_option('bvs_recipient', ''));
     $status = 'not_configured';
     if (is_email($recipient)) {
         $body = implode("\n", array_map(fn($key,$value) => ucfirst($key).': '.$value, array_keys($fields), $fields));
+        $attachment = $design ? bvs_design_file($design) : null;
+        if ($design) $body .= "\nDesign attachment: bvs-design.png";
         try {
-            $sent = wp_mail($recipient, 'New equipment enquiry #'.$id, $body, ['Reply-To: '.$fields['email']]);
+            $sent = wp_mail($recipient, 'New equipment enquiry #'.$id, $body, ['Reply-To: '.$fields['email']], $attachment ? [$attachment] : []);
             $status = $sent ? (bvs_is_local() ? 'local_captured' : 'accepted_by_transport') : 'failed';
         } catch (Throwable $error) { $status = 'failed'; }
     }
@@ -100,7 +121,7 @@ add_filter('pre_wp_mail', function ($return, $attributes) {
     return bvs_is_local() ? true : $return;
 }, PHP_INT_MAX - 10, 2);
 function bvs_handle_quote() {
-    $result = bvs_save_quote(wp_unslash($_POST));
+    $result = bvs_save_quote(wp_unslash($_POST), $_FILES['design'] ?? null);
     $ajax = wp_doing_ajax();
     if (is_wp_error($result)) {
         if ($ajax) wp_send_json_error(['message'=>$result->get_error_message()], 400);
@@ -115,6 +136,10 @@ add_action('add_meta_boxes_bvs_enquiry', function () {
         echo '<dl>';
         foreach ((array) get_post_meta($post->ID, '_bvs_fields', true) as $key=>$value) echo '<dt><strong>'.esc_html(ucfirst($key)).'</strong></dt><dd><p>'.nl2br(esc_html($value)).'</p></dd>';
         echo '</dl><p><strong>Notification:</strong> '.esc_html(get_post_meta($post->ID,'_bvs_notification',true)).'</p>';
+        if (get_post_meta($post->ID, '_bvs_design', true)) {
+            $url = wp_nonce_url(admin_url('admin-post.php?action=bvs_download_design&enquiry='.$post->ID), 'bvs_design_'.$post->ID);
+            echo '<p><a class="button" href="'.esc_url($url).'">Download attached design</a></p>';
+        }
         if (bvs_is_local()) echo '<p>Local capture is active. No email leaves this site. The values above are the captured notification content.</p>';
     }, 'bvs_enquiry', 'normal', 'high');
 });

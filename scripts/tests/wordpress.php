@@ -3,13 +3,13 @@
 if (!bvs_is_local() || !get_option('bvs_seed_version')) throw new RuntimeException('Seed the Local site first.');
 function bvs_assert($condition,$message) { if(!$condition) throw new RuntimeException($message); }
 $pages=get_posts(['post_type'=>'page','post_status'=>'publish','meta_key'=>'_bvs_seed_key','numberposts'=>-1]);
-bvs_assert(count($pages)===8,'Expected eight translated starter pages.');
+bvs_assert(count($pages)===10,'Expected ten translated starter pages including the editor.');
 foreach($pages as $p) {
  $lang=pll_get_post_language($p->ID); bvs_assert(in_array($lang,['lv','en'],true),'Every starter page has a language.');
  bvs_assert(pll_get_post($p->ID,$lang==='lv' ? 'en' : 'lv'),'Every starter page has a translation.');
- if(!str_contains(get_post_meta($p->ID,'_bvs_seed_key',true),'privacy')) bvs_assert(bvs_find_form(parse_blocks($p->post_content),'quote-'.$lang),'The quote block attributes survived storage.');
+ if(!str_contains(get_post_meta($p->ID,'_bvs_seed_key',true),'privacy')) bvs_assert(bvs_find_form(parse_blocks($p->post_content),(str_ends_with(get_post_meta($p->ID,'_bvs_seed_key',true),'-design')?'design-':'quote-').$lang),'The quote block attributes survived storage.');
 }
-$attachments=get_posts(['post_type'=>'attachment','post_status'=>'inherit','meta_key'=>'_bvs_source','numberposts'=>-1]);
+$attachments=get_posts(['post_type'=>'attachment','post_status'=>'inherit','meta_query'=>[['key'=>'_bvs_source','value'=>['compact','fridge'],'compare'=>'IN']],'numberposts'=>-1]);
 bvs_assert(count($attachments)===2,'Two proposal attachments.');
 foreach($attachments as $p) { bvs_assert(is_file(get_attached_file($p->ID)),'The uploaded media file exists.'); bvs_assert(!empty(wp_get_attachment_metadata($p->ID)['sizes']),'Native generated media sizes exist.'); }
 $home=pll_get_post(get_option('page_on_front'),'en');

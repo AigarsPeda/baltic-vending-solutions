@@ -182,4 +182,6 @@ PLL()->model->term->save_translations($menus);
 flush_rewrite_rules(); update_option('bvs_seed_version','0.1.0');
 require __DIR__.'/setup-cookies.php';
 require __DIR__.'/setup-privacy.php';
+require __DIR__.'/setup-design-editor.php';
+require __DIR__.'/setup-mobile-home.php';
 WP_CLI::success('Created editable LV/EN pages, native menus/widgets, quote blocks and Media Library attachments.');

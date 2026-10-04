@@ -50,6 +50,9 @@ function bvs_branding_content($lang) {
             .bvs_branding_block('paragraph', [], '<p>'.esc_html($description).'</p>');
         $details .= bvs_branding_block('group', ['className'=>'bvs-branding-detail'], '<div class="wp-block-group bvs-branding-detail">'.$content.'</div>');
     }
+    require_once __DIR__.'/design-content.php';
+    $editor_url = bvs_design_page_url($lang);
+    if ($editor_url) $details .= bvs_design_button($lang, $editor_url);
     $columns = bvs_branding_block('column', [], '<div class="wp-block-column">'.$heading.$intro.$details.'</div>')
         .bvs_branding_block('column', ['className'=>'bvs-branding-example'], '<div class="wp-block-column bvs-branding-example">'.bvs_branding_image($lang, bvs_branding_media()).'</div>');
     $layout = bvs_branding_block('columns', ['className'=>'bvs-branding-layout'], '<div class="wp-block-columns bvs-branding-layout">'.$columns.'</div>');

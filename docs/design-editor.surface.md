@@ -1,0 +1,71 @@
+# Wrapping editor page brief
+
+Recorded from the built editor on 2026-10-04. [STYLE_GUIDE.md](../STYLE_GUIDE.md) governs the incumbent BVS identity; [DESIGN.md](../DESIGN.md) records the reusable implementation. [design-editor.md](design-editor.md) owns the detailed model, attachment-storage and verification notes.
+
+## Scope and job
+
+The native WordPress routes `/dizaina-redaktors/` and `/en/design-editor/` are an Operate page. The `bvs/design-editor` block supplies translated tools, while introduction, headings, menus, wrapping links and the quote form remain native editable content.
+
+The visitor tries branding on the supplied Smart Fridge model. Three independent visual wrap panels accept colour, background artwork, a separate logo, drawing and text. Visitors edit the flat panel or draw directly on the machine's wrap panels. The screen, payment devices, door, stock and cabinet stay intact. The page leads to a downloaded PNG proposal or a design attached to a private quote enquiry. It does not define print dimensions or production cut lines.
+
+## Direction contract
+
+- Thesis: see branding on the actual machine while editing its flat or 3D wrap panels.
+- Visual world: existing BVS Plex, petrol controls, white tools and cool neutral preview.
+- Story: select a panel, upload artwork or a logo, change colour, draw or place text, inspect the machine, then download or prepare a quote attachment.
+- First viewport: compact tools at left, large machine and flat panel at right, exports below the previews.
+- Form: direct Operate shaping within the existing BVS identity. Implementation key `bvs-wrap-editor`.
+
+This is an extension of the existing site. The desktop composition stays intact; customer colour and artwork change the mockup, not the surrounding interface.
+
+## Desktop and mobile composition
+
+The page has a 1360px outer bound with 40px gutters. The workbench starts with a 304px tools column beside the preview stage. Tools and stage have 24px padding. The preview grid holds a flexible 490px-high machine view alongside a 200px flat editing panel. At 1180px, tools narrow to 280px and the flat preview to 150px; at 900px, tools narrow to 260px and the preview areas stack within the stage.
+
+At 680px and below, the workbench becomes one column. JavaScript moves the existing flat canvas immediately after the panel selector inside the tools. The canvas and its zoom controls are sticky at the top of that tool area, with a white backing and a separating rule. They stay visible beside colour, upload, logo and drawing controls as the visitor scrolls. The panel viewport is 162px wide for the front and 109px for either side. Zoom enlarges the canvas inside that viewport. The mobile shadow is removed.
+
+The 3D machine moves into a separate native disclosure below the tools, initially closed. Opening it reveals the machine, Rotate machine / Draw on machine modes, machine zoom and the reset-view action. The machine and fallback still are 340px high. Export actions stack at full available width. Outer gutters reduce to 24px, then 16px at 380px and below. Resizing across the breakpoint moves the same editing elements back into the desktop arrangement without replacing the draft.
+
+## Editing and states
+
+Front is initially selected, with petrol as the starting colour on all panels. Selection changes both the flat editing target and the machine angle. Panel and drawing-mode buttons expose `aria-pressed`. Transparent front-panel cut-outs mark areas that stay unwrapped and reveal the surrounding page background. The same cut-outs apply after artwork, logos and drawing, including to panel views in exported mockups. Side panels remain opaque. The 3D model uses separate hardware geometry.
+
+Background artwork supports fill or fit. Logo controls appear after a logo is loaded and expose width, horizontal position, vertical position and rotation. Uploaded filenames remain visible outside the native file chooser. Removal controls appear only when the selected panel contains that image. PNG, JPG and WebP uploads are limited to 5 MB and 4096px per side; working images reduce to at most 1024px.
+
+Drawing tools remain in a native disclosure. Its selector offers exact freehand, smoothed freehand, straight line, rectangle, ellipse and text. Draw / Stop drawing switches the flat panel between drawing and logo dragging. Brush colour and size apply to drawing; rectangles and ellipses expose Fill shapes. Hold Shift while dragging a rectangle or ellipse to make a square or circle. Text exposes a field and its own size control, then a click places it on the flat panel or the machine. Smoothed freehand straightens near-straight strokes and softens curves. It does not recognise handwriting or infer shapes.
+
+Rotate machine / Draw on machine is a separate pair of pressed-state buttons. Rotate first to expose the intended panel, then choose Draw on machine to use the selected drawing tool without rotating the camera. Material and UV raycasts map a pointer hit to the actual wrap panel, and hitting another panel selects it. Hardware and transparent front cut-outs reject drawing. A freehand stroke breaks when it crosses a protected area or another panel. Both editing views update the same design and exported PNG.
+
+Machine zoom spans 75% to 300%, with labelled buttons available in either machine mode. Flat zoom spans 100% to 400% inside a scrollable panel viewport. Above 100%, Move zoomed panel appears below the zoom controls. Its pressed state enables mouse or touch dragging to pan without drawing or moving a logo; Continue editing returns to the active editing tool. Reducing flat zoom to 100% ends pan mode. Zoom changes the editing view, not the artwork dimensions.
+
+Undo, redo and clear sit at the end of the drawing group. History is bounded to 20 whole-design snapshots; a drawing gesture is one step even when a freehand stroke breaks. Undo and redo start disabled. Reset asks before clearing all three panels. Export buttons disable while preparing a file and re-enable after success or failure.
+
+Native labels and legends group controls. File hints are associated with their inputs. Editor buttons, fields, range inputs and the drawing summary have at least 44px-high targets. The focusable flat canvas lets arrow keys move an uploaded logo by one percentage point, or five with Shift, when drawing and pan mode are off. In pan mode, arrow keys scroll the zoomed viewport. Sliders offer native keyboard control. Ctrl/Cmd+Z undoes; Ctrl/Cmd+Shift+Z or Ctrl/Cmd+Y redoes when focus is outside input fields. The 3D preview has descriptive alternate text and supports focused arrow-key rotation in Rotate machine mode. Freehand drawing uses pointer input; the implementation does not provide a keyboard freehand drawing mode.
+
+Buttons, fields and disclosures inherit the site's visible focus outline. The status region is `role="status"` with polite live announcements for loading, ready, fallback, invalid files, export and prepared attachments. Error states add explanatory text and error colour. Reduced motion changes the scroll-to-form transition to immediate. These recorded affordances do not certify complete WCAG conformance.
+
+## Graphics and JavaScript fallback
+
+The neutral Smart Fridge still appears while 3D loads and remains if graphics fail or the model is unavailable after 20 seconds. Flat editing and PNG export continue without 3D. The fallback status explains this. If a machine snapshot cannot be captured, export contains the flat panels. Without JavaScript, the editor shows an explanation and the native quote form still supports manual artwork attachment.
+
+The model viewer, fonts and model assets are self-hosted. The viewer script loads only on the editor page.
+
+## Download and enquiry action
+
+Download produces a PNG mockup containing all three panel views and a machine snapshot when available. Its note states that it is not a print template. The interface also says that dimensions, print files and wrapping scope need confirmation before production.
+
+"Request a quote with this design" prepares that PNG in the quote form on the same page, preselects Smart Fridge, scrolls to the form and focuses the name field. It does not submit the form. The visitor completes contact details and submits. After any edit, the form also selects “Include my current editor design” automatically and hides the manual chooser. Direct form submission exports the latest editor state in memory, without requiring the editor button, a download or a manual upload. An untouched editor adds no default file. Unticking the option or removing the design opts out; manual file selection also opts out. Manual attachment remains available. Failed submissions retain the form and attachment; successful submissions reset them.
+
+One editable draft saves automatically in this browser's IndexedDB storage and restores across reloads, browser closure and either language route. Version 1 retains panel colours, PNG images, logo positions, strokes, shapes, placed text, panel selection, drawing-tool options, brush settings and flat zoom. Older version-1 drafts with untyped strokes restore as exact freehand. Contact-form details and undo history are excluded. A separate live status announces saving, saved, restored or storage failure. Start again confirms deletion of the current and saved draft, clears undo history and removes any prepared form file. Browser site-data clearing also removes it. Autosave is independent of Analytics choices and never uploads a draft. Only form submission sends the attachment. Submitted images are validated, re-encoded and stored privately outside the web root, with no public Media Library URL. Administrators use the protected download route described in design-editor.md. Existing cookie choices, Local email interception and noindex safeguards remain in effect.
+
+## Evidence and continuing checks
+
+The implementation sources are `plugins/bvs-site/design-editor.php`, `plugins/bvs-site/design-editor/editor.css`, `plugins/bvs-site/design-editor/view.js`, the block metadata and the shared theme stylesheet. The final screenshots show the implemented composition:
+
+- [Desktop machine and edited panel](../output/design-drawing-desktop.png)
+- [Desktop drawing tools](../output/design-drawing-tools-desktop.png)
+- [Mobile tools and sticky panel](../output/design-drawing-mobile-tools.png)
+- [Mobile machine disclosure](../output/design-drawing-mobile-machine.png)
+- [Mobile zoomed panel and pan action](../output/design-drawing-mobile-panel.png)
+
+The drawing extension's final finish review is Pass. Its three findings are resolved: the mobile panel stays close to editing controls, range inputs and the drawing summary have 44px-high targets, and an explicit pan mode supports touch movement of zoomed panels. The BRAND text in the captures is test content. Continue checking both languages, narrow widths, keyboard state, graphics fallback, PNG output and private attachment behavior when editing this page. The test scope and storage lifecycle are recorded in design-editor.md. Print measurements and wrapping scope remain production decisions, not missing visual tokens.

@@ -17,7 +17,7 @@ if (!new URL(base).hostname.endsWith('.local')) throw new Error('Use a Local .lo
       assert.equal(await page.locator('main h1').count(), 1, path);
       const labels = await page.locator('main .bvs-eyebrow').allTextContents();
       assert(labels.every(text => /^0[1-3]$/.test(text.trim())), 'Only useful process numbers remain');
-      const alternate = page.locator('header .lang-item a');
+      const alternate = page.locator('.site-navigation .lang-item a');
       assert.equal(await alternate.count(), 1, 'Equivalent-page language switcher');
       const href = await alternate.getAttribute('href');
       assert(!href.endsWith('/en/') || path === '/', 'Equipment translations stay on the equipment page');
@@ -29,8 +29,9 @@ if (!new URL(base).hostname.endsWith('.local')) throw new Error('Use a Local .lo
     }
     await page.getByRole('button',{name:'Menu',exact:true}).click();
     assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
-    await page.locator('header .site-navigation a').first().focus();
+    await page.locator('.site-navigation a').first().focus();
     await page.keyboard.press('Escape');
+    await page.waitForFunction(() => !document.getElementById('mobile-menu').open);
     assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'false');
     assert(await page.locator('.menu-toggle').evaluate(node => node === document.activeElement));
     await page.goto(base+'/en/?model=compact&mode=rent#quote',{waitUntil:'networkidle'});

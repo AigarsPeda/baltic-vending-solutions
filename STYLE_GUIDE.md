@@ -32,7 +32,7 @@ Use white text on solid accent buttons. Use ink text on white or canvas. Use acc
 
 `divider` is decorative. It must not be the only visible boundary of a form input or the only cue for a selected state. Use `control-border` for those boundaries and text or an icon as well as colour for status.
 
-Keep the accent consistent across the page. Customer wraps may introduce their own colours within the machine image; the surrounding website interface stays in this palette. Change tokens centrally when a supplied identity requires a different accent.
+Keep the accent consistent across the page. The owner requested a distinct colour for the first navigation item, the design editor. That link alone uses warm rust #A13D24, with #7B2B19 on hover; other navigation links retain the normal accent. Customer wraps may introduce their own colours within the machine image; the remaining website interface stays in this palette. Change tokens centrally when a supplied identity requires a different accent.
 
 Base colour checks use solid, opaque colours. Recheck any overlays or image backgrounds in the actual layout.
 
@@ -179,3 +179,9 @@ Manage content photographs and logos through native Media Library and image cont
 Register the palette, font sizes and spacing through shared theme settings and `theme.json` where appropriate. Reuse the same values in frontend and editor styles. Content templates should keep headings, descriptions, specifications, images, enquiry labels and contact details editable. Keep branding-demo captions editable as well.
 
 Before a layout is ready for review, confirm that both models use the same comparison structure, wrapping concepts are labelled, price and service statements match the offer, and the primary action remains easy to find. Check narrow mobile widths, 200% text zoom, keyboard navigation, error/success states, reduced motion and the chosen website languages. Verify the logo's proportions and colour pairings when actual brand assets are added.
+
+## Wrapping design editor
+
+The separate Latvian and English editor pages reuse the site palette and IBM Plex Sans. Desktop places the tools beside the machine and editable flat panel. On mobile, keep the flat panel visible within the controls and offer the 3D view in a disclosure below. Use the neutral machine still while 3D loads or fails. Colours, artwork, logos and drawing affect only the designated front and side wrapping panels.
+
+Keep uploads, download labels, feedback and quote-attachment labels editable through the native blocks. Menu and wrapping-section links lead to the equivalent translated editor page. The download is a PNG design mockup; avoid presenting it as a production print file. One design draft saves in this browser and restores on return. Keep its save status and deletion action clear. Contact details are excluded; drafts are sent only when the visitor explicitly submits the attached image with an enquiry. Implementation and source-asset notes are in `docs/design-editor.md`.
