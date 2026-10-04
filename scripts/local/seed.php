@@ -187,4 +187,5 @@ require __DIR__.'/setup-mobile-home.php';
 require __DIR__.'/setup-contact-menu.php';
 require __DIR__.'/setup-contact-details.php';
 require __DIR__.'/setup-create-design-link.php';
+require __DIR__.'/setup-rank-math-keywords.php';
 WP_CLI::success('Created editable LV/EN pages, native menus/widgets, quote blocks and Media Library attachments.');
