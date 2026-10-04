@@ -4,7 +4,7 @@ Recorded from the built editor on 2026-10-04. [STYLE_GUIDE.md](../STYLE_GUIDE.md
 
 ## Scope and job
 
-The native WordPress routes `/dizaina-redaktors/` and `/en/design-editor/` are an Operate page. The `bvs/design-editor` block supplies translated tools, while introduction, headings, menus, wrapping links and the quote form remain native editable content.
+The native WordPress routes `/dizaina-redaktors/` and `/en/design-editor/` are an Operate page. The quote section uses the native heading “Saņemiet piedāvājumu savam dizainam” / “Get a quote for your design”, naming the next step. The `bvs/design-editor` block supplies translated tools, while introduction, headings, menus, wrapping links and the quote form remain native editable content.
 
 The visitor tries branding on the supplied Smart Fridge model. Three independent visual wrap panels accept colour, background artwork, a separate logo, drawing and text. Visitors edit the flat panel or draw directly on the machine's wrap panels. The screen, payment devices, door, stock and cabinet stay intact. The page leads to a downloaded PNG proposal or a design attached to a private quote enquiry. It does not define print dimensions or production cut lines.
 

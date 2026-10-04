@@ -39,7 +39,7 @@ function bvs_design_page_content($lang, $quote) {
         .bvs_design_block('paragraph',['className'=>'bvs-lead'],'<p class="bvs-lead">'.esc_html($intro).'</p>')
         .'<!-- wp:bvs/design-editor '.wp_json_encode(bvs_design_labels($lang),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES).' /-->';
     $page = bvs_design_block('group',['className'=>'bvs-design-page','layout'=>['type'=>'default']],'<div class="wp-block-group bvs-design-page">'.$content.'</div>');
-    $heading = $lang==='lv'?'Nosūtiet savu dizainu ar pieprasījumu':'Send your design with an enquiry';
+    $heading = $lang==='lv'?'Saņemiet piedāvājumu savam dizainam':'Get a quote for your design';
     $text = $lang==='lv'?'Redaktorā izveidotais dizains tiks pievienots automātiski, nosūtot formu. Varat arī izvēlēties savu failu. Tas palīdzēs mums sagatavot jūsu iekārtas un aplīmēšanas piedāvājumu.':'Your editor design will be attached automatically when you submit the form. You can also choose your own file. We will use it to prepare your equipment and wrapping quote.';
     $contact = bvs_design_block('heading',[],'<h2 class="wp-block-heading">'.esc_html($heading).'</h2>').bvs_design_block('paragraph',['className'=>'bvs-lead'],'<p class="bvs-lead">'.esc_html($text).'</p>');
     $left=bvs_design_block('column',[],'<div class="wp-block-column">'.$contact.'</div>');
