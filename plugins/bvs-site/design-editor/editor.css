@@ -14,6 +14,10 @@
 .bvs-design-editor button[aria-pressed=true]{background:#00675f;color:#fff;border-color:#00675f}
 .bvs-design-panels{display:flex;gap:6px}
 .bvs-design-panels button{flex:1;padding:10px 6px;font-size:14px;white-space:nowrap}
+/* Match the first selector row to the preview title height, gap and column inset. */
+@media(min-width:681px){.bvs-design-tools>fieldset:first-of-type .bvs-design-panels{margin-top:calc(22px * 1.2 + 20px - 17px * 1.5 - 12px)}}
+@media(min-width:901px) and (max-width:1180px){.bvs-design-tools>fieldset:first-of-type .bvs-design-panels{margin-top:calc(22px * 1.2 + 20px - 17px * 1.5 - 12px + 4px)}}
+@media(min-width:681px) and (max-width:900px){.bvs-design-tools>fieldset:first-of-type .bvs-design-panels{margin-top:calc(20px * 1.2 + 20px - 17px * 1.5 - 12px)}}
 .bvs-design-colour{display:flex;gap:12px;align-items:center}
 .bvs-design-editor input[type=color]{padding:4px;width:52px;height:44px;border:1px solid #7e9094;border-radius:4px;background:white;cursor:pointer;flex-shrink:0}
 .bvs-design-editor input[type=text],.bvs-design-editor select{min-width:0;width:100%;height:44px;padding:8px 12px;border:1px solid #7e9094;border-radius:4px;background:white;color:#16282d;font-size:16px}
@@ -103,7 +107,12 @@
 .bvs-design-zoom button{width:44px;padding:8px;font-size:18px}
 .bvs-design-canvas-wrap{aspect-ratio:592/1024;overflow:auto;overscroll-behavior:contain;--bvs-flat-zoom:1}
 .bvs-design-editor[data-panel=left] .bvs-design-canvas-wrap,.bvs-design-editor[data-panel=right] .bvs-design-canvas-wrap{aspect-ratio:400/1024}
-@media(min-width:681px){.bvs-design-editor[data-panel=left] .bvs-design-canvas-wrap,.bvs-design-editor[data-panel=right] .bvs-design-canvas-wrap{width:80%;max-width:160px}}
+@media(min-width:681px){.bvs-design-flat h3{margin-bottom:18px}}
+@media(min-width:901px){
+ .bvs-design-previews{row-gap:0}
+ .bvs-design-machine,.bvs-design-flat{display:grid;grid-template-rows:subgrid;grid-row:span 3}
+ .bvs-design-machine>.bvs-design-zoom,.bvs-design-flat>.bvs-design-zoom{align-self:start}
+}
 .bvs-design-flat canvas{width:calc(100% * var(--bvs-flat-zoom));max-width:none}
 .bvs-design-editor[data-model-drawing=true] model-viewer{touch-action:none;cursor:crosshair}
 .bvs-design-editor[data-flat-panning=true] canvas{cursor:grab}
