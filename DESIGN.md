@@ -1,13 +1,16 @@
 ---
 name: Baltic Vending Solutions
-description: Practical industrial equipment, clear information and petrol controls.
+description: Practical industrial equipment, clear information and cobalt controls.
 colors:
-  accent: "#00675f"
-  accent-hover: "#00534d"
-  accent-soft: "#e4f1ef"
+  accent: "#2457e6"
+  accent-hover: "#1c43b5"
+  accent-soft: "#eaf0fd"
+  accent-light: "#dce5ff"
+  branding-highlight: "#b1263d"
   canvas: "#f3f6f6"
   surface: "#ffffff"
   ink: "#16282d"
+  dark: "#182338"
   muted: "#506166"
   divider: "#cbd5d6"
   control-border: "#7e9094"
@@ -114,28 +117,28 @@ components:
 
 **Creative North Star: "Practical industrial equipment"**
 
-The established BVS interface uses clear proportions, precise alignment, visible equipment and readable information. Full machine images carry the visual interest. IBM Plex Sans, deep petrol controls and cool neutral backgrounds connect the marketing pages and wrapping tools.
+The established BVS interface uses clear proportions, precise alignment, visible equipment and readable information. Full machine images carry the visual interest. IBM Plex Sans, cobalt blue controls and cool neutral backgrounds connect the marketing pages and wrapping tools.
 
-This scan records the implemented system on 2026-10-04. [STYLE_GUIDE.md](STYLE_GUIDE.md) remains the detailed brand authority; this file does not replace its logo, writing or content rules. The wrapping editor extends that identity. Its page composition and editing workflow are recorded separately in [docs/design-editor.surface.md](docs/design-editor.surface.md).
+The palette was updated to the owner-selected cobalt on 2026-10-05; other implemented design conventions were recorded on 2026-10-04. [STYLE_GUIDE.md](STYLE_GUIDE.md) remains the detailed brand authority; this file does not replace its logo, writing or content rules. The wrapping editor extends that identity. Its page composition and editing workflow are recorded separately in [docs/design-editor.surface.md](docs/design-editor.surface.md).
 
 **Key Characteristics:**
 
 - Equipment remains complete and legible in its image area.
 - White and cool neutral areas separate reading, controls and equipment.
-- Petrol marks actions, links and selected controls.
+- Cobalt marks actions, links and selected controls.
 - Straight panels, thin rules and small control corners organise the interface.
 
 ## Colors
 
-The existing palette uses cool neutrals and one deep petrol brand accent. Frontmatter contains the reusable values found in the shared stylesheet and editor stylesheet.
+The existing palette uses cool neutrals and one cobalt blue brand accent. The canonical palette lives in `theme/baltic-vending-solutions/theme.json`. WordPress emits its named CSS presets for the public site and block editor. Shared theme aliases and plugin controls consume those presets; frontmatter records their current values.
 
 ### Primary
 
-Petrol accent identifies primary actions, text links and selected controls. Its darker hover variant gives feedback; the soft variant supports quiet hover and selected backgrounds.
+Cobalt accent identifies primary actions, text links and selected controls. Its darker hover variant gives feedback; the soft variant supports quiet hover and selected backgrounds.
 
 ### Neutral
 
-White surface holds forms and tools. Cool canvas sits behind machine imagery and the editor stage. Ink supplies headings, body text and dark sections; muted supports helper text. Divider separates groups. Control border supplies visible input and outlined-button boundaries.
+White surface holds forms and tools. Cool canvas sits behind machine imagery and the editor stage. Ink supplies headings and body text; dark supplies the blue-charcoal marketing sections, footer and cookie surfaces; muted supports helper text. Divider separates groups. Control border supplies visible input and outlined-button boundaries.
 
 Error and success colours pair with explanatory text in feedback. They are semantic colours, not additional brand accents.
 
@@ -173,9 +176,9 @@ Image panels, reading areas and workbench containers are straight-edged. Buttons
 
 ### Buttons
 
-Primary buttons use petrol with white text, then the darker petrol hover. Outline buttons use control-border strokes and ink text, with soft petrol hover. Shared actions have a 48px minimum height; editor buttons use 44px. The editor's selected panel, drawing toggle, machine mode and pan buttons expose `aria-pressed` and use filled petrol. Keep Rotate machine and Draw on machine separate so drawing does not rotate the object. Labelled zoom buttons surround a percentage output. Move zoomed panel appears above 100% flat zoom and changes to Continue editing while pan mode is active. Disabled editor actions reduce opacity and stop accepting input.
+Primary buttons use cobalt with white text, then the darker cobalt hover. Outline buttons use control-border strokes and ink text, with soft cobalt hover. Shared actions have a 48px minimum height; editor buttons use 44px. The editor's selected panel, drawing toggle, machine mode and pan buttons expose `aria-pressed` and use filled cobalt. Keep Rotate machine and Draw on machine separate so drawing does not rotate the object. Labelled zoom buttons surround a percentage output. Move zoomed panel appears above 100% flat zoom and changes to Continue editing while pan mode is active. Disabled editor actions reduce opacity and stop accepting input.
 
-Visible focus uses a 3px petrol outline with a 3px offset. Dark sections use white focus outlines. Underlined text actions remain underlined. The dark branding section reverses its primary button to white with petrol text.
+Visible focus uses a 3px cobalt outline with a 3px offset. Dark sections use white focus outlines. Underlined text actions remain underlined. The dark branding section reverses its primary button to white with darker cobalt text.
 
 ### Cards / Containers
 
@@ -201,7 +204,7 @@ Keep the three panel selectors on one row with compact labels Priekša / Kreisai
 
 ### Do:
 
-- **Do** reuse the established Plex, petrol and cool neutral palette.
+- **Do** reuse the established Plex, cobalt and cool neutral palette.
 - **Do** preserve the complete machine and identify visual mockups as visualisations.
 - **Do** pair selected and feedback colours with semantic state or explanatory text.
 - **Do** retain visible focus, native labels and reduced-motion behavior.
@@ -215,4 +218,6 @@ Keep the three panel selectors on one row with compact labels Priekša / Kreisai
 - **Don't** add marketing labels above headings or use decorative parallax and autoplay carousels.
 - **Don't** present the wrap mockup as a dimensioned print template or a completed customer project.
 
-The owner-requested exception is the first navigation destination, the design editor. Its link uses warm rust `#A13D24`, with `#7B2B19` on hover, through the native menu class `bvs-design-menu`. Other menu links retain petrol.
+The first navigation destination, the design editor, is highlighted through the native menu class `bvs-design-menu`. Use cobalt text on an accent-soft background with 4px corners and darker cobalt text on hover. The desktop highlight preserves the existing text spacing; in the mobile drawer it fills the link row. It shares the brand palette rather than introducing another accent.
+
+The owner-selected exception for the wrapping headline is `branding-highlight` #B1263D. Apply it only to the final brand phrase, using the named WordPress preset. Other dark-surface emphasis retains accent-light.

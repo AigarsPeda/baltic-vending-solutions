@@ -5,14 +5,15 @@ Created on 2026-10-04 using the built-in image-generation tool. The owner's sele
 ## Files and WordPress settings
 
 - Logo: `output/brand/baltic-vending-solutions-wordmark.png`, transparent PNG, native Media Library attachment 103.
-- Favicon: `output/brand/baltic-vending-solutions-favicon.png`, white B on teal, native Media Library attachment 104.
+- Current favicon: `output/brand/baltic-vending-solutions-favicon-cobalt.png`, white B on cobalt, native Media Library attachment 206. The earlier teal asset remains in the library for recovery. Updated on 2026-10-05 with the built-in image tool, preserving the white B.
+- Edit prompt: "Recolor this existing company website icon. Replace the green background with a flat #2457E6 blue background. Preserve the white capital letter B, its shape and positioning. Square opaque PNG."
 - Header previews: `output/brand/header-{lv,en}-{1440,375,320}.png`.
 
 The header uses WordPress's `custom_logo` theme setting. Replace it under **Appearance > Customize > Site Identity**. Replace the favicon under **Settings > General > Site Icon**, or the Site Identity panel. Uploads, attachment records, alt text and image sizes use native WordPress storage and APIs. The theme contains no asset URLs or attachment IDs. Both languages share this identity; logo links lead to their respective homepages.
 
-WordPress generated 32, 64, 180, 192, 270 and 512 pixel Site Icon sizes. There is no separate hardcoded favicon tag. Media can be replaced or deleted using the standard Media Library controls. Source exports and browser previews are in ignored `output/`; transfer the database and uploads with the site. Code-only sync does not install these settings or files.
+The current icon has native 32, 64, 180, 192 and 270 pixel Site Icon sizes; larger requests use the source attachment. There is no separate hardcoded favicon tag. The raster icon is independent of CSS presets; replace it natively when changing the palette again. Media can be replaced or deleted using the standard Media Library controls. Source exports and browser previews are in ignored `output/`; transfer the database and uploads with the site. Code-only sync does not install these settings or files.
 
-## Final prompt set
+## Original prompt set
 
 ### Reference lockup generation
 

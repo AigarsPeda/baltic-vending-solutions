@@ -61,6 +61,14 @@ Product facts appear in both homepage comparisons and equipment detail pages. Up
 
 Only the project's theme or first-party plugin directory is synchronised. Saved WordPress content is unaffected. Edit fonts, colour defaults and layout in the theme; edit ordinary text and images through WordPress.
 
+## Changing the brand accent
+
+Edit the named colours in `theme/baltic-vending-solutions/theme.json`: `accent` for primary actions, `accent-hover` for their hover state, `accent-soft` for quiet backgrounds, `accent-light` for text on dark surfaces, and `dark` for blue-charcoal section and cookie backgrounds. The separate `branding-highlight` preset controls only the wrapping headline phrase. Product hover gradients mix their transparency from `accent`, so they follow later palette changes too. This is the single runtime palette for both languages, the public theme, Gutenberg, forms, cookies and editor controls. Theme CSS aliases WordPress presets; plugin CSS uses the same presets directly. Keep the slugs stable so saved blocks follow later changes.
+
+The wrapping editor reads its starting colour from that palette. New and reset designs use the current accent; saved customer colours remain unchanged. Success and error colours retain their separate roles. The design-editor navigation highlight uses accent-soft and accent, so it follows the same palette.
+
+After code sync, run `./scripts/wp-local.sh eval-file scripts/local/setup-brand-colors.php` once on existing Local installations to convert old fixed brand colours in native pages and block widgets to named presets. Reruns make no further changes. Update the design records when changing the palette. The raster Site Icon is a separate Media Library asset and must also be replaced through Settings > General > Site Icon when its colour changes.
+
 ## Creating another Local installation
 
 1. Create a new WordPress site in Local, using a `.local` domain and a Local environment.

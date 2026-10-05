@@ -12,17 +12,20 @@ The first release prioritises businesses with their own products and entrepreneu
 
 ## Colour palette
 
-Use cool neutrals with deep petrol as the single brand accent. Charcoal anchors headings and the footer. Reserve semantic colours for feedback, not marketing decoration.
+Use cool neutrals with cobalt blue as the single brand accent. Ink anchors headings; blue-charcoal anchors dark sections and the footer. Reserve semantic colours for feedback, not marketing decoration.
 
 | Token | Value | Use |
 | --- | --- | --- |
 | `canvas` | `#F3F6F6` | Page background and neutral machine-image backgrounds |
 | `surface` | `#FFFFFF` | Reading areas, forms and alternating sections |
-| `ink` | `#16282D` | Headings, body copy, dark footer |
+| `ink` | `#16282D` | Headings and body copy |
+| `dark` | `#182338` | Blue-charcoal marketing sections, footer and cookie surfaces |
 | `muted` | `#506166` | Supporting text, captions and helper copy |
-| `accent` | `#00675F` | Primary buttons, text links and selected controls |
-| `accent-hover` | `#00534D` | Hover/active primary action |
-| `accent-soft` | `#E4F1EF` | Quiet selected backgrounds; use ink or accent text |
+| `accent` | `#2457E6` | Primary buttons, text links and selected controls |
+| `accent-hover` | `#1C43B5` | Hover/active primary action |
+| `accent-soft` | `#EAF0FD` | Quiet selected backgrounds; use ink or accent text |
+| `accent-light` | `#DCE5FF` | Links and inline emphasis on dark backgrounds |
+| `branding-highlight` | `#B1263D` | Owner-selected wrapping headline phrase |
 | `divider` | `#CBD5D6` | Decorative separators and section rules |
 | `control-border` | `#7E9094` | Input boundaries and outlined interactive controls |
 | `error` | `#A32727` | Validation errors paired with explanatory text |
@@ -32,7 +35,7 @@ Use white text on solid accent buttons. Use ink text on white or canvas. Use acc
 
 `divider` is decorative. It must not be the only visible boundary of a form input or the only cue for a selected state. Use `control-border` for those boundaries and text or an icon as well as colour for status.
 
-Keep the accent consistent across the page. The owner requested a distinct colour for the first navigation item, the design editor. That link alone uses warm rust #A13D24, with #7B2B19 on hover; other navigation links retain the normal accent. Customer wraps may introduce their own colours within the machine image; the remaining website interface stays in this palette. Change tokens centrally when a supplied identity requires a different accent.
+Keep the accent consistent across the page. The owner requested a highlight for the first navigation item, the design editor. Use the same cobalt text as navigation on an accent-soft background with 4px corners and accent-hover text on hover. Keep the quote action as the solid primary button. Customer wraps may introduce their own colours within the machine image; the remaining website interface stays in this palette. Change tokens centrally when a supplied identity requires a different accent.
 
 Base colour checks use solid, opaque colours. Recheck any overlays or image backgrounds in the actual layout.
 
@@ -49,7 +52,7 @@ Base colour checks use solid, opaque colours. Recheck any overlays or image back
 
 ## Logo and favicon
 
-Use the text-only Baltic Vending Solutions wordmark in dark ink on a light background. Preserve its two-line layout, proportions and transparent background. The favicon is a plain white typographic B on teal; do not use the earlier machine-shaped symbols. Both languages share the same identity. Manage the logo and Site Icon through native WordPress settings and Media Library, as described in [brand assets](docs/brand-assets.md).
+Use the text-only Baltic Vending Solutions wordmark in dark ink on a light background. Preserve its two-line layout, proportions and transparent background. The favicon is a plain white typographic B on cobalt; do not use the earlier machine-shaped symbols. Both languages share the same identity. Manage the logo and Site Icon through native WordPress settings and Media Library, as described in [brand assets](docs/brand-assets.md).
 
 ## Typography
 
@@ -57,7 +60,7 @@ Use IBM Plex Sans for headings, body text and controls. Its technical character 
 
 Self-host the selected WOFF2 files with their licence. Start with weights 400 and 600, use `font-display: swap`, and retain a system sans-serif fallback. Check the actual font files for English and Latvian characters before shipping. Do not make a remote font service a requirement for rendering the page.
 
-The cookie banner follows the owner’s JanogaGo reference layout, with the site’s dark ink `#16282d` background and white text, a 28px Playfair Display heading and Manrope body/control text. Its fonts are self-hosted and scoped to this component. Use a teal top border and subtle upward shadow to separate the banner from the page. Use square outlined reject/allow buttons with equal emphasis. Show only these choices on first visit; offer close without changing when reopening an existing choice. On mobile, place the actions below the copy, retaining readable labels and a scrollable banner on short screens.
+The cookie banner follows the owner’s JanogaGo reference layout, with the site’s dark surface `#182338` background and white text, a 28px Playfair Display heading and Manrope body/control text. Its fonts are self-hosted and scoped to this component. Use a cobalt top border and subtle upward shadow to separate the banner from the page. Use square outlined reject/allow buttons with equal emphasis. Show only these choices on first visit; offer close without changing when reopening an existing choice. On mobile, place the actions below the copy, retaining readable labels and a scrollable banner on short screens.
 
 | Role | Small screens | Desktop | Weight and line height |
 | --- | --- | --- | --- |
@@ -121,11 +124,11 @@ Use "Branding visualisation" as the visible caption for concepts. Use customer l
 
 Write useful alt text describing the model, view or wrapping. Decorative duplicates can have empty alt text. Keep captions and labels as editable text rather than baked into images.
 
-The homepage wrapping offer is a service overview. Its headline focuses on making the customer’s brand stand out, with the final brand phrase on its own line in light teal #a5d1cb using native inline colour formatting. Name the wrapping service directly in the introductory text. Group the heading, introduction and two unnumbered artwork/approval details on the left. Show the supplied JāņogaGO client photo without a visible caption on the right, preserving the full machine and transparency. Stack text and image on mobile. The following project-start section uses three photo cards at the owner’s request. Each card has an image, step number, action heading and short explanation on a canvas background. Use the real equipment photograph for model selection and local Unsplash photos for planning and discussion. Keep image areas, heading starts and description starts aligned across desktop cards. Use shared CSS grid rows through the card and copy groups so the tallest heading determines the description baseline, rather than reserving a fixed number of lines. Stack the cards in sequence on mobile. Keep the wrapping section as a distinct split layout. Use the shared purchase/rental quote button immediately above this section; do not repeat the same button inside the wrapping section.
+The homepage wrapping offer is a service overview. Its headline focuses on making the customer’s brand stand out, with the final brand phrase on its own line using the owner-selected red `branding-highlight` preset through native inline colour formatting. Name the wrapping service directly in the introductory text. Group the heading, introduction and two unnumbered artwork/approval details on the left. Show the supplied JāņogaGO client photo without a visible caption on the right, preserving the full machine and transparency. Stack text and image on mobile. The following project-start section uses three photo cards at the owner’s request. Each card has an image, step number, action heading and short explanation on a canvas background. Use the real equipment photograph for model selection and local Unsplash photos for planning and discussion. Keep image areas, heading starts and description starts aligned across desktop cards. Use shared CSS grid rows through the card and copy groups so the tallest heading determines the description baseline, rather than reserving a fixed number of lines. Stack the cards in sequence on mobile. Keep the wrapping section as a distinct split layout. Use the shared purchase/rental quote button immediately above this section; do not repeat the same button inside the wrapping section.
 
-Explain payments and management through the buyer's daily tasks. Pair a pale teal payment panel with stock, sales and remote-pricing rows, using the actual proposed model capabilities. Keep these as native editable blocks. Avoid simulated dashboards with invented numbers. Manufacturer feature headings can inform the hierarchy; copy and colours should belong to Baltic Vending Solutions.
+Explain payments and management through the buyer's daily tasks. Pair a pale cobalt payment panel with stock, sales and remote-pricing rows, using the actual proposed model capabilities. Keep these as native editable blocks. Avoid simulated dashboards with invented numbers. Manufacturer feature headings can inform the hierarchy; copy and colours should belong to Baltic Vending Solutions.
 
-Purchase and rental headings use matching 28px teal outline icons: a shopping bag for purchase and a calendar with a clock for rental. Keep a 12px gap between each icon and its heading. These are decorative theme SVGs tied to semantic heading classes, so the readable labels remain native editable text and the icons follow the correct option if columns move.
+Purchase and rental headings use matching 28px cobalt outline icons: a shopping bag for purchase and a calendar with a clock for rental. Keep a 12px gap between each icon and its heading. These are decorative theme SVGs tied to semantic heading classes, so the readable labels remain native editable text and the icons follow the correct option if columns move.
 
 ## Buttons, navigation and forms
 
@@ -162,7 +165,7 @@ Design toward WCAG 2.2 AA. Normal text needs at least 4.5:1 contrast; large text
 
 Use semantic headings, visible keyboard focus, descriptive link names and a skip link. Validate reflow, zoom, screen-reader labels and form errors during implementation. Palette checks do not establish that the entire website meets WCAG.
 
-Motion is limited to brief state transitions, normally 120 to 180ms. FAQ answers follow the JanogaGo reference with a 340ms opening slide and a faster 220ms closing slide, accompanied by a teal plus/minus indicator. Equipment comparison buttons may reveal a brief teal tile-and-light treatment over their matching photo, as selected by the owner from the CodePen reference. Keep this treatment confined to the selected product, run it once per hover or focus, and retain static feedback with reduced motion. Each comparison photo links to the matching translated product page through the native image-block link control. Keep an inset focus outline visible on image links. The detail button also carries its own filled teal tile pattern and light sweep, so its hover feedback is visible independently of the photo. Honour reduced-motion preferences with immediate state changes. Keep essential content accessible without JavaScript. Avoid autoplay carousels, scroll hijacking, bouncing quote buttons and decorative parallax. An optional 3D viewer needs a static image fallback and accessible controls; it must not block the offer or comparison.
+Motion is limited to brief state transitions, normally 120 to 180ms. FAQ answers follow the JanogaGo reference with a 340ms opening slide and a faster 220ms closing slide, accompanied by a cobalt plus/minus indicator. Equipment comparison buttons may reveal a brief cobalt tile-and-light treatment over their matching photo, as selected by the owner from the CodePen reference. Keep this treatment confined to the selected product, run it once per hover or focus, and retain static feedback with reduced motion. Each comparison photo links to the matching translated product page through the native image-block link control. Keep an inset focus outline visible on image links. The detail button also carries its own filled cobalt tile pattern and light sweep, so its hover feedback is visible independently of the photo. Honour reduced-motion preferences with immediate state changes. Keep essential content accessible without JavaScript. Avoid autoplay carousels, scroll hijacking, bouncing quote buttons and decorative parallax. An optional 3D viewer needs a static image fallback and accessible controls; it must not block the offer or comparison.
 
 The manufacturer performance section uses one scroll-triggered counter, counting to its editable value over one second. Animate it only once per page load. Screen readers receive the final value throughout; reduced motion and disabled JavaScript show the final value immediately. Keep the manufacturer attribution in the explanatory note and record its source in project documentation, and distinguish reported averages from forecasts for a specific installation.
 

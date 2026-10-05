@@ -10,7 +10,8 @@
     const quoteForm = document.querySelector('#design-quote .bvs-quote-form');
     let hasDraft = false;
     const controls = Object.fromEntries(all('[data-control]').map(el=>[el.dataset.control,el]));
-    const blank = panel => ({colour:'#00675f', artwork:null, logo:null, fit:'cover', size:22, x:panel==='front'?17:50, y:panel==='front'?6:35, rotation:0, strokes:[]});
+    const defaultColour = controls.colour.value;
+    const blank = panel => ({colour:defaultColour, artwork:null, logo:null, fit:'cover', size:22, x:panel==='front'?17:50, y:panel==='front'?6:35, rotation:0, strokes:[]});
     let panels = Object.fromEntries(['front','left','right'].map(name=>[name,blank(name)]));
     let selected = 'front', tool = 'move', dragging = null, frame = 0, ready = false;
     let modelDrawing=false, flatZoom=100, flatPanning=false, panning=null;

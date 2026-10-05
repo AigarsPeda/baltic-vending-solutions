@@ -21,6 +21,8 @@ function bvs_render_design_editor($attributes) {
     $meta = json_decode(file_get_contents(__DIR__.'/design-editor/block.json'), true);
     $a = array_merge(array_map(fn($value)=>$value['default'], $meta['attributes']), $attributes);
     $id = wp_unique_id('bvs-design-');
+    $palette = array_column(wp_get_global_settings(['color', 'palette', 'theme']), 'color', 'slug');
+    $default_colour = $palette['accent'] ?? '#ffffff';
     $model_url = add_query_arg('ver', filemtime(__DIR__.'/design-editor/assets/smart-fridge-design.glb'), plugins_url('design-editor/assets/smart-fridge-design.glb', __FILE__));
     $label = fn($key)=>esc_html($a[$key]);
     $range = function ($key,$min,$max,$value) use ($label,$id) {
@@ -28,7 +30,7 @@ function bvs_render_design_editor($attributes) {
     };
     ob_start(); ?>
     <!-- THESIS: See your branding on the actual machine while editing flat panels.
-    OWN-WORLD: Existing BVS Plex, petrol controls, white tools and cool neutral preview.
+    OWN-WORLD: Existing BVS Plex, shared brand controls, white tools and cool neutral preview.
     STORY: Select panel, upload or draw, inspect in 3D, download or send with an enquiry.
     FIRST VIEWPORT: Compact tools at left, large machine and flat panel at right, export below.
     FORM: Operate workbench, extension of the existing BVS world, seed bvs-wrap-editor.
@@ -41,8 +43,8 @@ function bvs_render_design_editor($attributes) {
             <?php foreach (['front','left','right'] as $panel): ?><button type="button" data-panel="<?php echo $panel; ?>" aria-pressed="<?php echo $panel==='front'?'true':'false'; ?>" aria-label="<?php echo esc_attr($a[$panel.'Label']); ?>" title="<?php echo esc_attr($a[$panel.'Label']); ?>"><?php echo $label($panel.'ShortLabel'); ?></button><?php endforeach; ?>
           </div></fieldset>
           <fieldset><legend><?php echo $label('colourLabel'); ?></legend><div class="bvs-design-colour">
-            <input type="color" data-control="colour" value="#00675f" aria-label="<?php echo esc_attr($a['colourLabel']); ?>">
-            <input type="text" data-control="hex" value="#00675f" maxlength="7" pattern="#[a-fA-F0-9]{6}" aria-label="<?php echo esc_attr($a['colourLabel'].' HEX'); ?>" spellcheck="false">
+            <input type="color" data-control="colour" value="<?php echo esc_attr($default_colour); ?>" aria-label="<?php echo esc_attr($a['colourLabel']); ?>">
+            <input type="text" data-control="hex" value="<?php echo esc_attr($default_colour); ?>" maxlength="7" pattern="#[a-fA-F0-9]{6}" aria-label="<?php echo esc_attr($a['colourLabel'].' HEX'); ?>" spellcheck="false">
           </div><button type="button" class="bvs-design-text" data-action="colour-all"><?php echo $label('colourAllLabel'); ?></button></fieldset>
           <?php foreach (['artwork','logo'] as $kind): ?><fieldset><legend><?php echo $label($kind.'Label'); ?></legend>
             <input type="file" data-upload="<?php echo $kind; ?>" accept="image/png,image/jpeg,image/webp" aria-label="<?php echo esc_attr($a[$kind.'Label']); ?>" aria-describedby="<?php echo esc_attr($id.$kind.'-hint'); ?>">

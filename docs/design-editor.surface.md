@@ -11,7 +11,7 @@ The visitor tries branding on the supplied Smart Fridge model. Three independent
 ## Direction contract
 
 - Thesis: see branding on the actual machine while editing its flat or 3D wrap panels.
-- Visual world: existing BVS Plex, petrol controls, white tools and cool neutral preview.
+- Visual world: existing BVS Plex, cobalt controls, white tools and cool neutral preview.
 - Story: select a panel, upload artwork or a logo, change colour, draw or place text, inspect the machine, then download or prepare a quote attachment.
 - First viewport: compact tools at left, large machine and flat panel at right, exports below the previews. Mobile places a full-width 3D preview above inset tool fields, with a corner button for 2D editing.
 - Form: direct Operate shaping within the existing BVS identity. Implementation key `bvs-wrap-editor`.
@@ -30,7 +30,7 @@ On screens taller than 780px, the active preview stays sticky at the top of the 
 
 ## Editing and states
 
-Front is initially selected, with petrol as the starting colour on all panels. Selection changes both the flat editing target and the machine angle. Panel and drawing-mode buttons expose `aria-pressed`. Transparent front-panel cut-outs mark areas that stay unwrapped and reveal the surrounding page background. The same cut-outs apply after artwork, logos and drawing, including to panel views in exported mockups. Side panels remain opaque. The 3D model uses separate hardware geometry.
+Front is initially selected, with cobalt as the starting colour on all panels. Selection changes both the flat editing target and the machine angle. Panel and drawing-mode buttons expose `aria-pressed`. Transparent front-panel cut-outs mark areas that stay unwrapped and reveal the surrounding page background. The same cut-outs apply after artwork, logos and drawing, including to panel views in exported mockups. Side panels remain opaque. The 3D model uses separate hardware geometry.
 
 Background artwork supports fill or fit. Logo controls appear after a logo is loaded and expose width, horizontal position, vertical position and rotation. Double-clicking an individual logo slider restores its panel default: width 22%, rotation 0°, front position 17% horizontal and 6% vertical, or side position 50% horizontal and 35% vertical. Each reset updates the preview, supports undo/redo and saves to the browser draft. Uploaded filenames remain visible outside the native file chooser. Removal controls appear only when the selected panel contains that image. PNG, JPG and WebP uploads are limited to 5 MB and 4096px per side; working images reduce to at most 1024px.
 

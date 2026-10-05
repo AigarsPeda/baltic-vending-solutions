@@ -42,7 +42,7 @@ function bvs_branding_content($lang) {
             ['You approve the design', 'Before we start, we agree the design and which parts of the machine to wrap.'],
         ],
     ];
-    $heading = bvs_branding_block('heading', [], '<h2 class="wp-block-heading">'.esc_html($copy['title']).' <mark style="background-color:rgba(0, 0, 0, 0);color:#a5d1cb" class="has-inline-color">'.esc_html($copy['titleAccent']).'</mark></h2>');
+    $heading = bvs_branding_block('heading', [], '<h2 class="wp-block-heading">'.esc_html($copy['title']).' <mark style="background-color:rgba(0, 0, 0, 0);color:var(--wp--preset--color--branding-highlight)" class="has-inline-color">'.esc_html($copy['titleAccent']).'</mark></h2>');
     $intro = bvs_branding_block('paragraph', ['className'=>'bvs-lead'], '<p class="bvs-lead">'.esc_html($copy['intro']).'</p>');
     $details = '';
     foreach ($copy['details'] as [$title, $description]) {

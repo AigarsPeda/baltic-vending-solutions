@@ -9,9 +9,9 @@
 .bvs-design-editor fieldset{padding:0;border:0;margin:0 0 24px;min-width:0}
 .bvs-design-editor legend,.bvs-design-editor summary{font-weight:600;font-size:17px;margin:0 0 12px;padding:0}
 .bvs-design-editor button{border:1px solid #7e9094;border-radius:4px;background:#fff;color:#16282d;min-height:44px;padding:10px 14px;font-size:15px;line-height:1.4;cursor:pointer;font-weight:600}
-.bvs-design-editor button:hover{background:#e4f1ef}
+.bvs-design-editor button:hover{background:var(--wp--preset--color--accent-soft)}
 .bvs-design-editor button:disabled{opacity:.5;cursor:default}
-.bvs-design-editor button[aria-pressed=true]{background:#00675f;color:#fff;border-color:#00675f}
+.bvs-design-editor button[aria-pressed=true]{background:var(--wp--preset--color--accent);color:#fff;border-color:var(--wp--preset--color--accent)}
 .bvs-design-panels{display:flex;gap:6px}
 .bvs-design-panels button{flex:1;padding:10px 6px;font-size:14px;white-space:nowrap}
 /* Match the first selector row to the preview title height, gap and column inset. */
@@ -23,12 +23,12 @@
 .bvs-design-editor input[type=text],.bvs-design-editor select{min-width:0;width:100%;height:44px;padding:8px 12px;border:1px solid #7e9094;border-radius:4px;background:white;color:#16282d;font-size:16px}
 .bvs-design-editor input[type=file]{display:block;width:100%;font-size:14px;color:#506166;cursor:pointer;min-height:44px}
 .bvs-design-editor input[type=file]::file-selector-button{font:600 14px Plex,sans-serif;min-height:44px;padding:10px 12px;color:#16282d;border:1px solid #7e9094;border-radius:4px;background:#f3f6f6;margin-right:8px;cursor:pointer}
-.bvs-design-editor .bvs-design-text{background:none;border:0;text-decoration:underline;text-underline-offset:4px;color:#00675f;padding:10px 0;text-align:left;font-size:14px}
-.bvs-design-editor .bvs-design-text:hover{color:#00534d}
+.bvs-design-editor .bvs-design-text{background:none;border:0;text-decoration:underline;text-underline-offset:4px;color:var(--wp--preset--color--accent);padding:10px 0;text-align:left;font-size:14px}
+.bvs-design-editor .bvs-design-text:hover{color:var(--wp--preset--color--accent-hover)}
 .bvs-design-hint{color:#506166;font-size:14px;line-height:1.5;margin:8px 0 0}
 .bvs-design-fit{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 .bvs-design-range{display:grid;grid-template-columns:1fr 34px;gap:8px;margin-top:12px;font-size:14px}
-.bvs-design-range input{grid-column:1;grid-row:2;width:100%;margin:0;accent-color:#00675f;min-height:24px}
+.bvs-design-range input{grid-column:1;grid-row:2;width:100%;margin:0;accent-color:var(--wp--preset--color--accent);min-height:24px}
 .bvs-design-range output{grid-column:2;grid-row:2;text-align:right;color:#506166}
 .bvs-design-drawing{border-top:1px solid #cbd5d6;padding:16px 0 0;margin:0}
 .bvs-design-drawing summary{cursor:pointer;min-height:32px}
@@ -54,8 +54,8 @@
 .bvs-design-status{font-size:14px;color:#506166;min-height:21px;margin:24px 0 16px}
 .bvs-design-status[data-error=true]{color:#a32727}
 .bvs-design-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding-top:20px;border-top:1px solid #cbd5d6}
-.bvs-design-editor .bvs-design-primary{background:#00675f;color:#fff;border-color:#00675f}
-.bvs-design-editor .bvs-design-primary:hover{background:#00534d}
+.bvs-design-editor .bvs-design-primary{background:var(--wp--preset--color--accent);color:#fff;border-color:var(--wp--preset--color--accent)}
+.bvs-design-editor .bvs-design-primary:hover{background:var(--wp--preset--color--accent-hover)}
 .bvs-design-editor .bvs-design-danger{margin-inline-start:auto;background:#a32727;color:#fff;border-color:#a32727}
 .bvs-design-editor .bvs-design-danger:hover{background:#851f1f;border-color:#851f1f}
 .bvs-design-production{margin-top:16px;max-width:65ch}
@@ -66,7 +66,7 @@
 @media(max-width:680px){.bvs-design-page{padding:32px 24px 48px}.bvs-design-workbench{grid-template-columns:1fr}.bvs-design-tools{border-right:0;border-bottom:1px solid #cbd5d6}.bvs-design-stage{padding:20px}.bvs-design-machine model-viewer{height:400px}.bvs-design-stage-heading h2{font-size:22px}.bvs-design-previews{grid-template-columns:1fr}.bvs-design-flat{width:200px}.bvs-design-actions{flex-direction:column;align-items:stretch}.bvs-design-actions .bvs-design-text{text-align:center}.bvs-design-editor fieldset{margin-bottom:20px}}
 @media(max-width:380px){.bvs-design-page{padding-inline:16px}.bvs-design-tools,.bvs-design-stage{padding:16px}.bvs-design-machine model-viewer{height:340px}}
 .bvs-design-model{position:relative}
-.bvs-design-editor .bvs-design-reset{display:grid;place-items:center;width:44px;height:44px;padding:10px;color:#00675f;flex-shrink:0}
+.bvs-design-editor .bvs-design-reset{display:grid;place-items:center;width:44px;height:44px;padding:10px;color:var(--wp--preset--color--accent);flex-shrink:0}
 .bvs-design-reset-label{display:none}
 .bvs-design-reset-icon{display:block}
 .bvs-design-poster{position:absolute;inset:0;display:block;width:100%;height:490px;object-fit:contain;pointer-events:none;background:#f3f6f6}
@@ -99,7 +99,7 @@
 .bvs-design-save-status[data-state=error]{color:#a13d24}.bvs-design-save-status{margin:16px 0 8px;font-weight:600}
 .bvs-design-field{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-size:14px}
 .bvs-design-fill{display:flex;align-items:center;gap:8px;font-size:14px;margin:12px 0;min-height:44px}
-.bvs-design-fill input{width:18px;height:18px;accent-color:#00675f}
+.bvs-design-fill input{width:18px;height:18px;accent-color:var(--wp--preset--color--accent)}
 .bvs-design-view-modes{display:flex;gap:8px;flex:1;min-width:0;flex-wrap:wrap}
 .bvs-design-view-modes button{flex:1;font-size:14px}
 .bvs-design-zoom{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
@@ -123,7 +123,7 @@
  .bvs-design-actions .bvs-design-danger{margin-inline-start:0}
  .bvs-design-mobile-preview .bvs-design-zoom{margin-top:8px;padding-inline:16px}
  .bvs-design-mobile-preview .bvs-design-model [data-action=view]{position:absolute;top:8px;right:16px;z-index:1}
- .bvs-design-mobile-preview .bvs-design-model [data-action=view]:hover{background:#e4f1ef}
+ .bvs-design-mobile-preview .bvs-design-model [data-action=view]:hover{background:var(--wp--preset--color--accent-soft)}
 }
 @media(max-width:380px){.bvs-design-page{--bvs-design-gutter:16px}}
 @media(max-width:340px){.bvs-design-mobile-heading h3{flex-basis:100%}.bvs-design-mobile-heading .bvs-design-history{margin-inline-start:auto}}

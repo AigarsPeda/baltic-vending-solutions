@@ -2,15 +2,15 @@
 @font-face{font-family:"BVS Cookie Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/manrope-600.ttf) format("truetype")}
 @font-face{font-family:"BVS Cookie Serif";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/playfair-display-700.ttf) format("truetype")}
 .bvs-cookie-banner[hidden],.bvs-cookie-settings[hidden],.bvs-cookie-actions [hidden],.bvs-cookie-error[hidden]{display:none!important}
-.bvs-cookie-banner{position:fixed;inset:auto 0 0;z-index:1000;border-top:3px solid #00675f;background:#16282d;color:#fff;max-height:75vh;max-height:75dvh;overflow-y:auto;box-shadow:0 -8px 32px #16282d26;font-family:"BVS Cookie Sans",sans-serif}
+.bvs-cookie-banner{position:fixed;inset:auto 0 0;z-index:1000;border-top:3px solid var(--wp--preset--color--accent);background:var(--wp--preset--color--dark);color:#fff;max-height:75vh;max-height:75dvh;overflow-y:auto;box-shadow:0 -8px 32px color-mix(in srgb,var(--wp--preset--color--dark) 15%,transparent);font-family:"BVS Cookie Sans",sans-serif}
 .bvs-cookie-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:32px;padding:26px clamp(24px,5vw,80px) max(26px,env(safe-area-inset-bottom))}
 .bvs-cookie-inner .bvs-cookie-copy h2{font-family:"BVS Cookie Serif",serif;font-size:28px;font-weight:700;line-height:1.2;margin:0 0 10px;letter-spacing:-.025em;color:#fff}
 /* The banner lives in a native footer widget; keep footer text colours out of it. */
 .bvs-cookie-inner .bvs-cookie-copy p{font-size:14px;line-height:1.6;margin:0 0 10px;color:#fff;max-width:74ch}
 .bvs-cookie-inner .bvs-cookie-copy a{font-size:13px;color:#fff;text-decoration:underline;text-underline-offset:4px;display:inline-block;min-height:44px;padding:10px 0}
 .bvs-cookie-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.bvs-cookie-actions button,.bvs-cookie-editor-button{background:#16282d;color:#fff;border:1px solid #cbd5d6;border-radius:0;font:600 13px/1.4 "BVS Cookie Sans",sans-serif;padding:12px 18px;min-height:48px;cursor:pointer}
-.bvs-cookie-actions button:hover{background:#00675f}
+.bvs-cookie-actions button,.bvs-cookie-editor-button{background:var(--wp--preset--color--dark);color:#fff;border:1px solid #cbd5d6;border-radius:0;font:600 13px/1.4 "BVS Cookie Sans",sans-serif;padding:12px 18px;min-height:48px;cursor:pointer}
+.bvs-cookie-actions button:hover{background:var(--wp--preset--color--accent-hover)}
 .bvs-cookie-actions .bvs-cookie-close{grid-column:1/-1;justify-self:center;background:transparent;border:0;text-decoration:underline;font-weight:400}
 .bvs-cookie-banner button:focus-visible,.bvs-cookie-banner a:focus-visible,.bvs-cookie-settings:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .bvs-cookie-settings{background:transparent;color:inherit;border:0;padding:10px 0;font-size:14px;min-height:44px;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
@@ -19,7 +19,7 @@
 .bvs-cookie-visible body{padding-bottom:var(--bvs-cookie-space,0px)}
 .bvs-cookie-visible{scroll-padding-bottom:var(--bvs-cookie-space,0px)}
 .bvs-cookie-inner .bvs-cookie-copy .bvs-cookie-error{color:#ffc3c3;margin-top:12px}
-.bvs-cookie-editor{background:#16282d;color:#fff;border:1px solid #cbd5d6;padding:16px;font-family:"BVS Cookie Sans",sans-serif}
+.bvs-cookie-editor{background:var(--wp--preset--color--dark);color:#fff;border:1px solid #cbd5d6;padding:16px;font-family:"BVS Cookie Sans",sans-serif}
 .bvs-cookie-editor .bvs-cookie-inner{padding:0;display:block}
 .bvs-cookie-editor .bvs-cookie-actions{margin:20px 0}
 @media(max-width:900px){.bvs-cookie-inner{padding:22px 24px max(22px,env(safe-area-inset-bottom));gap:18px;grid-template-columns:1fr}.bvs-cookie-actions{justify-self:start;max-width:480px}}
