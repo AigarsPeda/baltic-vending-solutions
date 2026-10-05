@@ -69,17 +69,17 @@
 .bvs-design-editor .bvs-design-reset{display:grid;place-items:center;width:44px;height:44px;padding:10px;color:var(--wp--preset--color--accent);flex-shrink:0}
 .bvs-design-reset-label{display:none}
 .bvs-design-reset-icon{display:block}
-.bvs-design-poster{position:absolute;inset:0;display:block;width:100%;height:490px;object-fit:contain;pointer-events:none;background:#f3f6f6}
-.bvs-design-editor[data-model=ready] .bvs-design-poster{display:none}
-.bvs-design-editor[data-model=error] model-viewer{visibility:hidden}
+.bvs-design-loading{position:absolute;inset:0;display:grid;place-items:center;width:100%;height:490px;pointer-events:none;background:#f3f6f6;color:#506166}
+.bvs-design-editor[data-model=ready] .bvs-design-loading,.bvs-design-editor[data-model=error] .bvs-design-loading{display:none}
+.bvs-design-editor:not([data-model=ready]) model-viewer{visibility:hidden}
 .bvs-design-file-name{font-size:14px;overflow-wrap:anywhere;margin:8px 0 0;color:#16282d}
 .bvs-design-editor input[type=file]{color:transparent;font-size:0}
 .bvs-design-mobile-heading{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .bvs-design-mobile-heading h3{font-size:14px;margin:0 auto 0 0}
 
 .bvs-design-mobile-heading [data-action=preview-switch]{font-size:14px;padding:10px}
-@media(max-width:1180px){.bvs-design-poster{height:450px}}
-@media(max-width:900px){.bvs-design-poster{height:380px}}
+@media(max-width:1180px){.bvs-design-loading{height:450px}}
+@media(max-width:900px){.bvs-design-loading{height:380px}}
 @media(max-width:680px){
  .bvs-design-page{--bvs-design-gutter:24px}
  .bvs-design-workbench{width:calc(100% + 2 * var(--bvs-design-gutter));margin-inline:calc(-1 * var(--bvs-design-gutter));border-inline:0}
@@ -91,7 +91,7 @@
  .bvs-design-editor[data-panel=left] .bvs-design-mobile-preview .bvs-design-canvas-wrap,.bvs-design-editor[data-panel=right] .bvs-design-mobile-preview .bvs-design-canvas-wrap{width:109px}
  .bvs-design-mobile-preview .bvs-design-hint,.bvs-design-mobile-preview .bvs-design-flat h3{display:none}
  .bvs-design-stage-heading{display:none}
- .bvs-design-machine model-viewer,.bvs-design-poster{height:clamp(200px,calc(45svh - 145px),280px)}
+ .bvs-design-machine model-viewer,.bvs-design-loading{height:clamp(200px,calc(45svh - 145px),280px)}
  .bvs-design-previews{margin-top:0}
  .bvs-design-status{margin-top:12px}
 }

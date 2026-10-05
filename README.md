@@ -2,6 +2,7 @@
 
 The first local WordPress version is implemented for vending equipment purchase, rental and custom branding. It runs in Local App with Latvian and English pages.
 
+- [Droplet preview, no domain](http://167.71.44.25/) and [deployment notes](docs/droplet-deployment.md)
 - [Local website](http://baltic-vending-solutions.local/)
 - [English website](http://baltic-vending-solutions.local/en/)
 - [WordPress admin](http://baltic-vending-solutions.local/wp-admin/)
@@ -25,7 +26,7 @@ Polylang, Rank Math SEO, Site Kit by Google, WP Mail SMTP and WP Consent API are
 
 ## Local workflow
 
-The ignored `scripts/baltic-vending-solutions.env` contains this machine's Local runtime paths. The example retains blank values for a different installation. Start the site in Local before running commands.
+The ignored `scripts/baltic-vending-solutions.env` contains this machine's Local runtime paths and the droplet settings for `root@167.71.44.25`, using the JanogaGo SSH key. The example retains blank values for a different installation. Start the site in Local before running commands.
 
 ```bash
 ./scripts/sync-code-to-local.sh --dry-run
@@ -49,7 +50,7 @@ Theme and plugin syncs update code without modifying saved pages, widgets, menus
 | `push-db-to-droplet.sh` | Replace the server database after a server backup |
 | `pull-db-from-droplet.sh` | Replace the Local database after a Local backup and download uploads |
 
-Transfer scripts support `--help` and `--dry-run`. Database replacement requires explicit confirmation. Remote configuration remains blank; DigitalOcean deployment is pending. A complete website transfer requires the database, uploads, theme and plugin files.
+Transfer scripts support `--help` and `--dry-run`. Database replacement requires explicit confirmation. The complete Local installation was deployed to `http://167.71.44.25` on 2026-10-05, including WordPress, saved content, uploads, theme and plugins. All five transfer-script dry runs passed. See [deployment notes](docs/droplet-deployment.md) for server paths, backups and verification.
 
 ## Checks
 

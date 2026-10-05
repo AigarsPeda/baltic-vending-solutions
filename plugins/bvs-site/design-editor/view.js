@@ -528,18 +528,22 @@
     }));
     viewer.addEventListener('load',async()=>{
       try {
+        await draftReady;
         for(const panel of ['front','left','right']) {
           const material=viewer.model.materials.find(m=>m.name===`BVS wrap ${panel}`);
           if(!material)throw new Error('Wrap material missing');
           const texture=viewer.createCanvasTexture();[texture.source.element.width,texture.source.element.height]=sizes[panel];
+          paint(texture.source.element,panel,true);texture.source.update();
           material.pbrMetallicRoughness.setBaseColorFactor('#ffffff');material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);textures[panel]=texture;
         }
         viewer.jumpCameraToGoal();await viewer.updateComplete;
+        // Let the painted textures reach the renderer before revealing the model.
+        await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
         ready=true;root.dataset.model='ready';updateMobileView();find('[data-preview-mode="draw"]').disabled=false;render();say('readyMessage');
       }catch(_){root.dataset.model='error';mobileView='flat';updateMobileView();say('fallbackMessage',true);}
     });
     viewer.addEventListener('error',()=>{ready=false;setModelDrawing(false);find('[data-preview-mode="draw"]').disabled=true;root.dataset.model='error';mobileView='flat';updateMobileView();say('fallbackMessage',true);});
     setTimeout(()=>{if(!ready){root.dataset.model='error';mobileView='flat';updateMobileView();say('fallbackMessage',true);}},20000);
-    loadDraft();
+    const draftReady=loadDraft();
   });
 })();

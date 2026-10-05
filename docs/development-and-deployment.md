@@ -1,5 +1,7 @@
 # Local izstrāde un DigitalOcean izvietošana
 
+Current deployment, 2026-10-05: the full Local site is live at [http://167.71.44.25/](http://167.71.44.25/), without a domain. The ignored environment file now contains the correct droplet variables. See [the deployment record](droplet-deployment.md) for server setup, backups and verification. The workflow below remains the general transfer reference.
+
 Skripti pielāgoti no JanogaGo projekta četrām vispārīgām sinhronizācijas darbībām. Konkrētā projekta servera dati, tēma, pārtikas katalogs, saturs un biznesa migrācijas nav pārkopēti.
 
 ## Local App

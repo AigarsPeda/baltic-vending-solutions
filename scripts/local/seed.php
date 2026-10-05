@@ -137,7 +137,7 @@ foreach($copy as $lang=>$c) {
         if($lang==='lv') $rows[0][1]=$model==='compact' ? '+1 līdz +8 °C' : '+2 līdz +8 °C';
         $spec[$model]=$rows;
         $cards[]=seed_group(seed_image($media[$model],'bvs-product-image','Boost inc '.$c[$model],'',$url[$lang][$model]).seed_h($c[$model],3).seed_p($c[$model.'Intro']).seed_table($rows).seed_buttons(seed_button($c['detail'].' '.$c[$model],$url[$lang][$model],true)),'bvs-product');
-        $details=seed_group(seed_columns([seed_h('Boost inc '.$c[$model],1).seed_p($c[$model.'Desc'],'bvs-lead').seed_buttons(seed_button($c['quote'],$url[$lang]['home'].'?model='.$model.'#quote').seed_button($c['equipment'],$url[$lang]['home'].'#equipment',true)),seed_image($media[$model],'bvs-hero-image','Boost inc '.$c[$model])],true),'bvs-section bvs-hero');
+        $details=seed_group(seed_columns([seed_h('Boost inc '.$c[$model],1).seed_p($c[$model.'Desc'],'bvs-lead').seed_buttons(seed_button($c['quote'],'#quote')),seed_image($media[$model],'bvs-hero-image','Boost inc '.$c[$model])],true),'bvs-section bvs-hero');
         $details.=seed_group(seed_h($c['specTitle']).seed_table(array_merge($rows,$c[$model.'More'])).seed_p($c['specNote'],'bvs-note'),'bvs-section bvs-specs');
         $details.=$contact;
         if(!get_post_meta($pages[$lang][$model],'_bvs_seed_complete',true)) { wp_update_post(wp_slash(['ID'=>$pages[$lang][$model],'post_content'=>$details])); update_post_meta($pages[$lang][$model],'_bvs_seed_complete',1); }
