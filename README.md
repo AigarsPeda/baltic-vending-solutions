@@ -47,15 +47,18 @@ Theme and plugin syncs update code without modifying saved pages, widgets, menus
 | `sync-code-to-droplet.sh` | Copy theme code and archive the previous theme |
 | `sync-plugins-to-droplet.sh` | Copy Local plugins and mu-plugins after a server backup |
 | `sync-uploads-to-droplet.sh` | Copy uploaded files without creating attachment records |
-| `push-db-to-droplet.sh` | Replace the server database after a server backup |
-| `pull-db-from-droplet.sh` | Replace the Local database after a Local backup and download uploads |
+| `push-db-to-droplet.sh` | Replace server content after a backup, preserving server mail connections and queues |
+| `pull-db-from-droplet.sh` | Replace Local content after a backup and download uploads, preserving Local mail connections and queues |
 
 Transfer scripts support `--help` and `--dry-run`. Database replacement requires explicit confirmation. The complete Local installation was deployed to `http://167.71.44.25` on 2026-10-05, including WordPress, saved content, uploads, theme and plugins. All five transfer-script dry runs passed. See [deployment notes](docs/droplet-deployment.md) for server paths, backups and verification.
+
+Full database transfers synchronize enquiry recipients and the admin email, while preserving each destination's SMTP/OAuth connection settings, sender configuration, mail logs, mail queues and scheduled jobs. Client IDs, client secrets and access/refresh tokens never enter the transfer export. See [mail preservation during database sync](docs/db-sync-mail.md).
 
 ## Checks
 
 ```bash
 python3 scripts/tests/smoke.py
+./scripts/wp-local.sh --skip-plugins --skip-themes eval-file scripts/tests/db-sync-mail.php
 ./scripts/wp-local.sh eval-file scripts/tests/wordpress.php
 ./scripts/wp-local.sh eval-file scripts/tests/consent.php
 NODE_PATH=/path/to/playwright/node_modules node scripts/tests/browser.cjs

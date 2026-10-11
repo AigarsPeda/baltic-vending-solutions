@@ -45,11 +45,11 @@ Sagatavot svaigu servera WordPress instalāciju, pārskatīt skriptu dry-run un 
 
 Datubāzes dry-run pārbauda pieejamību un Local home adresi, neaprēķina ierakstu izmaiņu sarakstu. Failu dry-run vēl neesošu attālinātu galamapi var parādīt kā jaunizveidojamu. Apply sākumā saglabā esošās tēmas vai pluginu kopijas un izveido galamapes.
 
-Pēc pārskatīšanas un autorizētas pirmās izvietošanas palaist atbilstošos skriptus bez `--dry-run`, datubāzi pēdējo. Pilns push aizvieto arī servera lietotājus, iestatījumus, spraudņu datus un visus pieprasījumus. Tas nav ikdienas satura publicēšanas paņēmiens. Local datubāzi push nemaina; WP-CLI izveido eksportu ar serializētu vērtību URL pārrakstīšanu. WordPress GUID kolonnas paliek nemainītas.
+Pēc pārskatīšanas un autorizētas pirmās izvietošanas palaist atbilstošos skriptus bez `--dry-run`, datubāzi pēdējo. Pilns push aizvieto arī servera lietotājus, iestatījumus, spraudņu datus un visus pieprasījumus. Tas nav ikdienas satura publicēšanas paņēmiens. Local datubāzi push nemaina; WP-CLI eksportē satura tabulas un atsevišķi apvieno iestatījumus, saglabājot mērķa vides SMTP/OAuth savienojumu un pasta rindas. Saņēmēji tiek sinhronizēti. Serializētu iestatījumu URL pārraksta eksportā, pārējā satura URL pēc importa. Skatīt [pasta iestatījumu saglabāšanu](db-sync-mail.md). WordPress GUID kolonnas paliek nemainītas.
 
 Uploads skripts pats neveido Media Library ierakstus. Pirmajā pilnajā pārcelšanā tos nodrošina datubāzes imports. Atsevišķa failu kopēšana vēlāk nenodrošina pilnu jaunu satura ierakstu pārcelšanu.
 
-Pēc pārcelšanas pārbaudīt WordPress home/siteurl, aktīvo tēmu un pluginus, Media Library attēlus, izvēlnes, valodas, formas, e-pasta konfigurāciju, HTTPS un failu atļaujas. No Local pārnestā SMTP vai analītikas konfigurācija jāpārskata. Izdrukātie arhīvu ceļi jāfiksē HANDOFF; kļūmes gadījumā tie ir manuālas atjaunošanas pamats.
+Pēc pārcelšanas pārbaudīt WordPress home/siteurl, aktīvo tēmu un pluginus, Media Library attēlus, izvēlnes, valodas, formas, e-pasta konfigurāciju, HTTPS un failu atļaujas. SMTP/OAuth savienojuma iestatījumi paliek katrā vidē atsevišķi; saņēmēji tiek sinhronizēti. Analītikas konfigurācija jāpārskata. Izdrukātie arhīvu ceļi jāfiksē HANDOFF; kļūmes gadījumā tie ir manuālas atjaunošanas pamats.
 
 ## Turpmākās izmaiņas
 

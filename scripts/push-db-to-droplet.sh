@@ -39,11 +39,12 @@ Usage: ./scripts/push-db-to-droplet.sh [--dry-run] [--yes]
 Replace the droplet WordPress database with the local database. The script:
   1. validates both databases and the local URL;
   2. creates a compressed droplet backup;
-  3. exports Local with production-safe URLs;
-  4. imports that export on the droplet;
+  3. exports content and non-mail options without connection credentials;
+  4. imports that export and rewrites content URLs on the droplet;
   5. flushes caches and rewrite rules.
 
-This overwrites production pages, menus, settings, users, and plugin data.
+This overwrites production pages, menus, settings, users, and plugin data, except
+mail connection settings, mail logs/queues and scheduled jobs. Recipients sync.
 It does not copy files from wp-content/uploads.
 --dry-run checks connectivity and databases without replacing data.
 Without --yes, type PUSH TO PRODUCTION when prompted.
@@ -134,14 +135,26 @@ ACTUAL_LOCAL_HOME="$(local_wp --skip-plugins --skip-themes option get home)"
 [ "${ACTUAL_LOCAL_HOME%/}" = "$LOCAL_URL" ] \
 	|| die "Local home URL is $ACTUAL_LOCAL_HOME, expected $LOCAL_URL"
 
+# Validate the merge policy on both environments without exporting credentials.
+DB_POLICY="$SCRIPT_DIR/wordpress-db-sync.php"
+[ -r "$DB_POLICY" ] || die "Database sync policy helper is missing."
+LOCAL_PREFIX="$(local_wp --skip-plugins --skip-themes db prefix)"
+REMOTE_PREFIX="$(ssh "${SSH_ARGS[@]}" "$REMOTE_HOST" "wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes db prefix")"
+[ "$LOCAL_PREFIX" = "$REMOTE_PREFIX" ] || die "Database table prefixes differ. Neither database was changed."
+LOCAL_EXCLUDED="$(local_wp --skip-plugins --skip-themes eval-file "$DB_POLICY" excluded-tables)"
+REMOTE_EXCLUDED="$(ssh "${SSH_ARGS[@]}" "$REMOTE_HOST" "wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes eval-file - excluded-tables" < "$DB_POLICY")"
+[ -n "$LOCAL_EXCLUDED" ] && [ -n "$REMOTE_EXCLUDED" ] || die "Missing protected-table exclusions. Neither database was changed."
+LOCAL_TABLES="$(local_wp --skip-plugins --skip-themes eval-file "$DB_POLICY" included-tables)"
+[ -n "$LOCAL_TABLES" ] || die "No transferable Local tables were found. Neither database was changed."
+
 if [ "$DRY_RUN" -eq 1 ]; then
-	printf 'Preflight passed. No database or uploads changed.\n'
+	printf 'Preflight passed, including mail exclusions and options merge. No database or uploads changed.\n'
 	exit 0
 fi
 
 if [ "$ASSUME_YES" -ne 1 ]; then
 	printf 'This will REPLACE the database on %s with the local database.\n' "$REMOTE_HOST"
-	printf 'Production pages, menus, settings, users, and plugin data will be overwritten.\n'
+	printf 'Production content, users and recipients will be overwritten; mail connections and queues stay on the droplet.\n'
 	printf 'Type PUSH TO PRODUCTION to continue: '
 	read -r confirmation || die "No confirmation received."
 	[ "$confirmation" = "PUSH TO PRODUCTION" ] || die "Cancelled."
@@ -153,11 +166,9 @@ LOCAL_EXPORT="$TEMP_DIR/local-for-droplet.sql"
 REMOTE_TEMP="$(ssh "${SSH_ARGS[@]}" "$REMOTE_HOST" "umask 077; mktemp /tmp/baltic-vending-solutions-push.XXXXXXXX.sql")"
 REMOTE_BACKUP="$REMOTE_BACKUP_DIR/before-local-push-$TIMESTAMP.sql.gz"
 
-printf 'Preparing the local database with production URLs...\n'
-local_wp --skip-plugins --skip-themes search-replace \
-	"$LOCAL_URL" "$REMOTE_URL" \
-	--all-tables-with-prefix --precise --skip-columns=guid \
-	--export="$LOCAL_EXPORT" >/dev/null
+printf 'Preparing the local database without mail connections or queues...\n'
+local_wp --skip-plugins --skip-themes db export "$LOCAL_EXPORT" --tables="$LOCAL_TABLES" --add-drop-table --quiet
+local_wp --skip-plugins --skip-themes eval-file "$DB_POLICY" options-sql "$LOCAL_URL" "$REMOTE_URL" >> "$LOCAL_EXPORT"
 
 [ -s "$LOCAL_EXPORT" ] || die "The local export is empty. Production was not changed."
 LC_ALL=C grep -q 'CREATE TABLE' "$LOCAL_EXPORT" || die "The local export does not look like a SQL dump. Production was not changed."
@@ -170,7 +181,7 @@ printf 'Remote rollback backup: %s\n' "$REMOTE_BACKUP"
 printf 'Uploading and importing the local database...\n'
 scp "${SSH_ARGS[@]}" "$LOCAL_EXPORT" "$REMOTE_HOST:$REMOTE_TEMP"
 ssh "${SSH_ARGS[@]}" "$REMOTE_HOST" \
-	"set -e; wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes db import '$REMOTE_TEMP'; wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes search-replace '$LOCAL_URL' '$REMOTE_URL' --all-tables-with-prefix --precise --skip-columns=guid --quiet; wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes option update home '$REMOTE_URL' --quiet; wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes option update siteurl '$REMOTE_URL' --quiet; wp --allow-root --path='$REMOTE_WP_PATH' cache flush; wp --allow-root --path='$REMOTE_WP_PATH' rewrite flush; rm -f -- '$REMOTE_TEMP'"
+	"set -e; wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes db import '$REMOTE_TEMP'; wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes search-replace '$LOCAL_URL' '$REMOTE_URL' --all-tables-with-prefix --skip-tables='$LOCAL_EXCLUDED,$REMOTE_EXCLUDED' --precise --skip-columns=guid --quiet; wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes option update home '$REMOTE_URL' --quiet; wp --allow-root --path='$REMOTE_WP_PATH' --skip-plugins --skip-themes option update siteurl '$REMOTE_URL' --quiet; wp --allow-root --path='$REMOTE_WP_PATH' cache flush; wp --allow-root --path='$REMOTE_WP_PATH' rewrite flush; rm -f -- '$REMOTE_TEMP'"
 REMOTE_TEMP=""
 
 ssh "${SSH_ARGS[@]}" "$REMOTE_HOST" \
@@ -182,5 +193,5 @@ ACTUAL_REMOTE_HOME="$(ssh "${SSH_ARGS[@]}" "$REMOTE_HOST" "wp --allow-root --pat
 
 curl --fail --silent --show-error --location "$REMOTE_URL/" >/dev/null
 
-printf 'Droplet database replaced and verified at %s\n' "$REMOTE_URL"
+printf 'Droplet database replaced with mail connections and queues preserved; verified at %s\n' "$REMOTE_URL"
 printf 'Remote rollback backup: %s\n' "$REMOTE_BACKUP"

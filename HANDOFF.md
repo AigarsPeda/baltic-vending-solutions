@@ -84,6 +84,8 @@ Start Local, then run `scripts/sync-code-to-local.sh` and `scripts/sync-site-plu
 
 The initial commit `08b85df` was pushed to main. Check `git status`, `git log` and remotes before making further commits. This implementation does not imply a new push or a website deployment.
 
+Full database transfers now preserve destination SMTP/OAuth connections, sender settings, logs, mail queues, cron and Action Scheduler jobs while synchronizing `bvs_recipient` and `admin_email`. `scripts/wordpress-db-sync.php` filters source exports and merges ordinary options transactionally without deleting destination mail rows. The latest JanogaGo recipient/OAuth tests were adapted to BVS. Temporary-table integration, mocked workflows and both real dry runs passed on 2026-10-11; no database replacement occurred. See `docs/db-sync-mail.md`.
+
 The original transfer scripts remain available for future theme, plugin, upload and full database migration. A full database push replaces users and private enquiries too. Review destination content and retain backups before an authorised migration. Full transfer requires database, uploads, theme and plugins together.
 
 ## Verification and implementation notes

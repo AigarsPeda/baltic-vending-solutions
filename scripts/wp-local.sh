@@ -12,4 +12,5 @@ require_config LOCAL_WP_PATH LOCAL_PHP_BIN LOCAL_PHP_INI LOCAL_WP_CLI LOCAL_MYSQ
 [ -f "$LOCAL_WP_PATH/wp-config.php" ] || die 'Configured Local installation is missing.'
 [ -S "$LOCAL_MYSQL_SOCKET" ] || die 'Start this site in Local first.'
 export PATH="${LOCAL_MYSQL_BIN_DIR:-/usr/bin}:$PATH"
+export MYSQL_UNIX_PORT="$LOCAL_MYSQL_SOCKET"
 exec "$LOCAL_PHP_BIN" -c "$LOCAL_PHP_INI" -d "mysqli.default_socket=$LOCAL_MYSQL_SOCKET" -d "pdo_mysql.default_socket=$LOCAL_MYSQL_SOCKET" "$LOCAL_WP_CLI" --path="$LOCAL_WP_PATH" "$@"

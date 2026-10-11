@@ -33,13 +33,21 @@ with open(os.environ['MOCK_LOG'], 'a') as f: f.write(json.dumps([name, args]) + 
 joined = ' '.join(args)
 if name == 'ssh':
     command = args[-1]
-    if 'mktemp -d' in command: print('/var/backups/bvs/fixture')
+    if 'excluded-tables' in command: print('wp_options,wp_wpmailsmtp_emails_queue,wp_actionscheduler_actions')
+    elif 'included-tables' in command: print(os.environ.get('MOCK_TRANSFER_TABLES', 'wp_posts,wp_postmeta'))
+    elif 'options-sql' in command: print('START TRANSACTION;\\nCOMMIT;')
+    elif 'db prefix' in command: print(os.environ.get('MOCK_REMOTE_PREFIX', 'wp_'))
+    elif 'mktemp -d' in command: print('/var/backups/bvs/fixture')
     elif 'mktemp /tmp/' in command: print('/tmp/bvs-fixture.sql')
     elif 'option get home' in command: print('https://example.invalid')
     elif 'sha256sum' in command: print(hashlib.sha256(pathlib.Path(os.environ['MOCK_THEME'], 'functions.php').read_bytes()).hexdigest())
     elif 'db export - ' in command: print('CREATE TABLE fixture (id int);')
 elif name == 'php':
-    if 'option get home' in joined: print('http://bvs.local')
+    if 'excluded-tables' in args: print('wp_options,wp_wpmailsmtp_emails_queue,wp_actionscheduler_actions')
+    elif 'included-tables' in args: print(os.environ.get('MOCK_TRANSFER_TABLES', 'wp_posts,wp_postmeta'))
+    elif 'options-sql' in args: print('START TRANSACTION;\\nCOMMIT;')
+    elif 'db prefix' in joined: print('wp_')
+    elif 'option get home' in joined: print('http://bvs.local')
     elif 'db export' in joined:
         target = args[args.index('export') + 1]
         pathlib.Path(target).write_text('CREATE TABLE fixture (id int);')
@@ -117,6 +125,12 @@ elif name == 'php':
         run(ROOT / 'scripts/sync-code-to-droplet.sh', ['--dry-run'], env, ok=False)
         assert log.read_text() == ''
     config.write_text('\n'.join(k + '=' + shlex.quote(v) for k, v in values.items()))
+    # Invalid prefixes and empty source whitelists must fail before any export/import.
+    for filename in ['push-db-to-droplet.sh', 'pull-db-from-droplet.sh']:
+        for override in [{'MOCK_REMOTE_PREFIX': 'other_'}, {'MOCK_TRANSFER_TABLES': ''}]:
+            log.write_text('')
+            run(ROOT / 'scripts' / filename, ['--yes'], dict(env, **override), ok=False)
+            assert not any('db export' in line or 'db import' in line for line in log.read_text().splitlines())
     # Apply paths use mocked tools. Check backups precede replacement.
     for filename in ['sync-code-to-droplet.sh', 'sync-plugins-to-droplet.sh', 'push-db-to-droplet.sh', 'pull-db-from-droplet.sh']:
         log.write_text('')
@@ -130,18 +144,27 @@ elif name == 'php':
             assert backup < mutation
             local = [cmd for name, cmd in commands if name == 'php']
             assert not any('db import' in cmd for cmd in local)
-            assert all('--export=' in cmd for cmd in local if 'search-replace' in cmd)
+            export = next(cmd for cmd in local if 'db export' in cmd)
+            assert '--tables=wp_posts,wp_postmeta' in export and '--exclude_tables' not in export
+            assert any('options-sql http://bvs.local https://example.invalid' in cmd for cmd in local)
         elif filename == 'pull-db-from-droplet.sh':
             backup = next(i for i, (name, cmd) in enumerate(commands) if name == 'php' and 'db export' in cmd)
             mutation = next(i for i, (name, cmd) in enumerate(commands) if name == 'php' and 'db import' in cmd)
             assert backup < mutation
             assert list((base / 'backups').glob('*.sql.gz'))
+            export = next(cmd for name, cmd in commands if name == 'ssh' and 'db export - ' in cmd)
+            assert "--tables='wp_posts,wp_postmeta'" in export and '--exclude_tables' not in export
+            assert any("options-sql 'https://example.invalid' 'http://bvs.local'" in cmd for name, cmd in commands)
         else:
             backup = next(i for i, (name, cmd) in enumerate(commands) if name == 'ssh' and 'tar -czf' in cmd)
             mutation = next(i for i, (name, cmd) in enumerate(commands) if name == 'rsync')
             assert backup < mutation
             if filename == 'sync-plugins-to-droplet.sh':
                 assert all('--delete' not in cmd for name, cmd in commands if name == 'rsync')
+        if '-db-' in filename:
+            replacements = [cmd for name, cmd in commands if 'search-replace' in cmd]
+            assert replacements
+            assert all('--skip-tables=' in cmd and 'wp_options' in cmd and 'wp_wpmailsmtp_emails_queue' in cmd and 'wp_actionscheduler_actions' in cmd for cmd in replacements)
     # Exercise actual installed rsync for Local copy/deletion and SSH key quoting.
     real_rsync = shutil.which('rsync', path=os.environ['PATH'])
     log.write_text('')
