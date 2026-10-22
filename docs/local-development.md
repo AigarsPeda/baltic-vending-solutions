@@ -21,6 +21,14 @@ Start **Baltic Vending Solutions** in Local App. Open [the Latvian homepage](htt
 
 WordPress lives at `/Users/aigarspeda/Local Sites/baltic-vending-solutions/app/public`. Local runtime ID is `8Xh86i1z8`. The ignored environment file records the PHP executable, runtime INI, WP-CLI PHAR and database socket. Local may change its runtime files after an environment change; update those paths when necessary.
 
+### Pending PHP security update, 2026-10-22
+
+Local 10.1.2's PHP selector was checked again after running its updater and restarting the application. The newest offered PHP 8.3 build is 8.3.30, below the patched [PHP 8.3.36 release](https://www.php.net/releases/8_3_36.php). The owner chose to wait for Local's supported build instead of integrating a custom runtime. PHP remains 8.2.29 and is still unpatched for CVE-2026-109618 and CVE-2026-109619. The ignored project environment file is byte-identical to its pre-check backup; no runtime paths were changed.
+
+Private backup: `backups/local-php-security-20261022-zswriG/`, containing the database export, site configuration, project environment file and Local's site registry. Do not restore the complete registry over unrelated site changes.
+
+After Local restarted, WP-CLI and every database integrity check passed. Existing browser helpers passed ten LV/EN routes at desktop/mobile widths, the WordPress login page, mobile navigation, rendered 3D camera and colour changes, draft persistence and PNG export. The colour assertion needed an explicit wait for the existing animation-frame redraw; the initial immediate pixel read observed the old colour. No application code was changed and no quote was submitted. Captures and the 20 route results are in ignored `output/local-php-check-20261022/`. Once Local offers patched PHP 8.3, switch this site, update any changed paths, and repeat verification.
+
 ## Editing locations
 
 | Content | Native admin route |

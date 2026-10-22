@@ -22,6 +22,16 @@ The existing Local PHP runtime, database socket, WP-CLI and `.local` origin rema
 
 The fresh Ubuntu 24.04 droplet has nginx, PHP 8.3 FPM, MariaDB 10.11, WP-CLI and rsync. Its 512 MB RAM is supported by 1 GB swap, two on-demand PHP workers and a 64 MB InnoDB buffer pool. Services start at boot. UFW allows SSH and HTTP; MariaDB listens on loopback only.
 
+### PHP security update, 2026-10-22
+
+Updated all 12 installed PHP 8.3 packages from `8.3.6-0ubuntu0.24.04.12` to `8.3.6-0ubuntu0.24.04.13`, then explicitly restarted PHP-FPM at 06:46:49 UTC. This Ubuntu package includes the fixes for CVE-2026-109618 and CVE-2026-109619, as documented in [USN-8948-1](https://ubuntu.com/security/notices/USN-8948-1) and the installed package changelog. The upstream version still displays as PHP 8.3.6 because Ubuntu backports the fixes. Existing configuration was retained; no packages were added or removed.
+
+The private backup is `/var/backups/baltic-vending-solutions/php-security-20261022-4SdRPU/`, containing `database-before.sql.gz`, `service-config-before.tar.gz` for PHP/nginx/APT configuration, and `packages-before.tsv`.
+
+Verification passed PHP-FPM/nginx configuration tests, active PHP-FPM/nginx/MariaDB services, the running FPM executable and nginx socket mapping, WordPress bootstrap, and all database integrity checks. The PHP-FPM/nginx service journals contained no warnings since the restart. Existing deployment browser helpers passed ten LV/EN routes at 1440 and 375 px, including loaded images/models, one main heading, no horizontal overflow, no failed HTTP requests and no browser errors. The WordPress login redirect, mobile menu, actual 3D camera/texture changes, draft persistence and PNG export also passed. No quote was submitted. Browser captures and `report.json` are in ignored `output/php-security-20261022/`.
+
+Local remains on PHP 8.2.29. Its installed Local service bundles do not include a patched release. The updater and refreshed selector were checked on 2026-10-22; Local's newest offered PHP 8.3 build is still 8.3.30. The owner chose to wait for a supported patched Local build rather than integrate a custom runtime. Runtime paths are unchanged, and the existing local site passed verification after the app restarted. See `docs/local-development.md` for the pending update and backup record. When available, update through Local to PHP 8.3.36 or later on the 8.3 branch to match the server, then update `LOCAL_PHP_BIN` and any changed runtime paths and verify Local again. A Homebrew/CLI-only update does not replace Local's web-serving PHP runtime.
+
 WordPress 7.1.2 and all source files, uploads and plugin versions were copied from Local. The database includes the ten published pages, both languages, widgets, menus, Media Library metadata, theme settings, SEO scores and accounts. Server `wp-config.php` has independent database credentials and authentication salts. It uses `WP_ENVIRONMENT_TYPE=staging`; both WordPress and nginx prevent indexing.
 
 Customer designs are stored in `/var/lib/bvs-private-designs`, owned by `www-data` with directory mode 700 and file mode 600. The WordPress config is mode 640. nginx denies configuration files, hidden files, SQL/log backups, XML-RPC and PHP execution in uploads. Domain-specific configuration lives at `/etc/nginx/sites-available/baltic-vending-solutions`.
