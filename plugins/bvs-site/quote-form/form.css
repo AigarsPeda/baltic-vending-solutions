@@ -14,3 +14,14 @@
 .bvs-optional-fields>.bvs-form-grid{padding:8px 0 20px}
 .bvs-quote-form .bvs-field{min-width:0}
 .bvs-quote-form input::placeholder,.bvs-quote-form textarea::placeholder{color:#506166;opacity:1}
+
+/* Keep mobile fields and their instructions readable and easy to tap. */
+.bvs-quote-form .bvs-form-message{scroll-margin-block:24px;overflow-wrap:anywhere}
+.bvs-quote-form .bvs-form-message:focus{outline:2px solid currentColor;outline-offset:6px}
+@media(max-width:600px){
+ .bvs-quote-form .bvs-form-grid{gap:24px}
+ .bvs-quote-form .bvs-field input:not([type=checkbox]),.bvs-quote-form .bvs-field select{min-height:52px}
+ .bvs-quote-form .bvs-form-note,.bvs-quote-form .bvs-privacy{font-size:16px;line-height:1.6}
+ .bvs-quote-form .bvs-submit{width:100%;min-height:52px;white-space:normal}
+ .bvs-optional-fields>.bvs-form-grid{padding-top:16px}
+}

@@ -97,3 +97,17 @@ Deployed `assets/site.css` only after a full-page text/spacing review. No databa
 Initial pre-change rollback archive: `/var/backups/baltic-vending-solutions/theme-20261024-072049.TseTVDgH/theme.tar.gz`. Two small alignment corrections were also archived at `theme-20261024-072142.OmRxuMQL/` and `theme-20261024-072209.Ftj9Mr1h/` under the same private backup directory. Final constrained introductions align with the 1200px section grid rather than the viewport edge.
 
 Live checks passed at 320, 820 and 1440px in both languages; no horizontal overflow or live browser errors. Local text-spacing override checks passed at 320, 820, 1181, 1280 and 1440px. Evidence and live screenshot: `output/readability-review/`. WordPress content remains unchanged and editable.
+
+### Product-page readability — 24 October 2026
+
+Updated Compact Cooler and Smart Fridge, Latvian and English: page IDs 12, 13, 8, 9. Deployed only the reviewed four page bodies through `scripts/deploy/update-products.php`, plus theme `assets/site.css`. No full database import or plugin transfer. Exact content snapshots were checked before applying and the live bodies matched the reviewed payload afterward.
+
+Private database rollback and content payloads: `/var/backups/baltic-vending-solutions/products-20261024.nitvTehz/` (`db-before.sql.gz`, `remote-payload.json`, helper/snapshot scripts). Theme rollback: `/var/backups/baltic-vending-solutions/theme-20261024-104942.NNaN18VT/theme.tar.gz`.
+
+Local checks: all four routes at 320/820/1440px; native WordPress validation passes 21 blocks per page. Live checks: all four routes at 375/1440px, aligned tables, no horizontal overflow, optional disclosures present. Local/remote CSS hashes match. See `docs/product-page-review.md` and ignored `output/product-review/` for evidence.
+
+### Mobile quote-form follow-up — 24 October 2026
+
+Deployed only `bvs-site/quote-form/form.css` and `view.js`: mobile spacing/tap targets and reliable result focus/busy state. No page bodies, database settings or theme changes. Private plugin backup: `/var/backups/baltic-vending-solutions/plugins-20261024-112626.MJJUP5Ir/`.
+
+Local checks covered both languages, required/email/file validation, private AJAX saves with image attachment, failure/retry and narrow layouts. Live layout/native validation passed. An isolated live save check suppressed mail for that CLI process only, verified private storage, and deleted its synthetic record; it did not change recipient/SMTP settings. Source/deployed hashes match. See `docs/mobile-quote-review.md`.

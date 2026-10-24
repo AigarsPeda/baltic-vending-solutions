@@ -192,3 +192,11 @@ Keep uploads, download labels, feedback and quote-attachment labels editable thr
 ### Homepage reading rhythm
 
 Section introductions are left aligned with a 65ch maximum; FAQ answers use 70ch. Keep subheadings close to their descriptions (12–16px), and separate independent topics with 24–32px or more. Override Core sibling margins explicitly where they obscure this hierarchy. Process and contact columns stack at 960px. Desktop navigation may wrap to accommodate visitor text spacing. Authored content remains in native WordPress blocks.
+
+### Product detail pages
+
+Native groups use `bvs-product-section` for homepage-consistent section padding. Specification tables are capped at 1000px and align with the 1200px content grid; desktop label columns use 30%, with a 32px label/value gutter and 16px row padding. Specification notes use 16px text and a 75ch maximum. Keep one row per specification and use the native quote block's optional-field disclosure to match the homepage.
+
+### Mobile quote forms
+
+Up to 600px: single-column fields, 24px group gaps, 52px text/select controls and submit button, 16px hints/privacy copy, full-width submit action. Keep required labels visible; optional details expand natively. Feedback receives focus after submission and clears when the user edits the enquiry. Keep feedback strings editable in the quote block.

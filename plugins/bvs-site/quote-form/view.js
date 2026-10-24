@@ -9,6 +9,10 @@
     const useEditor = form.querySelector('.bvs-use-editor-design');
     const designHint = form.querySelector('.bvs-design-attachment > .bvs-form-note');
     let editorFile = false;
+    // A previous success/error should not describe a newly edited enquiry.
+    form.addEventListener('input', () => {
+      if (!button.disabled) message.hidden = true;
+    });
     // Native validation must be able to focus an invalid optional input, even when collapsed.
     form.addEventListener('invalid', event => {
       const disclosure = event.target.closest('.bvs-optional-fields');
@@ -45,6 +49,7 @@
       event.preventDefault();
       if (button.disabled) return;
       button.disabled = true; button.textContent = button.dataset.sending;
+      form.setAttribute('aria-busy', 'true');
       message.hidden = true;
       try {
         const data = new FormData(form);
@@ -63,6 +68,9 @@
         message.dataset.status = 'error';
       } finally {
         message.hidden = false; button.disabled = false; button.textContent = label;
+        form.removeAttribute('aria-busy');
+        // Bring the result into view without reopening the mobile keyboard.
+        message.focus();
       }
     });
   });

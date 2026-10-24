@@ -250,3 +250,12 @@ Theme/plugin synced to Local only. Verification: all 139 blocks per homepage pas
 ## Latest homepage readability pass
 
 24 October: deployed CSS-only spacing improvements to both homepages. Lead copy max65ch aligned with the section grid; FAQ answers max70ch; related heading/text gaps corrected against Core block defaults; FAQ row spacing normalized; process/contact stack at960px; contact paired controls align after label wrapping; desktop nav can wrap under visitor spacing overrides. See `docs/homepage-review.md` and `docs/droplet-deployment.md`. No DB/plugin changes this pass. Temporary local text-spacing test hook was removed. Evidence in `output/readability-review/`.
+
+
+## Product-page follow-up
+
+24 October: both product pages in LV/EN now match homepage section spacing. Specification tables are narrower with closer labels, no duplicate screen row, clearer native copy and 16px qualification notes. Native quote blocks now use the same optional-fields disclosure as home. Deployed four page bodies plus CSS; all 21 native blocks per page validated. See `docs/product-page-review.md` and release backups in `docs/droplet-deployment.md`. All later content editing stays in WordPress.
+
+## Mobile quote-form follow-up
+
+24 October: deployed mobile field spacing, larger hints/controls, full-width phone submit button, focused status feedback, aria-busy and clearing stale messages on edits. Only quote-form CSS/JS changed. Native validation, optional disclosures, uploads, failed-request retry and successful private storage verified; test records/attachment and temporary local failure hook removed. Live server save tested with email suppressed for that CLI process; actual recipient delivery was not tested. See `docs/mobile-quote-review.md` and deployment backup history.

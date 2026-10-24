@@ -312,3 +312,13 @@ body.home .bvs-audience{padding-block:48px}
  .bvs-contact>.wp-block-columns>.wp-block-column{flex-basis:auto!important;width:100%}
  .bvs-contact .bvs-lead{max-width:65ch}
 }
+
+/* Product details share the homepage's rhythm, with a narrower specification table. */
+.bvs-product-section{padding-block:64px}
+.bvs-product-section.bvs-hero{padding-block:48px}
+.bvs-specs.bvs-product-section>.wp-block-table{max-width:1000px;margin-inline:max(0px,calc((100% - 1200px)/2)) auto!important}
+.bvs-specs.bvs-product-section .wp-block-table td{padding-block:16px}
+.bvs-specs.bvs-product-section>.bvs-note{max-width:75ch;margin-inline:max(0px,calc((100% - 1200px)/2)) auto!important;margin-top:24px;font-size:16px;line-height:1.6}
+@media(min-width:782px){.bvs-specs.bvs-product-section .wp-block-table td:first-child{width:30%;padding-right:32px}}
+@media(max-width:960px){.bvs-product-section{padding-block:48px}}
+@media(max-width:781px){.bvs-product-section.bvs-hero{padding-block:40px}}
