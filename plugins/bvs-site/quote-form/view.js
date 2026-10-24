@@ -9,6 +9,11 @@
     const useEditor = form.querySelector('.bvs-use-editor-design');
     const designHint = form.querySelector('.bvs-design-attachment > .bvs-form-note');
     let editorFile = false;
+    // Native validation must be able to focus an invalid optional input, even when collapsed.
+    form.addEventListener('invalid', event => {
+      const disclosure = event.target.closest('.bvs-optional-fields');
+      if (disclosure) disclosure.open = true;
+    }, true);
     const updateDesign = () => {
       const available = !!form.bvsEditorDesign?.hasDraft();
       editorOption.hidden = !available;

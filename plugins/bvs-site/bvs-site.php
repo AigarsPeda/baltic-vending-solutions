@@ -35,6 +35,12 @@ function bvs_quote_attributes($attributes) {
 function bvs_render_quote($attributes) {
     $a = bvs_quote_attributes($attributes);
     $id = wp_unique_id('bvs-form-');
+    $input = function ($key, $type) use ($a, $id) { ?>
+        <label class="bvs-field" for="<?php echo esc_attr($id.$key); ?>"><?php echo esc_html($a[$key.'Label']); ?><input id="<?php echo esc_attr($id.$key); ?>" name="<?php echo esc_attr($key); ?>" type="<?php echo esc_attr($type); ?>" autocomplete="<?php echo esc_attr(['name'=>'name','company'=>'organization','email'=>'email','phone'=>'tel'][$key]); ?>" maxlength="200" placeholder="<?php echo esc_attr($a[$key.'Placeholder']); ?>" <?php echo in_array($key,['name','email'],true) ? 'required' : ''; ?>></label>
+    <?php };
+    $textarea = function ($key) use ($a, $id) { ?>
+        <label class="bvs-field bvs-field-wide" for="<?php echo esc_attr($id.$key); ?>"><?php echo esc_html($a[$key.'Label']); ?><textarea id="<?php echo esc_attr($id.$key); ?>" name="<?php echo esc_attr($key); ?>" rows="<?php echo $key === 'message' ? 3 : 2; ?>" maxlength="2000" placeholder="<?php echo esc_attr($a[$key.'Placeholder']); ?>" <?php echo $key === 'products' ? 'required' : ''; ?>></textarea></label>
+    <?php };
     ob_start(); ?>
     <form class="bvs-quote-form" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" data-endpoint="<?php echo esc_url(admin_url('admin-ajax.php')); ?>">
         <p class="bvs-form-note"><?php echo esc_html($a['intro']); ?></p>
@@ -42,15 +48,17 @@ function bvs_render_quote($attributes) {
         <?php wp_nonce_field('bvs_quote', 'bvs_nonce', false); ?>
         <div class="bvs-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
         <div class="bvs-form-grid">
-        <?php foreach (['name'=>'text','company'=>'text','email'=>'email','phone'=>'tel'] as $key=>$type): ?>
-            <label class="bvs-field" for="<?php echo esc_attr($id.$key); ?>"><?php echo esc_html($a[$key.'Label']); ?><input id="<?php echo esc_attr($id.$key); ?>" name="<?php echo esc_attr($key); ?>" type="<?php echo esc_attr($type); ?>" autocomplete="<?php echo esc_attr(['name'=>'name','company'=>'organization','email'=>'email','phone'=>'tel'][$key]); ?>" maxlength="200" placeholder="<?php echo esc_attr($a[$key.'Placeholder']); ?>" <?php echo in_array($key,['name','email'],true) ? 'required' : ''; ?>></label>
-        <?php endforeach; ?>
+        <?php foreach (($a['collapseOptional'] ? ['name'=>'text','email'=>'email'] : ['name'=>'text','company'=>'text','email'=>'email','phone'=>'tel']) as $key=>$type) $input($key, $type); ?>
         <?php foreach (['model'=>['any'=>'modelAny','compact'=>'compactLabel','fridge'=>'fridgeLabel'],'mode'=>['advice'=>'modeAdvice','buy'=>'modeBuy','rent'=>'modeRent']] as $key=>$choices): ?>
             <label class="bvs-field" for="<?php echo esc_attr($id.$key); ?>"><?php echo esc_html($a[$key.'Label']); ?><select id="<?php echo esc_attr($id.$key); ?>" name="<?php echo esc_attr($key); ?>"><?php foreach ($choices as $value=>$label): ?><option value="<?php echo esc_attr($value); ?>"><?php echo esc_html($a[$label]); ?></option><?php endforeach; ?></select></label>
         <?php endforeach; ?>
-        <?php foreach (['products','location','message'] as $key): ?>
-            <label class="bvs-field bvs-field-wide" for="<?php echo esc_attr($id.$key); ?>"><?php echo esc_html($a[$key.'Label']); ?><textarea id="<?php echo esc_attr($id.$key); ?>" name="<?php echo esc_attr($key); ?>" rows="<?php echo $key === 'message' ? 3 : 2; ?>" maxlength="2000" placeholder="<?php echo esc_attr($a[$key.'Placeholder']); ?>" <?php echo $key === 'products' ? 'required' : ''; ?>></textarea></label>
-        <?php endforeach; ?>
+        <?php foreach (($a['collapseOptional'] ? ['products','location'] : ['products','location','message']) as $key) $textarea($key); ?>
+        <?php if ($a['collapseOptional']): ?>
+        <details class="bvs-optional-fields bvs-field-wide">
+            <summary><?php echo esc_html($a['optionalLabel']); ?></summary>
+            <div class="bvs-form-grid">
+                <?php $input('company', 'text'); $input('phone', 'tel'); $textarea('message'); ?>
+        <?php endif; ?>
         <div class="bvs-field bvs-field-wide bvs-design-attachment">
             <label for="<?php echo esc_attr($id.'design'); ?>"><?php echo esc_html($a['designLabel']); ?></label>
             <div class="bvs-editor-design-option" hidden>
@@ -63,6 +71,7 @@ function bvs_render_quote($attributes) {
             <p id="<?php echo esc_attr($id.'design-hint'); ?>" class="bvs-form-note"><?php echo esc_html($a['designHint']); ?></p>
             <button type="button" class="bvs-remove-design" hidden><?php echo esc_html($a['designRemove']); ?></button>
         </div>
+        <?php if ($a['collapseOptional']): ?></div></details><?php endif; ?>
         </div>
         <p class="bvs-privacy"><?php echo esc_html($a['privacyText']); ?> <?php if ($a['privacyUrl']): ?><a href="<?php echo esc_url($a['privacyUrl']); ?>"><?php echo esc_html($a['privacyLabel']); ?></a><?php endif; ?></p>
         <button class="bvs-submit" type="submit" data-sending="<?php echo esc_attr($a['sendingLabel']); ?>"><?php echo esc_html($a['submitLabel']); ?></button>

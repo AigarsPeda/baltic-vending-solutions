@@ -2,17 +2,17 @@
 ((wp) => {
   const el = wp.element.createElement;
   const { InspectorControls, useBlockProps } = wp.blockEditor;
-  const { TextControl, TextareaControl, PanelBody, Notice } = wp.components;
+  const { TextControl, TextareaControl, PanelBody, Notice, ToggleControl } = wp.components;
   const meta = window.bvsQuoteMetadata;
   wp.blocks.registerBlockType(meta.name, {
     ...meta,
     edit: ({ attributes, setAttributes }) => {
-      const control = (key) => el(key.endsWith('Text') || key.endsWith('Message') ? TextareaControl : TextControl, {
+      const control = (key) => key === 'collapseOptional' ? el(ToggleControl, {key, label:'Group optional fields in an expandable section', checked:!!attributes[key], onChange:value => setAttributes({[key]:value})}) : el(key.endsWith('Text') || key.endsWith('Message') ? TextareaControl : TextControl, {
         key, label: key.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase()), value: attributes[key] || '',
         onChange: value => setAttributes({[key]: value})
       });
       const groups = {
-        'Form and feedback': ['intro','submitLabel','sendingLabel','successMessage','errorMessage','unavailableMessage','formId','language'],
+        'Form and feedback': ['intro','submitLabel','sendingLabel','successMessage','errorMessage','unavailableMessage','formId','language','collapseOptional','optionalLabel'],
         'Privacy': ['privacyText','privacyLabel','privacyUrl'],
         'Design attachment': ['designLabel','designHint','createDesignLabel','createDesignUrl','designError','designRemove','designEditorLabel','designEditorHint'],
         'Equipment and purchase options': ['modelLabel','modelAny','compactLabel','fridgeLabel','modeLabel','modeAdvice','modeBuy','modeRent'],

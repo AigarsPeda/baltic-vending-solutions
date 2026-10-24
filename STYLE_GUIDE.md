@@ -25,7 +25,7 @@ Use cool neutrals with cobalt blue as the single brand accent. Ink anchors headi
 | `accent-hover` | `#1C43B5` | Hover/active primary action |
 | `accent-soft` | `#EAF0FD` | Quiet selected backgrounds; use ink or accent text |
 | `accent-light` | `#DCE5FF` | Links and inline emphasis on dark backgrounds |
-| `branding-highlight` | `#B1263D` | Owner-selected wrapping headline phrase |
+| `branding-highlight` | `#B1263D` | Earlier wrapping colour, retained as an optional palette preset |
 | `divider` | `#CBD5D6` | Decorative separators and section rules |
 | `control-border` | `#7E9094` | Input boundaries and outlined interactive controls |
 | `error` | `#A32727` | Validation errors paired with explanatory text |
@@ -35,7 +35,7 @@ Use white text on solid accent buttons. Use ink text on white or canvas. Use acc
 
 `divider` is decorative. It must not be the only visible boundary of a form input or the only cue for a selected state. Use `control-border` for those boundaries and text or an icon as well as colour for status.
 
-Keep the accent consistent across the page. The owner requested a highlight for the first navigation item, the design editor. Use the same cobalt text as navigation on an accent-soft background with 4px corners and accent-hover text on hover. Keep the quote action as the solid primary button. Customer wraps may introduce their own colours within the machine image; the remaining website interface stays in this palette. Change tokens centrally when a supplied identity requires a different accent.
+Keep the accent consistent across the page. Equipment leads the desktop navigation; the design editor follows wrapping as an ordinary link. Keep the quote action as the solid primary button. Customer wraps may introduce their own colours within the machine image; the remaining website interface stays in this palette. Change tokens centrally when a supplied identity requires a different accent.
 
 Base colour checks use solid, opaque colours. Recheck any overlays or image backgrounds in the actual layout.
 
@@ -84,7 +84,7 @@ Base spacing on 4px increments. Use 8px between a label and its field, 16px with
 
 Keep the header about 72px high on desktop and 64px on mobile. The desktop navigation fits one line. Collapse it before labels become cramped. Use concise navigation labels such as Equipment, Purchase & rental, Custom branding and Contact, with "Request a quote" as the primary action.
 
-Use a split hero on desktop: left-aligned copy and actions alongside a full machine image. Give the machine enough vertical room to show its proportions. The owner requested a taller homepage hero: at desktop widths of 1000px and above, use a 720px minimum section height, 80px vertical padding and a 560px image area, with the two columns vertically centred. Keep the offer and primary action visible early. Do not force a viewport-height section; mobile and product-detail heroes retain their natural height. On mobile, show the offer and action before the machine image.
+Use a split hero on desktop: left-aligned copy and actions alongside a full machine image. The refined homepage uses natural height with 48px vertical padding and a 480px image area on desktop. Keep the offer and primary action visible early. On mobile, show the offer and action before the machine image; use 40px vertical padding and a 360px image area.
 
 Use straight-edged image panels and comparison sections. Buttons and inputs use a consistent 4px radius. Cards are for distinct products or choices, not every paragraph. Group explanatory content with spacing and thin rules. Use shadows only for floating UI such as an open navigation panel.
 
@@ -124,9 +124,9 @@ Use "Branding visualisation" as the visible caption for concepts. Use customer l
 
 Write useful alt text describing the model, view or wrapping. Decorative duplicates can have empty alt text. Keep captions and labels as editable text rather than baked into images.
 
-The homepage wrapping offer is a service overview. Its headline focuses on making the customer’s brand stand out, with the final brand phrase on its own line using the owner-selected red `branding-highlight` preset through native inline colour formatting. Name the wrapping service directly in the introductory text. Group the heading, introduction and two unnumbered artwork/approval details on the left. Show the supplied JāņogaGO client photo without a visible caption on the right, preserving the full machine and transparency. Stack text and image on mobile. The following project-start section uses three photo cards at the owner’s request. Each card has an image, step number, action heading and short explanation on a canvas background. Use the real equipment photograph for model selection and local Unsplash photos for planning and discussion. Keep image areas, heading starts and description starts aligned across desktop cards. Use shared CSS grid rows through the card and copy groups so the tallest heading determines the description baseline, rather than reserving a fixed number of lines. Stack the cards in sequence on mobile. Keep the wrapping section as a distinct split layout. Use the shared purchase/rental quote button immediately above this section; do not repeat the same button inside the wrapping section.
+The homepage wrapping offer is a service overview. Its final headline phrase uses the light `accent-light` preset through native inline colour formatting for contrast on navy. Group the heading, introduction and artwork/approval details on the left. Show the supplied JāņogaGO photo on the right, preserving the full machine and transparency, with an editable caption identifying it as a wrapping example. Stack text and image on mobile. The following process uses compact numbered columns with an action heading and explanation, separated by thin top rules. Stock photos are omitted. Keep wrapping as a distinct split layout with its design-editor action, and the shared purchase/rental quote button immediately above.
 
-Explain payments and management through the buyer's daily tasks. Pair a pale cobalt payment panel with stock, sales and remote-pricing rows, using the actual proposed model capabilities. Keep these as native editable blocks. Avoid simulated dashboards with invented numbers. Manufacturer feature headings can inform the hierarchy; copy and colours should belong to Baltic Vending Solutions.
+Explain payments and management through two aligned columns: the customer pays at the machine, and the owner manages it remotely. Use equal column widths, simple top rules and descriptions directly below their headings. Keep model-specific notes separate from software/payment terms. Preserve native editable blocks and actual proposed model capabilities. Avoid simulated dashboards with invented numbers.
 
 Purchase and rental headings use matching 28px cobalt outline icons: a shopping bag for purchase and a calendar with a clock for rental. Keep a 12px gap between each icon and its heading. These are decorative theme SVGs tied to semantic heading classes, so the readable labels remain native editable text and the icons follow the correct option if columns move.
 
@@ -188,3 +188,7 @@ Before a layout is ready for review, confirm that both models use the same compa
 The separate Latvian and English editor pages reuse the site palette and IBM Plex Sans. Desktop places the tools beside the machine and editable flat panel. On mobile, keep the flat panel visible within the controls and offer the 3D view in a disclosure below. Use the neutral machine still while 3D loads or fails. Colours, artwork, logos and drawing affect only the designated front and side wrapping panels.
 
 Keep uploads, download labels, feedback and quote-attachment labels editable through the native blocks. Menu and wrapping-section links lead to the equivalent translated editor page. The download is a PNG design mockup; avoid presenting it as a production print file. One design draft saves in this browser and restores on return. Keep its save status and deletion action clear. Contact details are excluded; drafts are sent only when the visitor explicitly submits the attached image with an enquiry. Implementation and source-asset notes are in `docs/design-editor.md`.
+
+### Homepage reading rhythm
+
+Section introductions are left aligned with a 65ch maximum; FAQ answers use 70ch. Keep subheadings close to their descriptions (12–16px), and separate independent topics with 24–32px or more. Override Core sibling margins explicitly where they obscure this hierarchy. Process and contact columns stack at 960px. Desktop navigation may wrap to accommodate visitor text spacing. Authored content remains in native WordPress blocks.

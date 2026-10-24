@@ -173,6 +173,14 @@
     "designRemove": {
       "type": "string",
       "default": "Remove design"
+    },
+    "collapseOptional": {
+      "type": "boolean",
+      "default": false
+    },
+    "optionalLabel": {
+      "type": "string",
+      "default": "More details and design (optional)"
     }
   },
   "supports": {

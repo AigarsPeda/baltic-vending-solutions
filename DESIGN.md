@@ -160,7 +160,7 @@ The cookie banner is a documented exception in STYLE_GUIDE.md, with scoped Playf
 
 Shared content uses a 1200px maximum width with 40px outer gutters, reducing to 24px and then 16px at very narrow widths. Sections normally use 80px vertical padding on desktop and 48px on smaller screens. Larger split sections use 48px gaps; process and related groups also use 24px gaps. The system is based on 4px increments.
 
-The desktop homepage hero has a 720px minimum height at 1000px and above, with a 560px machine image area. It returns to natural content height on mobile. The current header is 88px tall on wide screens and collapses navigation at 1180px into a 72px minimum-height header. These are implemented measurements, not a new global header specification.
+The homepage hero uses natural content height, 48px desktop vertical padding and a 480px machine image area. Homepage sections use 64px vertical padding on desktop and 48px on smaller screens; the mobile hero uses 40px. The current header is 88px tall on wide screens and collapses navigation at 1180px into a 72px minimum-height header. These are implemented measurements, not a new global header specification.
 
 Forms move from two columns to one at 781px. Footer utility controls stack and wrap on mobile. Privacy pages use a narrower 840px reading column. The wrap editor has a separate 1360px outer bound and a desktop tools-plus-preview grid; its mobile rearrangement belongs to its page brief.
 
@@ -218,6 +218,6 @@ Keep the three panel selectors on one row with compact labels Priekša / Kreisai
 - **Don't** add marketing labels above headings or use decorative parallax and autoplay carousels.
 - **Don't** present the wrap mockup as a dimensioned print template or a completed customer project.
 
-The first navigation destination, the design editor, is highlighted through the native menu class `bvs-design-menu`. Use cobalt text on an accent-soft background with 4px corners and darker cobalt text on hover. The desktop highlight preserves the existing text spacing; in the mobile drawer it fills the link row. It shares the brand palette rather than introducing another accent.
+Equipment is the first desktop navigation destination. Purchase/rental and wrapping precede the design editor, followed by contact and the language switch. These are ordinary native menu links; the quote action remains the solid primary button.
 
-The owner-selected exception for the wrapping headline is `branding-highlight` #B1263D. Apply it only to the final brand phrase, using the named WordPress preset. Other dark-surface emphasis retains accent-light.
+The wrapping headline uses the `accent-light` WordPress preset through native inline colour formatting, with readable contrast on navy. The earlier `branding-highlight` #B1263D preset remains available for editorial use but is no longer assigned to this phrase. The supplied machine image has a native caption identifying it as a wrapping example. The process below uses compact numbered columns without stock photography.

@@ -42,6 +42,8 @@ Outbound email remains unconfigured, as on Local. The server has no sendmail tra
 
 ## Updates
 
+Deployed the equipment hover refinement on 2026-10-22. Only `assets/site.css` changed on the server. Product photos now use modest model-specific motion and a corner arrow in place of the blue tile/grid effect. The previous theme is archived at `/var/backups/baltic-vending-solutions/theme-20261022-122118.Z73njGAq/theme.tar.gz`. The served stylesheet matches the tested local file byte for byte. Live checks passed both models and languages, image/button hover, keyboard focus, reduced motion, four viewport widths, touch navigation and no browser errors. Captures are in ignored `output/equipment-droplet-*`.
+
 Review these dry runs before transferring a change:
 
 ```bash
@@ -71,3 +73,27 @@ The live interactions passed mobile menu controls, rendered 3D camera movement, 
 Additional live checks passed no cookies before a choice, consent persistence across languages on the HTTP IP, reopening, acceptance and withdrawal, with no Analytics requests or browser errors. The admin route redirects to the IP-based login page. nginx/PHP configuration checks and database integrity checks also passed.
 
 Screenshots and `report.json` are in ignored `output/deployment-parity/`. A final checksum dry run compared the complete deployed WordPress files with Local, excluding the independent server config and temporary files. URL replacement validation reported zero remaining Local references outside preserved GUID columns.
+
+## Homepage clarity release, 24 October 2026
+
+Deployed the reviewed Latvian and English homepages, their existing menu order/classes, shared theme CSS and the quote block's editable optional-field disclosure. The final review also aligned the payments/management columns, placed descriptions beneath their headings, clarified Vendlive/Vision AI wording and completed the rental FAQ copy. Native WordPress content remains the source of all authored text and links. Research and findings are in [homepage-review.md](homepage-review.md).
+
+The release used `scripts/deploy/update-homepages.php` with a reviewed before/after payload. Its preflight confirmed that both server homepages still matched the pre-refinement versions and that menu membership/destinations were unchanged. Only the two homepage bodies and menu order/classes were written. No full database import was performed, so other pages, users, enquiries and server settings were preserved.
+
+Rollback backup: `/var/backups/baltic-vending-solutions/homepage-20261024.BWswyLTs/`, containing `database-before.sql.gz`, `site-code-before.tar.gz`, the targeted deployment helper and its payload. The normal transfer scripts also saved `/var/backups/baltic-vending-solutions/theme-20261024-070925.cC2xb36x/theme.tar.gz` and plugin archives in `/var/backups/baltic-vending-solutions/plugins-20261024-070932.JsbuTWVE/`.
+
+Verification passed exact saved-content/menu parity with the reviewed payload, no Local URLs in the deployed pages, and checksum dry runs with no remaining theme/plugin differences. Live LV/EN checks at 320/375/768/1440 px passed one H1, working in-page targets, no page/table overflow and collapsed optional fields. Desktop/mobile payment layouts were inspected. The English mobile menu passed Escape/focus return and Contact navigation; the optional enquiry disclosure opens by keyboard with required fields visible and labelled. Product and editor pages still render without mobile overflow, and product forms retain expanded fields. No live browser errors were observed. Local WordPress validation accepted 137 native blocks per homepage; the existing enquiry integration suite passed. No synthetic enquiry was submitted to the server. Screenshots and reports are in ignored `output/homepage-release/`.
+
+The site remains a staging HTTP preview. Existing owner-requested contact placeholders and unconfigured outbound email remain; enquiries are stored in WordPress. No new business terms were assumed. No Git commit or push was made.
+
+### Planning layout follow-up
+
+Later on 24 October, replaced the shared purchase/rental bullets with three native heading-and-description groups. The layout uses three columns above960px and stacked topics below. Both translations retain the existing descriptions and quote action. Only the planning group and its CSS changed; menu writes are skipped when unchanged. Backup: `/var/backups/baltic-vending-solutions/planning-20261024.W6SNISVS/` with database and previous theme, plus the normal theme archive `/var/backups/baltic-vending-solutions/theme-20261024-071436.64Wrh9jU/theme.tar.gz`. Live content/menu parity and theme checksum dry run pass. Desktop LV and mobile EN confirm the intended columns, no overflow and the quote destination; local checks cover both languages at320/768/1024/1440px. Evidence: `output/planning-layout/`. No plugin changes, full database replacement, commit or push.
+
+### Homepage readability follow-up — 24 October 2026
+
+Deployed `assets/site.css` only after a full-page text/spacing review. No database or plugin transfer. Narrower section introductions, corrected heading/description gaps, uniform FAQ rows, tablet process/contact stacking and resilient desktop-menu wrapping are live in both languages.
+
+Initial pre-change rollback archive: `/var/backups/baltic-vending-solutions/theme-20261024-072049.TseTVDgH/theme.tar.gz`. Two small alignment corrections were also archived at `theme-20261024-072142.OmRxuMQL/` and `theme-20261024-072209.Ftj9Mr1h/` under the same private backup directory. Final constrained introductions align with the 1200px section grid rather than the viewport edge.
+
+Live checks passed at 320, 820 and 1440px in both languages; no horizontal overflow or live browser errors. Local text-spacing override checks passed at 320, 820, 1181, 1280 and 1440px. Evidence and live screenshot: `output/readability-review/`. WordPress content remains unchanged and editable.

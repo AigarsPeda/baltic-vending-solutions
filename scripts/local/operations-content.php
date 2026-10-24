@@ -13,31 +13,33 @@ function bvs_operations_content($lang) {
     $copy = $lang === 'lv' ? [
         'title'=>'Ērti norēķini un pārskatāmi krājumi',
         'intro'=>'Pircējs norēķinās pie iekārtas. Jūs attālināti sekojat krājumiem un pārdošanai.',
-        'paymentTitle'=>'Ar karti vai telefonu',
+        'paymentTitle'=>'Pircējs norēķinās pie iekārtas',
         'paymentText'=>'Pircējs pietuvina bezkontakta bankas karti, telefonu vai viedpulksteni maksājumu terminālim.',
         'methods'=>'Visa, Mastercard, Apple Pay un Google Pay',
         'paymentNote'=>'Smart Fridge piedāvājumā ir Payter terminālis. Maksājumu pieslēgumu un komisijas precizējam piedāvājumā.',
-        'managementTitle'=>'Pārvaldiet produktus attālināti',
+        'managementTitle'=>'Jūs pārvaldāt attālināti',
         'tasks'=>[
             ['Krājumu atlikumi', 'Skatiet, cik produktu palicis, un plānojiet, ko vest nākamajā papildināšanas reizē.'],
             ['Pārdošanas dati', 'Sekojiet pirkumiem un redziet, kuri produkti tiek pārdoti.'],
-            ['Produkti un cenas', 'Compact Cooler produktu katalogu un cenas mainiet Vendlive panelī, nebraucot pie iekārtas.'],
+            ['Produkti un cenas', 'Compact Cooler produktu katalogu un cenas mainiet Vendlive pārvaldības panelī, nebraucot pie iekārtas.'],
         ],
-        'note'=>'Mūsu Compact Cooler komplektācijā Vision AI atpazīst paņemtos produktus. Smart Fridge sniedz krājumu, pirkumu un temperatūras datus. Programmatūras piekļuvi un maksājumu nosacījumus precizējam piedāvājumā.',
+        'note'=>'Mūsu Compact Cooler komplektācijā Vision AI kameras atpazīst paņemtos produktus. Smart Fridge sniedz krājumu, pirkumu un temperatūras datus.',
+        'terms'=>'Programmatūras piekļuvi un maksājumu nosacījumus precizējam piedāvājumā.',
     ] : [
         'title'=>'Easy payments and a clear view of your stock',
         'intro'=>'Customers pay at the machine. You follow stock and sales remotely.',
-        'paymentTitle'=>'Tap a card or phone',
+        'paymentTitle'=>'Customers pay at the machine',
         'paymentText'=>'The customer taps a contactless bank card, phone or smartwatch on the payment terminal.',
         'methods'=>'Visa, Mastercard, Apple Pay and Google Pay',
         'paymentNote'=>'The Smart Fridge proposal includes a Payter terminal. Payment setup and fees are agreed in your proposal.',
-        'managementTitle'=>'Manage products remotely',
+        'managementTitle'=>'You manage it remotely',
         'tasks'=>[
             ['Check stock', 'See how many products remain and plan what to bring on your next restocking visit.'],
             ['Follow sales', 'Review purchases and see which products are selling.'],
-            ['Products and prices', 'Update the Compact Cooler catalogue and prices in Vendlive without travelling to the machine.'],
+            ['Products and prices', 'Update the Compact Cooler catalogue and prices in the Vendlive management dashboard without travelling to the machine.'],
         ],
-        'note'=>'Our Compact Cooler configuration includes Vision AI to recognise products taken. Smart Fridge provides stock, purchase and temperature data. Software access and payment terms are specified in your proposal.',
+        'note'=>'Our Compact Cooler configuration uses Vision AI cameras to recognise products taken. Smart Fridge provides stock, purchase and temperature data.',
+        'terms'=>'Software access and payment terms are specified in your proposal.',
     ];
     $payment = bvs_operations_heading($copy['paymentTitle'], 3)
         .bvs_operations_paragraph($copy['paymentText'])
@@ -52,7 +54,7 @@ function bvs_operations_content($lang) {
     $columns = bvs_operations_block('column', [], '<div class="wp-block-column">'.$payment.'</div>')
         .bvs_operations_block('column', [], '<div class="wp-block-column">'.$management.'</div>');
     $columns = bvs_operations_block('columns', ['className'=>'bvs-operations-columns'], '<div class="wp-block-columns bvs-operations-columns">'.$columns.'</div>');
-    $footer = bvs_operations_block('group', ['className'=>'bvs-operations-footer'], '<div class="wp-block-group bvs-operations-footer">'.bvs_operations_paragraph($copy['note'], 'bvs-operations-note').'</div>');
+    $footer = bvs_operations_block('group', ['className'=>'bvs-operations-footer'], '<div class="wp-block-group bvs-operations-footer">'.bvs_operations_paragraph($copy['note'], 'bvs-operations-note').bvs_operations_paragraph($copy['terms'], 'bvs-operations-note').'</div>');
     $content = bvs_operations_heading($copy['title']).bvs_operations_paragraph($copy['intro'], 'bvs-lead').$columns.$footer;
     return bvs_operations_block('group', ['className'=>'bvs-section bvs-operations', 'anchor'=>'payments-management', 'layout'=>['type'=>'constrained']], '<div id="payments-management" class="wp-block-group bvs-section bvs-operations">'.$content.'</div>');
 }

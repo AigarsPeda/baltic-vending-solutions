@@ -69,7 +69,7 @@ $copy=[
  ['Which products are suitable?','Our proposed equipment is intended for chilled, packaged food and drinks. We will review your actual packaging and product range when preparing the configuration.'],
  ['Who stocks the machine?','Restocking, product quality and daily operating responsibilities need to be agreed. Tell us how you plan to run the machine so the proposal reflects that.'],
  ['Can I manage products remotely?','The proposed Compact Cooler uses Vendlive cloud management for stock, products and prices. The Smart Fridge proposal includes real-time stock, purchase and temperature information.'],
- ['What does rental cost?','We quote for the equipment and agreed services. Rental duration, availability and costs have not yet been published.']],
+ ['What does rental cost?','Rental price, availability and duration are specified in an individual quote for your chosen equipment and services.']],
  'contactLabel'=>'Plan your next sales channel','contactTitle'=>'Tell us what you want to sell','contactText'=>'Share your products, intended location and interest in purchase or rental. You can also ask for advice on which machine fits your plans.',
  'contactNote'=>'You do not need to have every detail decided before making an enquiry.',
  'proposed'=>'Proposed equipment','specTitle'=>'The proposed specification','specNote'=>'Specifications follow our equipment proposal. Final configuration, payment provider and service scope are confirmed in your quote.',
@@ -98,7 +98,7 @@ $copy=[
  ['Kādiem produktiem iekārtas ir piemērotas?','Mūsu piedāvātās iekārtas paredzētas atdzesētai, iepakotai pārtikai un dzērieniem. Gatavojot konfigurāciju, izvērtēsim jūsu produktu klāstu un iepakojumu.'],
  ['Kas papildina iekārtas krājumus?','Krājumu papildināšana, produktu kvalitāte un ikdienas pienākumi ir jāvienojas. Pastāstiet, kā plānojat apkalpot iekārtu, lai to ņemtu vērā piedāvājumā.'],
  ['Vai produktus var pārvaldīt attālināti?','Piedāvātais Compact Cooler izmanto Vendlive mākoņpārvaldību krājumiem, produktiem un cenām. Smart Fridge piedāvājums ietver krājumu, pirkumu un temperatūras datus reāllaikā.'],
- ['Cik maksā noma?','Sagatavojam cenu piedāvājumu izvēlētajai iekārtai un pakalpojumiem. Nomas termiņi, pieejamība un izmaksas vēl nav publicētas.']],
+ ['Cik maksā noma?','Nomas cenu, pieejamību un termiņu precizējam individuālā piedāvājumā izvēlētajai iekārtai un pakalpojumiem.']],
  'contactLabel'=>'Plānojiet nākamo pārdošanas vietu','contactTitle'=>'Pastāstiet, ko vēlaties pārdot','contactText'=>'Norādiet produktus, plānoto atrašanās vietu un interesi par iegādi vai nomu. Varat arī lūgt padomu piemērotas iekārtas izvēlē.',
  'contactNote'=>'Pirms saziņas nav jābūt izlemtiem visiem jautājumiem.',
  'proposed'=>'Piedāvātā iekārta','specTitle'=>'Piedāvātā specifikācija','specNote'=>'Specifikācija atbilst mūsu iekārtu piedāvājumam. Galīgo konfigurāciju, maksājumu pakalpojuma sniedzēju un pakalpojumu apjomu apstiprinām piedāvājumā.',
@@ -187,5 +187,6 @@ require __DIR__.'/setup-mobile-home.php';
 require __DIR__.'/setup-contact-menu.php';
 require __DIR__.'/setup-contact-details.php';
 require __DIR__.'/setup-create-design-link.php';
+require __DIR__.'/setup-homepage-refinement.php';
 require __DIR__.'/setup-rank-math-keywords.php';
 WP_CLI::success('Created editable LV/EN pages, native menus/widgets, quote blocks and Media Library attachments.');
